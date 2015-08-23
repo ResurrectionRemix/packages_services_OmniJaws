@@ -65,10 +65,9 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
         "city", "neigborhood", "county"
     };
 
-    private Context mContext;
 
     public YahooWeatherProvider(Context context) {
-        mContext = context;
+       super(context);
     }
 
     public List<WeatherInfo.WeatherLocation> getLocations(String input) {

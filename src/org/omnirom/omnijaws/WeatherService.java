@@ -17,6 +17,8 @@
  */
 package org.omnirom.omnijaws;
 
+import java.util.Date;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -24,31 +26,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 
 public class WeatherService extends Service {
-    private static final String TAG = "WeatherService";
+    static final String TAG = "WeatherService";
     private static final String ACTION_UPDATE = "org.omnirom.omnijaws.ACTION_UPDATE";
-    private static final String ACTION_CANCEL_LOCATION_UPDATE =
+    private static final String ACTION_ALARM = "org.omnirom.omnijaws.ACTION_ALARM";
+    private static final String EXTRA_FORCE = "force";
+
+    static final String ACTION_CANCEL_LOCATION_UPDATE =
             "org.omnirom.omnijaws.CANCEL_LOCATION_UPDATE";
 
     public static final String BROADCAST_INTENT= "org.omnirom.omnijaws.BROADCAST_INTENT";
-    public static final String EXTRA_DATA= "weather";
+    public static final String STOP_INTENT= "org.omnirom.omnijaws.STOP_INTENT";
+
     private static final float LOCATION_ACCURACY_THRESHOLD_METERS = 50000;
-    private static final long LOCATION_REQUEST_TIMEOUT = 5L * 60L * 1000L; // request for at most 5 minutes
+    static final long LOCATION_REQUEST_TIMEOUT = 5L * 60L * 1000L; // request for at most 5 minutes
     private static final long OUTDATED_LOCATION_THRESHOLD_MILLIS = 10L * 60L * 1000L; // 10 minutes
+    private static final long ALARM_INTERVAL = AlarmManager.INTERVAL_HOUR;
 
     private HandlerThread mHandlerThread;
     private Handler mHandler;
@@ -63,110 +66,6 @@ public class WeatherService extends Service {
         sLocationCriteria.setCostAllowed(false);
     }
     
-    private static class WeatherLocationListener implements LocationListener {
-        private Context mContext;
-        private PendingIntent mTimeoutIntent;
-        private static WeatherLocationListener sInstance = null;
-
-        static void registerIfNeeded(Context context, String provider) {
-            synchronized (WeatherLocationListener.class) {
-                Log.d(TAG, "Registering location listener");
-                if (sInstance == null) {
-                    final Context appContext = context.getApplicationContext();
-                    final LocationManager locationManager =
-                            (LocationManager) appContext.getSystemService(Context.LOCATION_SERVICE);
-
-                    // Check location provider after set sInstance, so, if the provider is not
-                    // supported, we never enter here again.
-                    sInstance = new WeatherLocationListener(appContext);
-                    // Check whether the provider is supported.
-                    // NOTE!!! Actually only WeatherUpdateService class is calling this function
-                    // with the NETWORK_PROVIDER, so setting the instance is safe. We must
-                    // change this if this call receive different providers
-                    LocationProvider lp = locationManager.getProvider(provider);
-                    if (lp != null) {
-                        Log.d(TAG, "LocationManager - Requesting single update");
-                        locationManager.requestSingleUpdate(provider, sInstance,
-                                appContext.getMainLooper());
-                        sInstance.setTimeoutAlarm();
-                    }
-                }
-            }
-        }
-
-        static void cancel(Context context) {
-            synchronized (WeatherLocationListener.class) {
-                if (sInstance != null) {
-                    final Context appContext = context.getApplicationContext();
-                    final LocationManager locationManager =
-                        (LocationManager) appContext.getSystemService(Context.LOCATION_SERVICE);
-                    Log.d(TAG, "Aborting location request after timeout");
-                    locationManager.removeUpdates(sInstance);
-                    sInstance.cancelTimeoutAlarm();
-                    sInstance = null;
-                }
-            }
-        }
-
-        private WeatherLocationListener(Context context) {
-            super();
-            mContext = context;
-        }
-
-        private void setTimeoutAlarm() {
-            Intent intent = new Intent(mContext, WeatherService.class);
-            intent.setAction(ACTION_CANCEL_LOCATION_UPDATE);
-
-            mTimeoutIntent = PendingIntent.getService(mContext, 0, intent,
-                    PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_CANCEL_CURRENT);
-
-            AlarmManager am = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
-            long elapseTime = SystemClock.elapsedRealtime() + LOCATION_REQUEST_TIMEOUT;
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, elapseTime, mTimeoutIntent);
-        }
-
-        private void cancelTimeoutAlarm() {
-            if (mTimeoutIntent != null) {
-                AlarmManager am = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
-                am.cancel(mTimeoutIntent);
-                mTimeoutIntent = null;
-            }
-        }
-
-        @Override
-        public void onLocationChanged(Location location) {
-            // Now, we have a location to use. Schedule a weather update right now.
-            Log.d(TAG, "The location has changed, schedule an update ");
-            synchronized (WeatherLocationListener.class) {
-                startUpdate(mContext);
-                cancelTimeoutAlarm();
-                sInstance = null;
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            // Now, we have a location to use. Schedule a weather update right now.
-            Log.d(TAG, "The location service has become available, schedule an update ");
-            if (status == LocationProvider.AVAILABLE) {
-                synchronized (WeatherLocationListener.class) {
-                    startUpdate(mContext);
-                    cancelTimeoutAlarm();
-                    sInstance = null;
-                }
-            }
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            // Not used
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            // Not used
-        }
-    }
     public WeatherService() {
     }
 
@@ -186,18 +85,28 @@ public class WeatherService extends Service {
         mWakeLock.setReferenceCounted(false);
     }
 
-    public static void startUpdate(Context context) {
-        start(context, ACTION_UPDATE);
+    public static void startUpdate(Context context, boolean force) {
+        start(context, ACTION_UPDATE, force);
     }
 
-    private static void start(Context context, String action) {
+    private static void start(Context context, String action, boolean force) {
         Intent i = new Intent(context, WeatherService.class);
         i.setAction(action);
+        if (force) {
+            i.putExtra(EXTRA_FORCE, force);
+        }
         context.startService(i);
     }
-    
+
+    public static PendingIntent alarmPending(Context context) {
+        Intent intent = new Intent(context, WeatherService.class);
+        intent.setAction(ACTION_ALARM);
+        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        boolean force = intent.getBooleanExtra(EXTRA_FORCE, false);
         if (ACTION_CANCEL_LOCATION_UPDATE.equals(intent.getAction())) {
             WeatherLocationListener.cancel(this);
             if (!mRunning) {
@@ -209,13 +118,34 @@ public class WeatherService extends Service {
             return START_REDELIVER_INTENT;
         }
         if (!isNetworkAvailable()) {
+            Log.d(TAG, "Service started, but no network ... stopping");
             stopSelf();
             return START_NOT_STICKY;
         }
-        if (ACTION_UPDATE.equals(intent.getAction())) {
+
+        if (!force) {
+            long lastUpdate = Config.getLastUpdateTime(this);
+            if (lastUpdate != 0) {
+                long now = System.currentTimeMillis();
+                if (lastUpdate + ALARM_INTERVAL > now) {
+                    Log.d(TAG, "Service started, but update not due ... stopping");
+                    stopSelf();
+                    return START_NOT_STICKY;
+                }
+            }
+        }
+        if (ACTION_UPDATE.equals(intent.getAction()) ||
+                ACTION_ALARM.equals(intent.getAction())) {
             updateWeather();
         }
         return START_REDELIVER_INTENT;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Intent result = new Intent(STOP_INTENT);
+        sendBroadcast(result);
     }
 
     private boolean isNetworkAvailable() {
@@ -227,6 +157,7 @@ public class WeatherService extends Service {
         }
         return true;
     }
+    
     private Location getCurrentLocation() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
@@ -258,6 +189,19 @@ public class WeatherService extends Service {
         return location;
     }
 
+    private static void scheduleUpdate(Context context, long timeFromNow) {
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        long due = System.currentTimeMillis() + timeFromNow;
+
+        Log.d(TAG, "Scheduling next update at " + new Date(due));
+        am.set(AlarmManager.RTC, due, alarmPending(context));
+    }
+
+    private static void canceUpdate(Context context) {
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        am.cancel(alarmPending(context));
+    }
+
     private void updateWeather() {
         mHandler.post(new Runnable() {
             @Override
@@ -272,7 +216,7 @@ public class WeatherService extends Service {
                         if (location != null) {
                             w = provider.getLocationWeather(location, Config.isMetric(WeatherService.this));
                         }
-                    } else {
+                    } else if (Config.getLocationId(WeatherService.this) != null){
                         w = provider.getCustomWeather(Config.getLocationId(WeatherService.this), Config.isMetric(WeatherService.this));
                     }
                     if (w != null) {
@@ -283,6 +227,9 @@ public class WeatherService extends Service {
                 } finally {
                     mWakeLock.release();
                     mRunning = false;
+                    if (Config.isAutoUpdate(WeatherService.this)) {
+                        scheduleUpdate(WeatherService.this, ALARM_INTERVAL);
+                    }
                 }
             }
          });

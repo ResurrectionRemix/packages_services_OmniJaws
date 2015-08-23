@@ -163,6 +163,10 @@ public class WeatherInfo {
         return forecasts;
     }
 
+    public String getFormattedTemperature() {
+        return getFormattedValue(temperature, "\u00b0" + (metric ? "C" : "F"));
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -177,7 +181,7 @@ public class WeatherInfo {
         builder.append("(");
         builder.append(conditionCode);
         builder.append("), temperature ");
-        builder.append(temperature);
+        builder.append(getFormattedTemperature());
         builder.append(", low ");
         builder.append(getFormattedLow());
         builder.append(", high ");

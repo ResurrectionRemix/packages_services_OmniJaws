@@ -47,10 +47,8 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
             "http://api.openweathermap.org/data/2.5/forecast/daily?" +
             "%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS;
 
-    private Context mContext;
-
     public OpenWeatherMapProvider(Context context) {
-        mContext = context;
+        super(context);
     }
 
     public List<WeatherInfo.WeatherLocation> getLocations(String input) {

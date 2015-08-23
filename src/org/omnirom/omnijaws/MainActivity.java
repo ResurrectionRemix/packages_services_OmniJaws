@@ -43,21 +43,24 @@ public class MainActivity extends Activity {
     public void onUpdatePressed(View v) {
         mProgress.setIndeterminate(true);
         mProgress.setProgress(1);
-        WeatherService.startUpdate(this);
+        WeatherService.startUpdate(this, true);
     }
     
     public void onSettingsPressed(View v) {
         startActivity(new Intent(this, SettingsActivity.class));
     }
-    private IntentFilter mUpdateFilter = new IntentFilter(
-            WeatherService.BROADCAST_INTENT);
     private BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            mProgress.setIndeterminate(false);
-            WeatherInfo data = Config.getWeatherData(MainActivity.this);
-            if (data != null) {
-                mTextView.setText(data.toString());
+            final String action = intent.getAction();
+            if (action.equals(WeatherService.BROADCAST_INTENT)) {
+                mProgress.setIndeterminate(false);
+                WeatherInfo data = Config.getWeatherData(MainActivity.this);
+                if (data != null) {
+                    mTextView.setText(data.toString());
+                }
+            } else if (action.equals(WeatherService.STOP_INTENT)) {
+                mProgress.setIndeterminate(false);
             }
         }
     };
@@ -71,7 +74,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(mUpdateReceiver, mUpdateFilter);
+        IntentFilter updateFilter = new IntentFilter();
+        updateFilter.addAction(WeatherService.BROADCAST_INTENT);
+        updateFilter.addAction(WeatherService.STOP_INTENT);
+        registerReceiver(mUpdateReceiver, updateFilter);
     }
 
     @Override

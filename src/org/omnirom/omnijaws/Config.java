@@ -29,6 +29,8 @@ public class Config {
     public static final String PREF_KEY_LOCATION_NAME = "location_name";
     public static final String PREF_KEY_CUSTOM_LOCATION = "custom_location";
     public static final String PREF_KEY_WEATHER_DATA = "weather_data";
+    public static final String PREF_KEY_AUTO_UPDATE = "auto_update";
+    public static final String PREF_KEY_LAST_UPDATE = "last_update";
 
     public static AbstractWeatherProvider getProvider(Context context) {
         SharedPreferences prefs = PreferenceManager
@@ -97,5 +99,20 @@ public class Config {
                 .getDefaultSharedPreferences(context);
 
         prefs.edit().putString(PREF_KEY_WEATHER_DATA, data.toSerializedString()).commit();
+        prefs.edit().putLong(PREF_KEY_LAST_UPDATE, System.currentTimeMillis()).commit();
+    }
+    
+    public static boolean isAutoUpdate(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.getBoolean(PREF_KEY_AUTO_UPDATE, false);
+    }
+    
+    public static long getLastUpdateTime(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.getLong(PREF_KEY_LAST_UPDATE, 0);
     }
 }

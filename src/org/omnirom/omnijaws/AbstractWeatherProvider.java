@@ -22,24 +22,33 @@ import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
 public abstract class AbstractWeatherProvider {
     private static final String TAG = "AbstractWeatherProvider";
     private static final boolean DEBUG = true;
+    protected Context mContext;
 
-    public AbstractWeatherProvider() {
+    public AbstractWeatherProvider(Context context) {
+        mContext = context;
     }
     
     protected String retrieve(String url) {
         HttpGet request = new HttpGet(url);
         try {
             HttpResponse response = new DefaultHttpClient().execute(request);
+            int code = response.getStatusLine().getStatusCode();
+            if (code != HttpStatus.SC_OK) {
+                Log.d(TAG, "response: " + code);
+                return null;
+            }
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 return EntityUtils.toString(entity);
