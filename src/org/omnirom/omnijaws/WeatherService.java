@@ -197,8 +197,10 @@ public class WeatherService extends Service {
         am.set(AlarmManager.RTC, due, alarmPending(context));
     }
 
-    private static void canceUpdate(Context context) {
+    public static void canceUpdate(Context context) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Log.d(TAG, "Cancel pending update");
+
         am.cancel(alarmPending(context));
     }
 

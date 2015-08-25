@@ -40,6 +40,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private SharedPreferences mPrefs;
     private ListPreference mProvider;
     private CheckBoxPreference mCustomLocation;
+    private CheckBoxPreference mAutoUpdates;
 
     public SettingsActivity() {
     }
@@ -53,6 +54,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         addPreferencesFromResource(R.xml.settings);
         
         mCustomLocation = (CheckBoxPreference) findPreference(Config.PREF_KEY_CUSTOM_LOCATION);
+        mAutoUpdates = (CheckBoxPreference) findPreference(Config.PREF_KEY_AUTO_UPDATE);
         mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
         mProvider.setOnPreferenceChangeListener(this);
         int idx = mProvider.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_PROVIDER,
@@ -74,6 +76,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !mCustomLocation.isChecked()) {
                 showDialog();
+            }
+            return true;
+        } else if (preference == mAutoUpdates) {
+            if (mAutoUpdates.isChecked()) {
+                WeatherService.startUpdate(this, true);
+            } else {
+                WeatherService.canceUpdate(this);
             }
             return true;
         }
