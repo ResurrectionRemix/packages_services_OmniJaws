@@ -66,6 +66,6 @@ public abstract class AbstractWeatherProvider {
     public abstract List<WeatherInfo.WeatherLocation> getLocations(String input);
 
     protected void log(String tag, String msg) {
-        if (DEBUG) Log.d(tag, msg);
+        if (DEBUG) Log.d("WeatherService:" + tag, msg);
     }
 }

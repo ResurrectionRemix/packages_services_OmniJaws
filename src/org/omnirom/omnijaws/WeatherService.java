@@ -223,6 +223,7 @@ public class WeatherService extends Service {
                     }
                     if (w != null) {
                         Config.setWeatherData(WeatherService.this, w);
+                        WeatherContentProvider.updateCachedWeatherInfo(WeatherService.this);
                         Intent result = new Intent(BROADCAST_INTENT);
                         sendBroadcast(result);
                     }

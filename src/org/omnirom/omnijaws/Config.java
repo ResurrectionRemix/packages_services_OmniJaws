@@ -115,4 +115,11 @@ public class Config {
 
         return prefs.getLong(PREF_KEY_LAST_UPDATE, 0);
     }
+
+    public static void clearLastUpdateTime(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        prefs.edit().putLong(PREF_KEY_LAST_UPDATE, 0).commit();
+    }
 }

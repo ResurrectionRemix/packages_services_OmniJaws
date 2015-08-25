@@ -24,7 +24,7 @@ import android.net.ConnectivityManager;
 import android.util.Log;
 
 public class SystemReceiver extends BroadcastReceiver {
-    private static final String TAG = "SystemReceiver";
+    private static final String TAG = "WeatherService:SystemReceiver";
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -45,6 +45,8 @@ public class SystemReceiver extends BroadcastReceiver {
             }
         } else if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
             if (Config.isAutoUpdate(context)) {
+                Log.d(TAG, "boot completed");
+                Config.clearLastUpdateTime(context);
                 WeatherService.startUpdate(context, false);
             }
         }

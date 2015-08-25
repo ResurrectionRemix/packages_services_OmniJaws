@@ -85,7 +85,7 @@ public class WeatherContentProvider extends ContentProvider {
             COLUMN_FORECAST_CONDITION_CODE
     };
 
-    public static final String AUTHORITY = "com.cyanogenmod.lockclock.weather.provider";
+    public static final String AUTHORITY = "org.omnirom.omnijaws.provider";
 
     private static final UriMatcher sUriMatcher;
     static {
@@ -138,9 +138,6 @@ public class WeatherContentProvider extends ContentProvider {
                         .add(COLUMN_FORECAST_CONDITION_CODE, day.getConditionCode());
             }
             return result;
-        } else {
-            if (DEBUG) Log.e(TAG, "sCachedWeatherInfo is null");
-            WeatherService.startUpdate(mContext, false);
         }
         return null;
     }
@@ -181,17 +178,10 @@ public class WeatherContentProvider extends ContentProvider {
         return 0;
     }
 
-    public static void updateCachedWeatherInfo(Context context, WeatherInfo info) {
+    public static void updateCachedWeatherInfo(Context context) {
         if (DEBUG) Log.e(TAG, "updateCachedWeatherInfo()");
-        if(info != null) {
-            if (DEBUG) Log.e(TAG, "set new weather info");
-            sCachedWeatherInfo = WeatherInfo.fromSerializedString(context, info.toSerializedString());
-        } else {
-            if(DEBUG) Log.e(TAG, "nulled out cached weather info");
-            sCachedWeatherInfo = null;
-        }
+        sCachedWeatherInfo = Config.getWeatherData(context);
         context.getContentResolver().notifyChange(
                 Uri.parse("content://" + WeatherContentProvider.AUTHORITY + "/weather"), null);
     }
-
 }
