@@ -41,6 +41,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private ListPreference mProvider;
     private CheckBoxPreference mCustomLocation;
     private CheckBoxPreference mAutoUpdates;
+    private ListPreference mUnits;
 
     public SettingsActivity() {
     }
@@ -55,13 +56,21 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         
         mCustomLocation = (CheckBoxPreference) findPreference(Config.PREF_KEY_CUSTOM_LOCATION);
         mAutoUpdates = (CheckBoxPreference) findPreference(Config.PREF_KEY_AUTO_UPDATE);
+
         mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
         mProvider.setOnPreferenceChangeListener(this);
         int idx = mProvider.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_PROVIDER,
                 mProvider.getEntryValues()[0].toString()));
         mProvider.setValueIndex(idx);
         mProvider.setSummary(mProvider.getEntries()[idx]);
-        
+
+        mUnits = (ListPreference) findPreference(Config.PREF_KEY_UNITS);
+        mUnits.setOnPreferenceChangeListener(this);
+        idx = mUnits.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UNITS,
+                mUnits.getEntryValues()[0].toString()));
+        mUnits.setValueIndex(idx);
+        mUnits.setSummary(mUnits.getEntries()[idx]);
+
         // Show a warning if location manager is disabled and there is no custom location set
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !mCustomLocation.isChecked()) {
@@ -96,6 +105,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             int idx = mProvider.findIndexOfValue(value);
             mProvider.setSummary(mProvider.getEntries()[idx]);
             mProvider.setValueIndex(idx);
+            return true;
+        } else if (preference == mUnits) {
+            String value = (String) newValue;
+            int idx = mUnits.findIndexOfValue(value);
+            mUnits.setSummary(mUnits.getEntries()[idx]);
+            mUnits.setValueIndex(idx);
             return true;
         }
         return false;

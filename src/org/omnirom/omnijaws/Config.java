@@ -24,7 +24,7 @@ import android.preference.PreferenceManager;
 public class Config {
 
     public static final String PREF_KEY_PROVIDER = "provider";
-    public static final String PREF_KEY_METRIC = "metric";
+    public static final String PREF_KEY_UNITS = "units";
     public static final String PREF_KEY_LOCATION_ID = "location_id";
     public static final String PREF_KEY_LOCATION_NAME = "location_name";
     public static final String PREF_KEY_CUSTOM_LOCATION = "custom_location";
@@ -46,7 +46,7 @@ public class Config {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        return prefs.getBoolean(PREF_KEY_METRIC, true);
+        return prefs.getString(PREF_KEY_UNITS, "0").equals("0");
     }
 
     public static boolean isCustomLocation(Context context) {

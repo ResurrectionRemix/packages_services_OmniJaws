@@ -82,7 +82,6 @@ public class WeatherService extends Service {
         mHandler = new Handler(mHandlerThread.getLooper());
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-        mWakeLock.setReferenceCounted(false);
     }
 
     public static void startUpdate(Context context, boolean force) {

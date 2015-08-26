@@ -27,11 +27,12 @@
 		android:entryValues="@array/provider_values"
 		android:key="provider"
 		android:title="@string/provider_title" />
+	<ListPreference
+		android:entries="@array/units_entries"
+		android:entryValues="@array/units_values"
+		android:key="units"
+		android:title="@string/units_title" />
 
-	<CheckBoxPreference
-		android:defaultValue="true"
-		android:key="metric"
-		android:title="@string/metric_title" />
 	<CheckBoxPreference
 		android:defaultValue="false"
 		android:key="custom_location"
