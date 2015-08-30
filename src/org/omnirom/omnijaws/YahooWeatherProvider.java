@@ -109,6 +109,8 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
             return null;
         }
 
+        log(TAG, "URL = " + url + " returning a response of " + response);
+
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
             SAXParser parser = factory.newSAXParser();

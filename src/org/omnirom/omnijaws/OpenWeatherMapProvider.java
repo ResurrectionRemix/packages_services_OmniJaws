@@ -102,14 +102,14 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
         if (conditionResponse == null) {
             return null;
         }
+        log(TAG, "Condition URL = " + conditionUrl + " returning a response of " + conditionResponse);
 
         String forecastUrl = String.format(Locale.US, URL_FORECAST, selection, units, locale);
         String forecastResponse = retrieve(forecastUrl);
         if (forecastResponse == null) {
             return null;
         }
-
-        log(TAG, "URL = " + conditionUrl + " returning a response of " + conditionResponse);
+        log(TAG, "Forcast URL = " + forecastUrl + " returning a response of " + forecastResponse);
 
         try {
             JSONObject conditions = new JSONObject(conditionResponse);
