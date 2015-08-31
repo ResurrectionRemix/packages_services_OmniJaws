@@ -287,7 +287,7 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
 
             // clouds
             case 800:     // clear sky
-                return 31;
+                return 32;
             case 801:     // few clouds  
                 return 34;
             case 802:     // scattered clouds  
