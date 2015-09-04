@@ -64,7 +64,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
     private static final String[] PLACE_NAMES = new String[] {
         "city", "neigborhood", "county"
     };
-
+    private static boolean metric;
 
     public YahooWeatherProvider(Context context) {
        super(context);
@@ -104,7 +104,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
     public WeatherInfo getCustomWeather(String id, boolean metric) {
         String url = String.format(URL_WEATHER, id, metric ? "c" : "f");
         String response = retrieve(url);
-
+        this.metric = metric;
         if (response == null) {
             return null;
         }
@@ -179,7 +179,9 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
                         /* low */ stringToFloat(attributes.getValue("low"), Float.NaN),
                         /* high */ stringToFloat(attributes.getValue("high"), Float.NaN),
                         /* condition */ attributes.getValue("text"),
-                        /* conditionCode */ (int) stringToFloat(attributes.getValue("code"), -1));
+                        /* conditionCode */ (int) stringToFloat(attributes.getValue("code"), -1),
+                        attributes.getValue("date"),
+                        metric);
                 if (!Float.isNaN(day.low) && !Float.isNaN(day.high) && day.conditionCode >= 0) {
                     forecasts.add(day);
                 }

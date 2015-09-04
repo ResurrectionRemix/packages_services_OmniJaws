@@ -50,6 +50,8 @@ public class WeatherContentProvider extends ContentProvider {
     private static final String COLUMN_FORECAST_HIGH = "forecast_high";
     private static final String COLUMN_FORECAST_CONDITION = "forecast_condition";
     private static final String COLUMN_FORECAST_CONDITION_CODE = "forecast_condition_code";
+    private static final String COLUMN_FORECAST_DATE = "forecast_date";
+
 
     private static final String[] PROJECTION_DEFAULT_CURRENT = new String[] {
             COLUMN_CURRENT_CITY_ID,
@@ -66,7 +68,8 @@ public class WeatherContentProvider extends ContentProvider {
             COLUMN_FORECAST_LOW,
             COLUMN_FORECAST_HIGH,
             COLUMN_FORECAST_CONDITION,
-            COLUMN_FORECAST_CONDITION_CODE
+            COLUMN_FORECAST_CONDITION_CODE,
+            COLUMN_FORECAST_DATE
     };
 
     private static final String[] PROJECTION_DEFAULT_EVERYTHING = new String[] {
@@ -82,7 +85,8 @@ public class WeatherContentProvider extends ContentProvider {
             COLUMN_FORECAST_LOW,
             COLUMN_FORECAST_HIGH,
             COLUMN_FORECAST_CONDITION,
-            COLUMN_FORECAST_CONDITION_CODE
+            COLUMN_FORECAST_CONDITION_CODE,
+            COLUMN_FORECAST_DATE
     };
 
     public static final String AUTHORITY = "org.omnirom.omnijaws.provider";
@@ -135,7 +139,8 @@ public class WeatherContentProvider extends ContentProvider {
                         .add(COLUMN_FORECAST_CONDITION, day.getCondition(mContext))
                         .add(COLUMN_FORECAST_LOW, day.getFormattedLow())
                         .add(COLUMN_FORECAST_HIGH, day.getFormattedHigh())
-                        .add(COLUMN_FORECAST_CONDITION_CODE, day.getConditionCode());
+                        .add(COLUMN_FORECAST_CONDITION_CODE, day.getConditionCode())
+                        .add(COLUMN_FORECAST_DATE, day.date);
             }
             return result;
         }

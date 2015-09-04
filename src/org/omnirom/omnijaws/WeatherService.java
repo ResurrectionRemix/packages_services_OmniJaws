@@ -24,6 +24,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -33,6 +34,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -57,6 +59,7 @@ public class WeatherService extends Service {
     private Handler mHandler;
     private PowerManager.WakeLock mWakeLock;
     private boolean mRunning;
+    private SharedPreferences.OnSharedPreferenceChangeListener mPrefsListener;
 
     private static final Criteria sLocationCriteria;
     static {
@@ -82,6 +85,24 @@ public class WeatherService extends Service {
         mHandler = new Handler(mHandlerThread.getLooper());
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+
+        mPrefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs,
+                    String key) {
+                if (key.equals(Config.PREF_KEY_PROVIDER) ||
+                        key.equals(Config.PREF_KEY_UNITS) ||
+                        key.equals(Config.PREF_KEY_LOCATION_ID)) {
+                    try {
+                        startUpdate(WeatherService.this, true);
+                    } catch(Exception e) {
+                        Log.e(TAG, "updatePrefs", e);
+                    }
+                }
+            }
+        };
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(mPrefsListener);
     }
 
     public static void startUpdate(Context context, boolean force) {
@@ -143,6 +164,10 @@ public class WeatherService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        prefs.unregisterOnSharedPreferenceChangeListener(mPrefsListener);
+
         Intent result = new Intent(STOP_INTENT);
         sendBroadcast(result);
     }

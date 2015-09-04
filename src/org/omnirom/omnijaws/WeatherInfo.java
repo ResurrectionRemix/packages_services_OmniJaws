@@ -33,7 +33,7 @@ public class WeatherInfo {
     private String city;
     private String condition;
     private int conditionCode;
-    private float temperature;
+    public float temperature;
     private float humidity;
     private float wind;
     private int windDirection;
@@ -71,20 +71,24 @@ public class WeatherInfo {
         public final float low, high;
         public final int conditionCode;
         public final String condition;
+        public boolean metric;
+        public String date;
 
-        public DayForecast(float low, float high, String condition, int conditionCode) {
+        public DayForecast(float low, float high, String condition, int conditionCode, String date, boolean metric) {
             this.low = low;
             this.high = high;
             this.condition = condition;
             this.conditionCode = conditionCode;
+            this.metric = metric;
+            this.date = date;
         }
 
         public String getFormattedLow() {
-            return getFormattedValue(low, "\u00b0");
+            return getFormattedValue(low, "\u00b0" + (metric ? "C" : "F"));
         }
 
         public String getFormattedHigh() {
-            return getFormattedValue(high, "\u00b0");
+            return getFormattedValue(high, "\u00b0"  + (metric ? "C" : "F"));
         }
 
         public String getCondition(Context context) {
@@ -200,8 +204,9 @@ public class WeatherInfo {
             if (i != 0) {
                 builder.append(";");
             }
-            builder.append(" day ").append(i + 1).append(": ");
-            builder.append("high ").append(d.getFormattedHigh());
+            builder.append(" day ").append(i + 1).append(":");
+            builder.append(d.date);
+            builder.append(" high ").append(d.getFormattedHigh());
             builder.append(", low ").append(d.getFormattedLow());
             builder.append(", ").append(d.condition);
             builder.append("(").append(d.conditionCode).append(")");
@@ -232,7 +237,8 @@ public class WeatherInfo {
             builder.append(d.high).append(';');
             builder.append(d.low).append(';');
             builder.append(d.condition).append(';');
-            builder.append(d.conditionCode);
+            builder.append(d.conditionCode).append(';');
+            builder.append(d.date);
         }
     }
 
@@ -268,19 +274,21 @@ public class WeatherInfo {
             return null;
         }
 
-        if (forecastItems == 0 || forecastParts.length != 4 * forecastItems + 1) {
+        if (forecastItems == 0 || forecastParts.length != 5 * forecastItems + 1) {
             return null;
         }
 
         // Parse the forecast data
         try {
             for (int item = 0; item < forecastItems; item ++) {
-                int offset = item * 4 + 1;
+                int offset = item * 5 + 1;
                 DayForecast day = new DayForecast(
                         /* low */ Float.parseFloat(forecastParts[offset + 1]),
                         /* high */ Float.parseFloat(forecastParts[offset]),
                         /* condition */ forecastParts[offset + 2],
-                        /* conditionCode */ Integer.parseInt(forecastParts[offset + 3]));
+                        /* conditionCode */ Integer.parseInt(forecastParts[offset + 3]),
+                        forecastParts[offset + 4],
+                        metric);
                 if (!Float.isNaN(day.low) && !Float.isNaN(day.high) /*&& day.conditionCode >= 0*/) {
                     forecasts.add(day);
                 }

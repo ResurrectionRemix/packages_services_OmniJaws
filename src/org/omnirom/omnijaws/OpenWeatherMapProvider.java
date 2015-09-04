@@ -158,7 +158,9 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
                     /* high */ sanitizeTemperature(temperature.getDouble("max"), metric),
                     /* condition */ data.getString("main"),
                     /* conditionCode */ mapConditionIconToCode(
-                            data.getString("icon"), data.getInt("id")));
+                            data.getString("icon"), data.getInt("id")),
+                    "NaN",
+                    metric);
             result.add(item);
         }
 

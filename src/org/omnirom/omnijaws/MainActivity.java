@@ -38,6 +38,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mTextView = (TextView) findViewById(R.id.textView);
         mProgress = (ProgressBar) findViewById(R.id.progress_bar);
+        IntentFilter updateFilter = new IntentFilter();
+        updateFilter.addAction(WeatherService.BROADCAST_INTENT);
+        updateFilter.addAction(WeatherService.STOP_INTENT);
+        registerReceiver(mUpdateReceiver, updateFilter);
     }
     
     public void onUpdatePressed(View v) {
@@ -72,16 +76,7 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        IntentFilter updateFilter = new IntentFilter();
-        updateFilter.addAction(WeatherService.BROADCAST_INTENT);
-        updateFilter.addAction(WeatherService.STOP_INTENT);
-        registerReceiver(mUpdateReceiver, updateFilter);
-    }
-
-    @Override
-    protected void onStop() {
+    protected void onDestroy() {
         unregisterReceiver(mUpdateReceiver);
         super.onStop();
     }
