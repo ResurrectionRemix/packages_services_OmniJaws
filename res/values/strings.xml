@@ -17,5 +17,6 @@
 	<string name="auto_update_title">Automatic updates</string>
 	<string name="unit_metric">Metric</string>
 	<string name="unit_imperial">Imperial</string>
-
+	<string name="update">Update</string>
+	<string name="settings">Settings</string>
 </resources>
