@@ -18,7 +18,9 @@ package org.omnirom.omnijaws;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,7 +48,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
     private static final String TAG = "YahooWeatherProvider";
 
     private static final String URL_WEATHER =
-            "https://weather.yahooapis.com/forecastrss?w=%s&u=%s";
+            "https://weather.yahooapis.com/forecastrss?w=%s&u=%s&d=10";
     private static final String URL_LOCATION =
             "https://query.yahooapis.com/v1/public/yql?format=json&q=" +
             Uri.encode("select woeid, postal, admin1, admin2, admin3, " +
@@ -65,6 +67,8 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
         "city", "neigborhood", "county"
     };
     private static boolean metric;
+    private static String todayShort;
+    private static boolean addForecastDay;
 
     public YahooWeatherProvider(Context context) {
        super(context);
@@ -109,6 +113,14 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
             return null;
         }
 
+        // yahoo delivers old forecast days in 5 day mode
+        // so fetch 10 days and ignore all before today
+        // use 3 letter day abbrev as index
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE", Locale.US);
+        todayShort = sdf.format(new Date());
+        log(TAG, "todayShort = " + todayShort);
+        addForecastDay = false;
+
         log(TAG, "URL = " + url + " returning a response of " + response);
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -133,7 +145,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
                         handler.humidity, handler.windSpeed,
                         handler.windDirection, metric, handler.forecasts,
                         System.currentTimeMillis());
-                Log.d(TAG, "Weather updated: " + w);
+                log(TAG, "Weather updated: " + w);
                 return w;
             } else {
                 Log.w(TAG, "Received incomplete weather XML (id=" + id + ")");
@@ -175,15 +187,23 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
                 conditionCode = (int) stringToFloat(attributes.getValue("code"), -1);
                 temperature = stringToFloat(attributes.getValue("temp"), Float.NaN);
             } else if (qName.equals("yweather:forecast")) {
-                DayForecast day = new DayForecast(
-                        /* low */ stringToFloat(attributes.getValue("low"), Float.NaN),
-                        /* high */ stringToFloat(attributes.getValue("high"), Float.NaN),
-                        /* condition */ attributes.getValue("text"),
-                        /* conditionCode */ (int) stringToFloat(attributes.getValue("code"), -1),
-                        attributes.getValue("date"),
-                        metric);
-                if (!Float.isNaN(day.low) && !Float.isNaN(day.high) && day.conditionCode >= 0) {
-                    forecasts.add(day);
+                String date = attributes.getValue("date");
+                String dayShort = attributes.getValue("day");
+                // is this forecaset days before today?
+                if (dayShort .equals(todayShort) && !addForecastDay) {
+                    addForecastDay = true;
+                }
+                if (addForecastDay) {
+                    DayForecast day = new DayForecast(
+                            /* low */ stringToFloat(attributes.getValue("low"), Float.NaN),
+                            /* high */ stringToFloat(attributes.getValue("high"), Float.NaN),
+                            /* condition */ attributes.getValue("text"),
+                            /* conditionCode */ (int) stringToFloat(attributes.getValue("code"), -1),
+                            attributes.getValue("date"),
+                            metric);
+                    if (!Float.isNaN(day.low) && !Float.isNaN(day.high) && day.conditionCode >= 0) {
+                        forecasts.add(day);
+                    }
                 }
             }
         }
@@ -235,7 +255,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
                 Log.w(TAG, "Can not resolve place name for " + location);
             }
 
-            Log.d(TAG, "Resolved location " + location + " to " + city + " (" + woeid + ")");
+            log(TAG, "Resolved location " + location + " to " + city + " (" + woeid + ")");
 
             WeatherInfo info = getCustomWeather(woeid, metric);
             if (info != null) {

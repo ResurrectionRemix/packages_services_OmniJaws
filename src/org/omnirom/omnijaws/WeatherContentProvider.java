@@ -27,8 +27,7 @@ import android.net.Uri;
 import android.util.Log;
 
 public class WeatherContentProvider extends ContentProvider {
-
-    public static final String TAG = WeatherContentProvider.class.getSimpleName();
+    private static final String TAG = "WeatherService:WeatherContentProvider";
     private static final boolean DEBUG = true;
 
     static WeatherInfo sCachedWeatherInfo;

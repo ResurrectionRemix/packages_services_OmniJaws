@@ -30,7 +30,8 @@ import android.os.SystemClock;
 import android.util.Log;
 
 class WeatherLocationListener implements LocationListener {
-    private static final String TAG = "WeatherLocationListener";
+    private static final String TAG = "WeatherService:WeatherLocationListener";
+    private static final boolean DEBUG = true;
     private Context mContext;
     private PendingIntent mTimeoutIntent;
     private static WeatherLocationListener sInstance = null;

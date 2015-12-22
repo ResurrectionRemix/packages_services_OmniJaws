@@ -33,7 +33,7 @@ import android.util.Log;
 
 public abstract class AbstractWeatherProvider {
     private static final String TAG = "AbstractWeatherProvider";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false ;
     protected Context mContext;
 
     public AbstractWeatherProvider(Context context) {
@@ -46,7 +46,7 @@ public abstract class AbstractWeatherProvider {
             HttpResponse response = new DefaultHttpClient().execute(request);
             int code = response.getStatusLine().getStatusCode();
             if (code != HttpStatus.SC_OK) {
-                Log.d(TAG, "response: " + code);
+                log(TAG, "HttpStatus: " + code + " for url: " + url);
                 return null;
             }
             HttpEntity entity = response.getEntity();

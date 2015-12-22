@@ -63,7 +63,15 @@ public class CustomLocationPreference extends EditTextPreference {
             @Override
             public void onClick(View v) {
                 CustomLocationPreference.this.onClick(d, DialogInterface.BUTTON_POSITIVE);
-                new WeatherLocationTask(d, getEditText().getText().toString()).execute();
+                if (getEditText().getText().toString().length() > 0) {
+                    new WeatherLocationTask(d, getEditText().getText().toString()).execute();
+                } else {
+                    Config.setLocationId(getContext(), null);
+                    Config.setLocationName(getContext(), null);
+                    setSummary("");
+                    setText("");
+                    d.dismiss();
+                }
             }
         });
     }

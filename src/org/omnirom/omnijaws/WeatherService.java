@@ -19,12 +19,14 @@ package org.omnirom.omnijaws;
 
 import java.util.Date;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -39,9 +41,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 public class WeatherService extends Service {
-    static final String TAG = "WeatherService";
+    private static final String TAG = "WeatherService";
+    private static final boolean DEBUG = true;
     private static final String ACTION_UPDATE = "org.omnirom.omnijaws.ACTION_UPDATE";
     private static final String ACTION_ALARM = "org.omnirom.omnijaws.ACTION_ALARM";
+
     private static final String EXTRA_FORCE = "force";
 
     static final String ACTION_CANCEL_LOCATION_UPDATE =
@@ -51,15 +55,15 @@ public class WeatherService extends Service {
     public static final String STOP_INTENT= "org.omnirom.omnijaws.STOP_INTENT";
 
     private static final float LOCATION_ACCURACY_THRESHOLD_METERS = 50000;
-    static final long LOCATION_REQUEST_TIMEOUT = 5L * 60L * 1000L; // request for at most 5 minutes
+    public static final long LOCATION_REQUEST_TIMEOUT = 5L * 60L * 1000L; // request for at most 5 minutes
     private static final long OUTDATED_LOCATION_THRESHOLD_MILLIS = 10L * 60L * 1000L; // 10 minutes
-    private static final long ALARM_INTERVAL = AlarmManager.INTERVAL_HOUR;
+    private static final long ALARM_INTERVAL_BASE = AlarmManager.INTERVAL_HOUR;
 
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     private PowerManager.WakeLock mWakeLock;
     private boolean mRunning;
-    private SharedPreferences.OnSharedPreferenceChangeListener mPrefsListener;
+    private static PendingIntent mAlarm;
 
     private static final Criteria sLocationCriteria;
     static {
@@ -80,29 +84,11 @@ public class WeatherService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        mHandlerThread = new HandlerThread("OpenDelta Service Thread");
+        mHandlerThread = new HandlerThread("WeatherService Thread");
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper());
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-
-        mPrefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs,
-                    String key) {
-                if (key.equals(Config.PREF_KEY_PROVIDER) ||
-                        key.equals(Config.PREF_KEY_UNITS) ||
-                        key.equals(Config.PREF_KEY_LOCATION_ID)) {
-                    try {
-                        startUpdate(WeatherService.this, true);
-                    } catch(Exception e) {
-                        Log.e(TAG, "updatePrefs", e);
-                    }
-                }
-            }
-        };
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(mPrefsListener);
     }
 
     public static void startUpdate(Context context, boolean force) {
@@ -118,7 +104,7 @@ public class WeatherService extends Service {
         context.startService(i);
     }
 
-    public static PendingIntent alarmPending(Context context) {
+    private static PendingIntent alarmPending(Context context) {
         Intent intent = new Intent(context, WeatherService.class);
         intent.setAction(ACTION_ALARM);
         return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -127,68 +113,73 @@ public class WeatherService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         boolean force = intent.getBooleanExtra(EXTRA_FORCE, false);
-        if (ACTION_CANCEL_LOCATION_UPDATE.equals(intent.getAction())) {
-            WeatherLocationListener.cancel(this);
-            if (!mRunning) {
-                stopSelf();
-            }
-            return START_NOT_STICKY;
-        }
+
         if (mRunning) {
+            Log.w(TAG, "Service running ... do nothing");
             return START_REDELIVER_INTENT;
         }
+
+        if (!Config.isEnabled(this)) {
+            Log.w(TAG, "Service started, but not enabled ... stopping");
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        if (ACTION_CANCEL_LOCATION_UPDATE.equals(intent.getAction())) {
+            Log.w(TAG, "Service started, but location timeout ... stopping");
+            WeatherLocationListener.cancel(this);
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
         if (!isNetworkAvailable()) {
-            Log.d(TAG, "Service started, but no network ... stopping");
+            if (DEBUG) Log.d(TAG, "Service started, but no network ... stopping");
             stopSelf();
             return START_NOT_STICKY;
         }
 
         if (!force) {
-            long lastUpdate = Config.getLastUpdateTime(this);
+            final long lastUpdate = Config.getLastUpdateTime(this);
             if (lastUpdate != 0) {
-                long now = System.currentTimeMillis();
-                if (lastUpdate + ALARM_INTERVAL > now) {
-                    Log.d(TAG, "Service started, but update not due ... stopping");
+                final long now = System.currentTimeMillis();
+                final long updateInterval = ALARM_INTERVAL_BASE * Config.getUpdateInterval(this);
+                if (lastUpdate + updateInterval > now) {
+                    if (DEBUG)  Log.d(TAG, "Service started, but update not due ... stopping");
                     stopSelf();
                     return START_NOT_STICKY;
                 }
             }
         }
-        if (ACTION_UPDATE.equals(intent.getAction()) ||
-                ACTION_ALARM.equals(intent.getAction())) {
-            updateWeather();
-        }
+        if (DEBUG) Log.d(TAG, "updateWeather");
+        updateWeather();
+
         return START_REDELIVER_INTENT;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(mPrefsListener);
-
         Intent result = new Intent(STOP_INTENT);
         sendBroadcast(result);
     }
 
     private boolean isNetworkAvailable() {
-        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
-        if (info == null || !info.isConnected() || !info.isAvailable()) {
-            Log.d(TAG, "No network connection is available for weather update");
-            return false;
-        }
-        return true;
+        return info != null && info.isConnected();
     }
     
     private Location getCurrentLocation() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            Log.w(TAG, "network locations disabled");
+            return null;
+        }
         Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         Log.v(TAG, "Current location is " + location);
 
         if (location != null && location.getAccuracy() > LOCATION_ACCURACY_THRESHOLD_METERS) {
-            Log.d(TAG, "Ignoring inaccurate location");
+            Log.w(TAG, "Ignoring inaccurate location");
             location = null;
         }
 
@@ -201,7 +192,7 @@ public class WeatherService extends Service {
             needsUpdate = delta > OUTDATED_LOCATION_THRESHOLD_MILLIS;
         }
         if (needsUpdate) {
-            Log.d(TAG, "Getting best location provider");
+            if (DEBUG) Log.d(TAG, "Getting best location provider");
             String locationProvider = lm.getBestProvider(sLocationCriteria, true);
             if (TextUtils.isEmpty(locationProvider)) {
                 Log.e(TAG, "No available location providers matching criteria.");
@@ -213,19 +204,29 @@ public class WeatherService extends Service {
         return location;
     }
 
-    private static void scheduleUpdate(Context context, long timeFromNow) {
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        long due = System.currentTimeMillis() + timeFromNow;
+    public static void scheduleUpdate(Context context) {
+        cancelUpdate(context);
 
-        Log.d(TAG, "Scheduling next update at " + new Date(due));
-        am.set(AlarmManager.RTC, due, alarmPending(context));
+        final long interval = ALARM_INTERVAL_BASE * Config.getUpdateInterval(context);
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        final long due = System.currentTimeMillis() + interval;
+
+        if (DEBUG) Log.d(TAG, "Scheduling next update at " + new Date(due));
+
+        mAlarm = alarmPending(context);
+        am.setInexactRepeating(AlarmManager.RTC, due, interval, mAlarm);
+        startUpdate(context, true);
+
     }
 
-    public static void canceUpdate(Context context) {
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Log.d(TAG, "Cancel pending update");
+    public static void cancelUpdate(Context context) {
+        if (mAlarm != null) {
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            if (DEBUG) Log.d(TAG, "Cancel pending update");
 
-        am.cancel(alarmPending(context));
+            am.cancel(mAlarm);
+            mAlarm = null;
+        }
     }
 
     private void updateWeather() {
@@ -238,12 +239,18 @@ public class WeatherService extends Service {
                     AbstractWeatherProvider provider = Config.getProvider(WeatherService.this);
                     WeatherInfo w = null;
                     if (!Config.isCustomLocation(WeatherService.this)) {
-                        Location location = getCurrentLocation();
-                        if (location != null) {
-                            w = provider.getLocationWeather(location, Config.isMetric(WeatherService.this));
+                        if (checkPermissions()) {
+                            Location location = getCurrentLocation();
+                            if (location != null) {
+                                w = provider.getLocationWeather(location, Config.isMetric(WeatherService.this));
+                            }
+                        } else {
+                            Log.w(TAG, "no location permissions");
                         }
                     } else if (Config.getLocationId(WeatherService.this) != null){
                         w = provider.getCustomWeather(Config.getLocationId(WeatherService.this), Config.isMetric(WeatherService.this));
+                    } else {
+                        Log.w(TAG, "no valid custom location");
                     }
                     if (w != null) {
                         Config.setWeatherData(WeatherService.this, w);
@@ -254,11 +261,16 @@ public class WeatherService extends Service {
                 } finally {
                     mWakeLock.release();
                     mRunning = false;
-                    if (Config.isAutoUpdate(WeatherService.this)) {
-                        scheduleUpdate(WeatherService.this, ALARM_INTERVAL);
-                    }
                 }
             }
          });
+    }
+
+    private boolean checkPermissions() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+        return true;
     }
 }

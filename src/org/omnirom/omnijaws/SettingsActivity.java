@@ -17,12 +17,14 @@
  */
 package org.omnirom.omnijaws;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -32,6 +34,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.MenuItem;
 
@@ -40,11 +43,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private SharedPreferences mPrefs;
     private ListPreference mProvider;
     private CheckBoxPreference mCustomLocation;
-    private CheckBoxPreference mAutoUpdates;
+    //private CheckBoxPreference mAutoUpdates;
     private ListPreference mUnits;
+    private SwitchPreference mEnable;
+    private boolean mTriggerUpdate;
+    private ListPreference mUpdateInterval;
 
-    public SettingsActivity() {
-    }
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +58,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.settings);
-        
+
+        mEnable = (SwitchPreference) findPreference(Config.PREF_KEY_ENABLE);
         mCustomLocation = (CheckBoxPreference) findPreference(Config.PREF_KEY_CUSTOM_LOCATION);
-        mAutoUpdates = (CheckBoxPreference) findPreference(Config.PREF_KEY_AUTO_UPDATE);
+        //mAutoUpdates = (CheckBoxPreference) findPreference(Config.PREF_KEY_AUTO_UPDATE);
 
         mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
         mProvider.setOnPreferenceChangeListener(this);
@@ -71,27 +77,63 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         mUnits.setValueIndex(idx);
         mUnits.setSummary(mUnits.getEntries()[idx]);
 
-        // Show a warning if location manager is disabled and there is no custom location set
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !mCustomLocation.isChecked()) {
-            showDialog();
+        mUpdateInterval = (ListPreference) findPreference(Config.PREF_KEY_UPDATE_INTERVAL);
+        mUpdateInterval.setOnPreferenceChangeListener(this);
+        idx = mUpdateInterval.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UPDATE_INTERVAL,
+                mUpdateInterval.getEntryValues()[0].toString()));
+        mUpdateInterval.setValueIndex(idx);
+        mUpdateInterval.setSummary(mUpdateInterval.getEntries()[idx]);
+
+        if (mPrefs.getBoolean(Config.PREF_KEY_ENABLE, false)
+                && !mPrefs.getBoolean(Config.PREF_KEY_CUSTOM_LOCATION, false)) {
+            mTriggerUpdate = false;
+            checkPermissions();
         }
     }
-    
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mTriggerUpdate) {
+            WeatherService.scheduleUpdate(this);
+        }
+        mTriggerUpdate = false;
+    }
+
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
         if (preference == mCustomLocation) {
-            LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !mCustomLocation.isChecked()) {
-                showDialog();
+            if (!mCustomLocation.isChecked()) {
+                mTriggerUpdate = true;
+                checkPermissions();
+            } else {
+                WeatherService.startUpdate(this, true);
             }
             return true;
-        } else if (preference == mAutoUpdates) {
+        /*} else if (preference == mAutoUpdates) {
             if (mAutoUpdates.isChecked()) {
                 WeatherService.startUpdate(this, true);
             } else {
-                WeatherService.canceUpdate(this);
+                WeatherService.cancelUpdate(this);
+            }
+            return true;*/
+        } else if (preference == mEnable) {
+            if (mEnable.isChecked()) {
+                if (!mCustomLocation.isChecked()) {
+                    mTriggerUpdate = true;
+                    checkPermissions();
+                } else {
+                    WeatherService.scheduleUpdate(this);
+                }
+            } else {
+                // stop any pending
+                WeatherService.cancelUpdate(this);
+                // clear cached
+                Config.clearWeatherData(this);
+                // tell provider listeners that its gone
+                WeatherContentProvider.updateCachedWeatherInfo(this);
             }
             return true;
         }
@@ -105,12 +147,21 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             int idx = mProvider.findIndexOfValue(value);
             mProvider.setSummary(mProvider.getEntries()[idx]);
             mProvider.setValueIndex(idx);
+            WeatherService.startUpdate(this, true);
             return true;
         } else if (preference == mUnits) {
             String value = (String) newValue;
             int idx = mUnits.findIndexOfValue(value);
             mUnits.setSummary(mUnits.getEntries()[idx]);
             mUnits.setValueIndex(idx);
+            WeatherService.startUpdate(this, true);
+            return true;
+        } else if (preference == mUpdateInterval) {
+            String value = (String) newValue;
+            int idx = mUpdateInterval.findIndexOfValue(value);
+            mUpdateInterval.setSummary(mUpdateInterval.getEntries()[idx]);
+            mUpdateInterval.setValueIndex(idx);
+            WeatherService.scheduleUpdate(this);
             return true;
         }
         return false;
@@ -147,5 +198,40 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkPermissions() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        } else {
+            checkLocationEnabled();
+        }
+    }
+
+    private void checkLocationEnabled() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            showDialog();
+        } else {
+            if (mTriggerUpdate) {
+                WeatherService.scheduleUpdate(this);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkLocationEnabled();
+                }
+            }
+            return;
+        }
     }
 }

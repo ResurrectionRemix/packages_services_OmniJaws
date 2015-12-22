@@ -4,7 +4,6 @@
 	android:versionName="1.0" >
 
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -13,28 +12,15 @@
 	<permission android:name="org.omnirom.omnijaws.READ_WEATHER" />
 
 	<uses-sdk
-		android:minSdkVersion="21"
-		android:targetSdkVersion="21" />
+		android:minSdkVersion="23"
+		android:targetSdkVersion="23" />
 
 	<application
 		android:allowBackup="true"
-		android:icon="@drawable/ic_launcher"
-		android:label="@string/app_name"
-		android:theme="@style/AppTheme" >
+		android:label="@string/app_name" >
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+		<uses-library android:name="org.apache.http.legacy" android:required="false" />
 
-		<!--
-        <activity
-			android:name=".MainActivity"
-			android:launchMode="singleInstance" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		-->
 		<activity
 			android:name=".SettingsActivity"
 			android:exported="true"
@@ -62,6 +48,13 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
 		</receiver>
-	</application>
 
+		<activity android:name=".WeatherIconPackDefault"
+			  android:label="Default" >
+		    <intent-filter>
+			    <action android:name="org.omnirom.WeatherIconPack" />
+			    <category android:name="android.intent.category.DEFAULT" />
+		    </intent-filter>
+		</activity>
+	 </application>
 </manifest>

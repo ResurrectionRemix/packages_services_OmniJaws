@@ -9,34 +9,51 @@
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  along with this program.	If not, see <http://www.gnu.org/licenses/>.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-	<CheckBoxPreference
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="enable"
+		android:title="@string/enable_title" />
+
+	<!--<CheckBoxPreference
 		android:defaultValue="false"
 		android:key="auto_update"
-		android:title="@string/auto_update_title" />
+		android:title="@string/auto_update_title"
+	android:dependency="enable" />-->
+
+	<ListPreference
+		android:entries="@array/update_interval_entries"
+		android:entryValues="@array/update_interval_values"
+		android:key="update_interval"
+		android:title="@string/update_interval_title"
+		android:dependency="enable" />
 
 	<ListPreference
 		android:entries="@array/provider_entries"
 		android:entryValues="@array/provider_values"
 		android:key="provider"
-		android:title="@string/provider_title" />
+		android:title="@string/provider_title"
+		android:dependency="enable" />
+
 	<ListPreference
 		android:entries="@array/units_entries"
 		android:entryValues="@array/units_values"
 		android:key="units"
-		android:title="@string/units_title" />
+		android:title="@string/units_title"
+		android:dependency="enable" />
 
 	<CheckBoxPreference
 		android:defaultValue="false"
 		android:key="custom_location"
-		android:title="@string/custom_location_title" />
+		android:title="@string/custom_location_title"
+		android:dependency="enable" />
 
 	<org.omnirom.omnijaws.CustomLocationPreference
 		android:dependency="custom_location"

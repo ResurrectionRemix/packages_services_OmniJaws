@@ -22,7 +22,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class Config {
-
     public static final String PREF_KEY_PROVIDER = "provider";
     public static final String PREF_KEY_UNITS = "units";
     public static final String PREF_KEY_LOCATION_ID = "location_id";
@@ -31,6 +30,8 @@ public class Config {
     public static final String PREF_KEY_WEATHER_DATA = "weather_data";
     public static final String PREF_KEY_AUTO_UPDATE = "auto_update";
     public static final String PREF_KEY_LAST_UPDATE = "last_update";
+    public static final String PREF_KEY_ENABLE = "enable";
+    public static final String PREF_KEY_UPDATE_INTERVAL = "update_interval";
 
     public static AbstractWeatherProvider getProvider(Context context) {
         SharedPreferences prefs = PreferenceManager
@@ -55,6 +56,7 @@ public class Config {
 
         return prefs.getBoolean(PREF_KEY_CUSTOM_LOCATION, false);
     }
+
     public static String getLocationId(Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -82,6 +84,7 @@ public class Config {
 
         prefs.edit().putString(PREF_KEY_LOCATION_NAME, name).commit();
     }
+
     public static WeatherInfo getWeatherData(Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -101,12 +104,21 @@ public class Config {
         prefs.edit().putString(PREF_KEY_WEATHER_DATA, data.toSerializedString()).commit();
         prefs.edit().putLong(PREF_KEY_LAST_UPDATE, System.currentTimeMillis()).commit();
     }
-    
-    public static boolean isAutoUpdate(Context context) {
+
+    public static void clearWeatherData(Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        return prefs.getBoolean(PREF_KEY_AUTO_UPDATE, false);
+        prefs.edit().remove(PREF_KEY_WEATHER_DATA).commit();
+        prefs.edit().remove(PREF_KEY_LAST_UPDATE).commit();
+    }
+
+    public static boolean isAutoUpdate(Context context) {
+        return true;
+        /*SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.getBoolean(PREF_KEY_AUTO_UPDATE, true);*/
     }
     
     public static long getLastUpdateTime(Context context) {
@@ -121,5 +133,20 @@ public class Config {
                 .getDefaultSharedPreferences(context);
 
         prefs.edit().putLong(PREF_KEY_LAST_UPDATE, 0).commit();
+    }
+
+    public static boolean isEnabled(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.getBoolean(PREF_KEY_ENABLE, false);
+    }
+
+    public static int getUpdateInterval(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        String valueString = prefs.getString(PREF_KEY_UPDATE_INTERVAL, "1");
+        return Integer.valueOf(valueString);
     }
 }

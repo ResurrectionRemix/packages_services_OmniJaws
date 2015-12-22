@@ -38,21 +38,22 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     private static final int FORECAST_DAYS = 5;
     private static final String SELECTION_LOCATION = "lat=%f&lon=%f";
     private static final String SELECTION_ID = "id=%s";
+    private static final String API_KEY = "9f65b19b7a6648346dda93c6973a682c";
 
     private static final String URL_LOCATION =
-            "http://api.openweathermap.org/data/2.5/find?q=%s&mode=json&lang=%s";
+            "http://api.openweathermap.org/data/2.5/find?q=%s&mode=json&lang=%s&appid=%s";
     private static final String URL_WEATHER =
-            "http://api.openweathermap.org/data/2.5/weather?%s&mode=json&units=%s&lang=%s";
+            "http://api.openweathermap.org/data/2.5/weather?%s&mode=json&units=%s&lang=%s&appid=%s";
     private static final String URL_FORECAST =
             "http://api.openweathermap.org/data/2.5/forecast/daily?" +
-            "%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS;
+            "%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS + "&appid=%s";
 
     public OpenWeatherMapProvider(Context context) {
         super(context);
     }
 
     public List<WeatherInfo.WeatherLocation> getLocations(String input) {
-        String url = String.format(URL_LOCATION, Uri.encode(input), getLanguageCode());
+        String url = String.format(URL_LOCATION, Uri.encode(input), getLanguageCode(), getAPIKey());
         String response = retrieve(url);
         if (response == null) {
             return null;
@@ -97,14 +98,14 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     private WeatherInfo handleWeatherRequest(String selection, boolean metric) {
         String units = metric ? "metric" : "imperial";
         String locale = getLanguageCode();
-        String conditionUrl = String.format(Locale.US, URL_WEATHER, selection, units, locale);
+        String conditionUrl = String.format(Locale.US, URL_WEATHER, selection, units, locale, getAPIKey());
         String conditionResponse = retrieve(conditionUrl);
         if (conditionResponse == null) {
             return null;
         }
         log(TAG, "Condition URL = " + conditionUrl + " returning a response of " + conditionResponse);
 
-        String forecastUrl = String.format(Locale.US, URL_FORECAST, selection, units, locale);
+        String forecastUrl = String.format(Locale.US, URL_FORECAST, selection, units, locale, getAPIKey());
         String forecastResponse = retrieve(forecastUrl);
         if (forecastResponse == null) {
             return null;
@@ -132,7 +133,7 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
                     forecasts,
                     System.currentTimeMillis());
 
-            Log.d(TAG, "Weather updated: " + w);
+            log(TAG, "Weather updated: " + w);
             return w;
         } catch (JSONException e) {
             Log.w(TAG, "Received malformed weather data (selection = " + selection
@@ -309,5 +310,9 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
         }
 
         return -1;
+    }
+
+    private String getAPIKey() {
+        return mContext.getResources().getString(R.string.owm_api_key, API_KEY);
     }
 }

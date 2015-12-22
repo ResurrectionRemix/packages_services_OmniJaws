@@ -125,7 +125,11 @@ public class WeatherInfo {
         return condition;
     }
 
-    public Date getTimestamp() {
+    public Long getTimestamp() {
+        return new Long(timestamp);
+    }
+
+    public Date getFormattedTimestamp() {
         return new Date(timestamp);
     }
 
@@ -156,11 +160,11 @@ public class WeatherInfo {
         if (wind < 0) {
             return "-1";
         }
-        return getFormattedValue(wind, metric?"mph":"kph");
+        return getFormattedValue(wind, metric?"km/h":"m/h");
     }
 
     public String getWindDirection() {
-        return String.valueOf(windDirection);
+        return String.valueOf(windDirection) + "deg";
     }
 
     public ArrayList<DayForecast> getForecasts() {
@@ -179,7 +183,7 @@ public class WeatherInfo {
         builder.append(" (");
         builder.append(id);
         builder.append(") @ ");
-        builder.append(getTimestamp());
+        builder.append(getFormattedTimestamp());
         builder.append(": ");
         builder.append(getCondition());
         builder.append("(");
