@@ -49,7 +49,9 @@
 			</intent-filter>
 		</receiver>
 
-		<activity android:name=".WeatherIconPackDefault"
+        <!-- name is used a prefix +"_" for images e.g. weather_<condition_id>
+             weather_foo_<condition_id> -->
+		<activity android:name=".weather"
 			  android:label="Default" >
 		    <intent-filter>
 			    <action android:name="org.omnirom.WeatherIconPack" />
