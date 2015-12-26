@@ -43,6 +43,14 @@ public class Config {
         return new YahooWeatherProvider(context);
     }
 
+    public static String getProviderId(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        String provider = prefs.getString(PREF_KEY_PROVIDER, "0");
+        return provider.equals("0") ? "OpenWeatherMap" : "Yahoo";
+    }
+
     public static boolean isMetric(Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -140,6 +148,13 @@ public class Config {
                 .getDefaultSharedPreferences(context);
 
         return prefs.getBoolean(PREF_KEY_ENABLE, false);
+    }
+
+    public static boolean setEnabled(Context context, boolean value) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.edit().putBoolean(PREF_KEY_ENABLE, value).commit();
     }
 
     public static int getUpdateInterval(Context context) {

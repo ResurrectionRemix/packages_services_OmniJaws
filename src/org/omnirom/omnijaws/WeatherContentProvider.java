@@ -28,13 +28,12 @@ import android.util.Log;
 
 public class WeatherContentProvider extends ContentProvider {
     private static final String TAG = "WeatherService:WeatherContentProvider";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     static WeatherInfo sCachedWeatherInfo;
 
-    private static final int URI_TYPE_EVERYTHING = 1;
-    private static final int URI_TYPE_CURRENT = 2;
-    private static final int URI_TYPE_FORECAST = 3;
+    private static final int URI_TYPE_WEATHER = 1;
+    private static final int URI_TYPE_SETTINGS = 2;
 
     private static final String COLUMN_CURRENT_CITY_ID = "city_id";
     private static final String COLUMN_CURRENT_CITY = "city";
@@ -51,27 +50,13 @@ public class WeatherContentProvider extends ContentProvider {
     private static final String COLUMN_FORECAST_CONDITION_CODE = "forecast_condition_code";
     private static final String COLUMN_FORECAST_DATE = "forecast_date";
 
+    private static final String COLUMN_ENABLED = "enabled";
+    private static final String COLUMN_PROVIDER = "provider";
+    private static final String COLUMN_INTERVAL = "interval";
+    private static final String COLUMN_UNITS = "units";
+    private static final String COLUMN_LOCATION = "location";
 
-    private static final String[] PROJECTION_DEFAULT_CURRENT = new String[] {
-            COLUMN_CURRENT_CITY_ID,
-            COLUMN_CURRENT_CITY,
-            COLUMN_CURRENT_CONDITION,
-            COLUMN_CURRENT_TEMPERATURE,
-            COLUMN_CURRENT_HUMIDITY,
-            COLUMN_CURRENT_WIND,
-            COLUMN_CURRENT_TIME_STAMP,
-            COLUMN_CURRENT_CONDITION_CODE
-    };
-
-    private static final String[] PROJECTION_DEFAULT_FORECAST = new String[] {
-            COLUMN_FORECAST_LOW,
-            COLUMN_FORECAST_HIGH,
-            COLUMN_FORECAST_CONDITION,
-            COLUMN_FORECAST_CONDITION_CODE,
-            COLUMN_FORECAST_DATE
-    };
-
-    private static final String[] PROJECTION_DEFAULT_EVERYTHING = new String[] {
+    private static final String[] PROJECTION_DEFAULT_WEATHER = new String[] {
             COLUMN_CURRENT_CITY_ID,
             COLUMN_CURRENT_CITY,
             COLUMN_CURRENT_CONDITION,
@@ -80,7 +65,6 @@ public class WeatherContentProvider extends ContentProvider {
             COLUMN_CURRENT_WIND,
             COLUMN_CURRENT_TIME_STAMP,
             COLUMN_CURRENT_CONDITION_CODE,
-
             COLUMN_FORECAST_LOW,
             COLUMN_FORECAST_HIGH,
             COLUMN_FORECAST_CONDITION,
@@ -88,14 +72,21 @@ public class WeatherContentProvider extends ContentProvider {
             COLUMN_FORECAST_DATE
     };
 
+    private static final String[] PROJECTION_DEFAULT_SETTINGS = new String[] {
+            COLUMN_ENABLED,
+            COLUMN_PROVIDER,
+            COLUMN_INTERVAL,
+            COLUMN_UNITS,
+            COLUMN_LOCATION
+    };
+
     public static final String AUTHORITY = "org.omnirom.omnijaws.provider";
 
     private static final UriMatcher sUriMatcher;
     static {
-        sUriMatcher = new UriMatcher(URI_TYPE_EVERYTHING);
-        sUriMatcher.addURI(AUTHORITY, "weather", URI_TYPE_EVERYTHING);
-        sUriMatcher.addURI(AUTHORITY, "weather/current", URI_TYPE_CURRENT);
-        sUriMatcher.addURI(AUTHORITY, "weather/forecast", URI_TYPE_FORECAST);
+        sUriMatcher = new UriMatcher(URI_TYPE_WEATHER);
+        sUriMatcher.addURI(AUTHORITY, "weather", URI_TYPE_WEATHER);
+        sUriMatcher.addURI(AUTHORITY, "settings", URI_TYPE_SETTINGS);
     }
 
     private Context mContext;
@@ -118,30 +109,43 @@ public class WeatherContentProvider extends ContentProvider {
         final int projectionType = sUriMatcher.match(uri);
         final MatrixCursor result = new MatrixCursor(resolveProjection(projection, projectionType));
 
-        WeatherInfo weather = sCachedWeatherInfo;
-        if (weather != null) {
-            // current
-            result.newRow()
-                    .add(COLUMN_CURRENT_CITY, weather.getCity())
-                    .add(COLUMN_CURRENT_CITY_ID, weather.getId())
-                    .add(COLUMN_CURRENT_CONDITION, weather.getCondition())
-                    .add(COLUMN_CURRENT_HUMIDITY, weather.getFormattedHumidity())
-                    .add(COLUMN_CURRENT_WIND, weather.getFormattedWindSpeed()
-                            + " " + weather.getWindDirection())
-                    .add(COLUMN_CURRENT_TEMPERATURE, weather.getFormattedTemperature())
-                    .add(COLUMN_CURRENT_TIME_STAMP, weather.getTimestamp().toString())
-                    .add(COLUMN_CURRENT_CONDITION_CODE, weather.getConditionCode());
+        if (DEBUG) Log.i(TAG, "query: " + uri.toString());
 
-            // forecast
-            for (DayForecast day : weather.getForecasts()) {
-                result.newRow()
-                        .add(COLUMN_FORECAST_CONDITION, day.getCondition(mContext))
-                        .add(COLUMN_FORECAST_LOW, day.getFormattedLow())
-                        .add(COLUMN_FORECAST_HIGH, day.getFormattedHigh())
-                        .add(COLUMN_FORECAST_CONDITION_CODE, day.getConditionCode())
-                        .add(COLUMN_FORECAST_DATE, day.date);
-            }
+        if (projectionType == URI_TYPE_SETTINGS) {
+            result.newRow()
+                    .add(COLUMN_ENABLED, Config.isEnabled(mContext) ? 1 : 0)
+                    .add(COLUMN_PROVIDER, Config.getProviderId(mContext))
+                    .add(COLUMN_INTERVAL, Config.getUpdateInterval(mContext))
+                    .add(COLUMN_UNITS, Config.isMetric(mContext))
+                    .add(COLUMN_LOCATION, Config.isCustomLocation(mContext) ? Config.getLocationName(mContext) : "");
+
             return result;
+        } else if (projectionType == URI_TYPE_WEATHER) {
+            WeatherInfo weather = sCachedWeatherInfo;
+            if (weather != null) {
+                // current
+                result.newRow()
+                        .add(COLUMN_CURRENT_CITY, weather.getCity())
+                        .add(COLUMN_CURRENT_CITY_ID, weather.getId())
+                        .add(COLUMN_CURRENT_CONDITION, weather.getCondition())
+                        .add(COLUMN_CURRENT_HUMIDITY, weather.getFormattedHumidity())
+                        .add(COLUMN_CURRENT_WIND, weather.getFormattedWindSpeed()
+                                + " " + weather.getWindDirection())
+                        .add(COLUMN_CURRENT_TEMPERATURE, weather.getFormattedTemperature())
+                        .add(COLUMN_CURRENT_TIME_STAMP, weather.getTimestamp().toString())
+                        .add(COLUMN_CURRENT_CONDITION_CODE, weather.getConditionCode());
+
+                // forecast
+                for (DayForecast day : weather.getForecasts()) {
+                    result.newRow()
+                            .add(COLUMN_FORECAST_CONDITION, day.getCondition(mContext))
+                            .add(COLUMN_FORECAST_LOW, day.getFormattedLow())
+                            .add(COLUMN_FORECAST_HIGH, day.getFormattedHigh())
+                            .add(COLUMN_FORECAST_CONDITION_CODE, day.getConditionCode())
+                            .add(COLUMN_FORECAST_DATE, day.date);
+                }
+                return result;
+            }
         }
         return null;
     }
@@ -151,14 +155,11 @@ public class WeatherContentProvider extends ContentProvider {
             return projection;
         switch (uriType) {
             default:
-            case URI_TYPE_EVERYTHING:
-                return PROJECTION_DEFAULT_EVERYTHING;
+            case URI_TYPE_WEATHER:
+                return PROJECTION_DEFAULT_WEATHER;
 
-            case URI_TYPE_CURRENT:
-                return PROJECTION_DEFAULT_CURRENT;
-
-            case URI_TYPE_FORECAST:
-                return PROJECTION_DEFAULT_FORECAST;
+            case URI_TYPE_SETTINGS:
+                return PROJECTION_DEFAULT_SETTINGS;
         }
     }
 
@@ -183,7 +184,7 @@ public class WeatherContentProvider extends ContentProvider {
     }
 
     public static void updateCachedWeatherInfo(Context context) {
-        if (DEBUG) Log.e(TAG, "updateCachedWeatherInfo()");
+        if (DEBUG) Log.d(TAG, "updateCachedWeatherInfo()");
         sCachedWeatherInfo = Config.getWeatherData(context);
         context.getContentResolver().notifyChange(
                 Uri.parse("content://" + WeatherContentProvider.AUTHORITY + "/weather"), null);

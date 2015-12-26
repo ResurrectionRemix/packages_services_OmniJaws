@@ -204,6 +204,7 @@ public class CustomLocationPreference extends EditTextPreference {
             setText(result.city);
             mDialog.dismiss();
             CustomLocationPreference.this.setSummary(result.city);
+            WeatherService.startUpdate(getContext(), true);
         }
     }
 }

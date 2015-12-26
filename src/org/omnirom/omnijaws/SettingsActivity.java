@@ -47,6 +47,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private ListPreference mUnits;
     private SwitchPreference mEnable;
     private boolean mTriggerUpdate;
+    private boolean mTriggerPermissionCheck;
     private ListPreference mUpdateInterval;
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
@@ -87,19 +88,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         if (mPrefs.getBoolean(Config.PREF_KEY_ENABLE, false)
                 && !mPrefs.getBoolean(Config.PREF_KEY_CUSTOM_LOCATION, false)) {
             mTriggerUpdate = false;
-            checkPermissions();
+            checkLocationEnabled();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mTriggerUpdate) {
-            WeatherService.scheduleUpdate(this);
+        if (mTriggerPermissionCheck) {
+            checkLocationPermissions();
+            mTriggerPermissionCheck = false;
         }
-        mTriggerUpdate = false;
     }
-
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -107,9 +107,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         if (preference == mCustomLocation) {
             if (!mCustomLocation.isChecked()) {
                 mTriggerUpdate = true;
-                checkPermissions();
+                checkLocationEnabled();
             } else {
-                WeatherService.startUpdate(this, true);
+                String location = Config.getLocationName(this);
+                if (location != null) {
+                    WeatherService.startUpdate(this, true);
+                } else {
+                    disableService();
+                }
             }
             return true;
         /*} else if (preference == mAutoUpdates) {
@@ -123,17 +128,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             if (mEnable.isChecked()) {
                 if (!mCustomLocation.isChecked()) {
                     mTriggerUpdate = true;
-                    checkPermissions();
+                    checkLocationEnabled();
                 } else {
                     WeatherService.scheduleUpdate(this);
                 }
             } else {
-                // stop any pending
-                WeatherService.cancelUpdate(this);
-                // clear cached
-                Config.clearWeatherData(this);
-                // tell provider listeners that its gone
-                WeatherContentProvider.updateCachedWeatherInfo(this);
+                disableService();
             }
             return true;
         }
@@ -178,6 +178,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         builder.setPositiveButton(R.string.weather_retrieve_location_dialog_enable_button,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        mTriggerPermissionCheck = true;
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -200,13 +201,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         return super.onOptionsItemSelected(item);
     }
 
-    private void checkPermissions() {
+    private void checkLocationPermissions() {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         } else {
-            checkLocationEnabled();
+            if (mTriggerUpdate) {
+                WeatherService.scheduleUpdate(this);
+                mTriggerUpdate = false;
+            }
         }
     }
 
@@ -215,9 +219,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             showDialog();
         } else {
-            if (mTriggerUpdate) {
-                WeatherService.scheduleUpdate(this);
-            }
+            checkLocationPermissions();
         }
     }
 
@@ -228,10 +230,22 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    checkLocationEnabled();
+                    if (mTriggerUpdate) {
+                        WeatherService.scheduleUpdate(this);
+                        mTriggerUpdate = false;
+                    }
                 }
+                break;
             }
-            return;
         }
+    }
+
+    private void disableService() {
+        // stop any pending
+        WeatherService.cancelUpdate(this);
+        // clear cached
+        Config.clearWeatherData(this);
+        // tell provider listeners that its gone
+        WeatherContentProvider.updateCachedWeatherInfo(this);
     }
 }

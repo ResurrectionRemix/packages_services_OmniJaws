@@ -151,20 +151,31 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
             throw new JSONException("Empty forecasts array");
         }
         for (int i = 0; i < count; i++) {
-            JSONObject forecast = forecasts.getJSONObject(i);
-            JSONObject temperature = forecast.getJSONObject("temp");
-            JSONObject data = forecast.getJSONArray("weather").getJSONObject(0);
-            DayForecast item = new DayForecast(
-                    /* low */ sanitizeTemperature(temperature.getDouble("min"), metric),
-                    /* high */ sanitizeTemperature(temperature.getDouble("max"), metric),
-                    /* condition */ data.getString("main"),
-                    /* conditionCode */ mapConditionIconToCode(
-                            data.getString("icon"), data.getInt("id")),
-                    "NaN",
-                    metric);
+            DayForecast item = null;
+            try {
+                JSONObject forecast = forecasts.getJSONObject(i);
+                JSONObject temperature = forecast.getJSONObject("temp");
+                JSONObject data = forecast.getJSONArray("weather").getJSONObject(0);
+                item = new DayForecast(
+                        /* low */ sanitizeTemperature(temperature.getDouble("min"), metric),
+                        /* high */ sanitizeTemperature(temperature.getDouble("max"), metric),
+                        /* condition */ data.getString("main"),
+                        /* conditionCode */ mapConditionIconToCode(
+                                data.getString("icon"), data.getInt("id")),
+                        "NaN",
+                        metric);
+            } catch (JSONException e) {
+                Log.w(TAG, "Invalid forecast for day " + i + " creating dummy", e);
+                item = new DayForecast(
+                        /* low */ 0,
+                        /* high */ 0,
+                        /* condition */ "",
+                        /* conditionCode */ -1,
+                        "NaN",
+                        metric);
+            }
             result.add(item);
         }
-
         return result;
     }
 

@@ -176,7 +176,7 @@ public class WeatherService extends Service {
             return null;
         }
         Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-        Log.v(TAG, "Current location is " + location);
+        if (DEBUG) Log.d(TAG, "Current location is " + location);
 
         if (location != null && location.getAccuracy() > LOCATION_ACCURACY_THRESHOLD_METERS) {
             Log.w(TAG, "Ignoring inaccurate location");
