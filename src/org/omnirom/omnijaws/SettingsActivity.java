@@ -179,6 +179,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         mTriggerPermissionCheck = true;
+                        mTriggerUpdate = true;
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -243,9 +244,5 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private void disableService() {
         // stop any pending
         WeatherService.cancelUpdate(this);
-        // clear cached
-        Config.clearWeatherData(this);
-        // tell provider listeners that its gone
-        WeatherContentProvider.updateCachedWeatherInfo(this);
     }
 }
