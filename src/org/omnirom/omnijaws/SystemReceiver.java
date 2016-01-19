@@ -25,7 +25,7 @@ import android.util.Log;
 
 public class SystemReceiver extends BroadcastReceiver {
     private static final String TAG = "WeatherService:SystemReceiver";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     @Override
     public void onReceive(final Context context, Intent intent) {

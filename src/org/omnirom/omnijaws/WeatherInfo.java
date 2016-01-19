@@ -83,12 +83,12 @@ public class WeatherInfo {
             this.date = date;
         }
 
-        public String getFormattedLow() {
-            return getFormattedValue(low, "\u00b0" + (metric ? "C" : "F"));
+        public float getLow() {
+            return low;
         }
 
-        public String getFormattedHigh() {
-            return getFormattedValue(high, "\u00b0"  + (metric ? "C" : "F"));
+        public float getHigh() {
+            return high;
         }
 
         public String getCondition(Context context) {
@@ -144,35 +144,38 @@ public class WeatherInfo {
         return formatted + unit;
     }
 
-    public String getFormattedLow() {
-        return forecasts.get(0).getFormattedLow();
-    }
-
-    public String getFormattedHigh() {
-        return forecasts.get(0).getFormattedHigh();
-    }
-
     public String getFormattedHumidity() {
         return getFormattedValue(humidity, "%");
     }
 
-    public String getFormattedWindSpeed() {
+    public float getWindSpeed() {
         if (wind < 0) {
-            return "-1";
+            return 0;
+        }
+        return wind;
+    }
+
+    private String getFormattedWindSpeed() {
+        if (wind < 0) {
+            return "0";
         }
         return getFormattedValue(wind, metric?"km/h":"m/h");
     }
 
-    public String getWindDirection() {
-        return String.valueOf(windDirection) + "deg";
+    public int getWindDirection() {
+        return windDirection;
     }
 
     public ArrayList<DayForecast> getForecasts() {
         return forecasts;
     }
 
-    public String getFormattedTemperature() {
-        return getFormattedValue(temperature, "\u00b0" + (metric ? "C" : "F"));
+    public float getTemperature() {
+        return temperature;
+    }
+
+    private String getTemperatureUnit() {
+        return "\u00b0" + (metric ? "C" : "F");
     }
 
     @Override
@@ -189,11 +192,7 @@ public class WeatherInfo {
         builder.append("(");
         builder.append(conditionCode);
         builder.append("), temperature ");
-        builder.append(getFormattedTemperature());
-        builder.append(", low ");
-        builder.append(getFormattedLow());
-        builder.append(", high ");
-        builder.append(getFormattedHigh());
+        builder.append(getFormattedValue(getTemperature(), getTemperatureUnit()));
         builder.append(", humidity ");
         builder.append(getFormattedHumidity());
         builder.append(", wind ");
@@ -210,8 +209,8 @@ public class WeatherInfo {
             }
             builder.append(" day ").append(i + 1).append(":");
             builder.append(d.date);
-            builder.append(" high ").append(d.getFormattedHigh());
-            builder.append(", low ").append(d.getFormattedLow());
+            builder.append(" high ").append(getFormattedValue(d.getHigh(), getTemperatureUnit()));
+            builder.append(", low ").append(getFormattedValue(d.getLow(), getTemperatureUnit()));
             builder.append(", ").append(d.condition);
             builder.append("(").append(d.conditionCode).append(")");
         }
