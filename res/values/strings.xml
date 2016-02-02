@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2015 The OmniROM Project
+  Copyright (C) 2016 The OmniROM Project
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -32,8 +32,8 @@
 	<string name="weather_retrieve_location_dialog_enable_button">Enable</string>
 	<string name="settings_title">Settings</string>
 	<string name="auto_update_title">Automatic updates</string>
-	<string name="unit_metric">Metric</string>
-	<string name="unit_imperial">Imperial</string>
+	<string name="unit_metric">Metric - (\u00b0C)</string>
+	<string name="unit_imperial">Imperial - (\u00b0F)</string>
 	<string name="update">Update</string>
 	<string name="enable_title">Enable</string>
 	<string name="update_interval_title">Update interval</string>
