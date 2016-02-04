@@ -27,13 +27,14 @@
 	<string name="custom_location_title">Custom location</string>
 	<string name="weather_custom_location_dialog_title">Enter location</string>
 	<string name="weather_custom_location_title">Location</string>
+	<string name="weather_custom_location_missing">Set custom location</string>
 	<string name="weather_retrieve_location_dialog_title">Cannot retrieve location!</string>
 	<string name="weather_retrieve_location_dialog_message">Network geolocation is disabled.\n\nSet a custom location or enable network location</string>
 	<string name="weather_retrieve_location_dialog_enable_button">Enable</string>
 	<string name="settings_title">Settings</string>
 	<string name="auto_update_title">Automatic updates</string>
-	<string name="unit_metric">Metric - (\u00b0C)</string>
-	<string name="unit_imperial">Imperial - (\u00b0F)</string>
+	<string name="unit_metric">Metric (\u00b0C)</string>
+	<string name="unit_imperial">Imperial (\u00b0F)</string>
 	<string name="update">Update</string>
 	<string name="enable_title">Enable</string>
 	<string name="update_interval_title">Update interval</string>

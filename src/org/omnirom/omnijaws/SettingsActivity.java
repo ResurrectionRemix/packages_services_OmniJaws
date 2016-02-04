@@ -38,7 +38,7 @@ import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.MenuItem;
 
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener  {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, WeatherLocationTask.Callback  {
 
     private SharedPreferences mPrefs;
     private ListPreference mProvider;
@@ -49,7 +49,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private boolean mTriggerUpdate;
     private boolean mTriggerPermissionCheck;
     private ListPreference mUpdateInterval;
+    private CustomLocationPreference mLocation;
 
+    private static final String PREF_KEY_CUSTOM_LOCATION_CITY = "weather_custom_location_city";
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
 
     @Override
@@ -85,6 +87,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         mUpdateInterval.setValueIndex(idx);
         mUpdateInterval.setSummary(mUpdateInterval.getEntries()[idx]);
 
+        mLocation = (CustomLocationPreference) findPreference(PREF_KEY_CUSTOM_LOCATION_CITY);
         if (mPrefs.getBoolean(Config.PREF_KEY_ENABLE, false)
                 && !mPrefs.getBoolean(Config.PREF_KEY_CUSTOM_LOCATION, false)) {
             mTriggerUpdate = false;
@@ -109,9 +112,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 mTriggerUpdate = true;
                 checkLocationEnabled();
             } else {
-                String location = Config.getLocationName(this);
-                if (location != null) {
-                    WeatherService.startUpdate(this, true);
+                if (Config.getLocationName(this) != null) {
+                    // city ids are provider specific - so we need to recheck
+                    // cause provider migth be changed while unchecked
+                    new WeatherLocationTask(this, Config.getLocationName(this), this).execute();
                 } else {
                     disableService();
                 }
@@ -147,7 +151,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             int idx = mProvider.findIndexOfValue(value);
             mProvider.setSummary(mProvider.getEntries()[idx]);
             mProvider.setValueIndex(idx);
-            WeatherService.startUpdate(this, true);
+            if (mCustomLocation.isChecked() && Config.getLocationName(this) != null) {
+                // city ids are provider specific - so we need to recheck
+                new WeatherLocationTask(this, Config.getLocationName(this), this).execute();
+            } else {
+                WeatherService.startUpdate(this, true);
+            }
             return true;
         } else if (preference == mUnits) {
             String value = (String) newValue;
@@ -244,5 +253,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private void disableService() {
         // stop any pending
         WeatherService.cancelUpdate(this);
+    }
+
+    @Override
+    public void applyLocation(WeatherInfo.WeatherLocation result) {
+        Config.setLocationId(this, result.id);
+        Config.setLocationName(this, result.city);
+        mLocation.setText(result.city);
+        mLocation.setSummary(result.city);
+        WeatherService.startUpdate(this, true);
     }
 }
