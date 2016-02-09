@@ -246,7 +246,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
         String city = locateCity(location);
         if (city != null) {
             List<WeatherInfo.WeatherLocation> locations = getLocations(city);
-            if (locations.size() > 0) {
+            if (locations != null && locations.size() > 0) {
                 WeatherInfo.WeatherLocation loction = locations.get(0);
                 log(TAG, "Resolved location " + location + " to " + city + " id " + loction.id);
                 return getCustomWeather(loction.id, metric);
