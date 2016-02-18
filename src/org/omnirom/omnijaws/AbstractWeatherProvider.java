@@ -33,13 +33,13 @@ import android.util.Log;
 
 public abstract class AbstractWeatherProvider {
     private static final String TAG = "AbstractWeatherProvider";
-    private static final boolean DEBUG = false ;
+    private static final boolean DEBUG = false;
     protected Context mContext;
 
     public AbstractWeatherProvider(Context context) {
         mContext = context;
     }
-    
+
     protected String retrieve(String url) {
         HttpGet request = new HttpGet(url);
         try {

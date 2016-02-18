@@ -57,20 +57,18 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
                     "locality1, locality2, country from geo.places where " +
                     "(placetype = 7 or placetype = 8 or placetype = 9 " +
                     "or placetype = 10 or placetype = 11 or placetype = 20) and text =");
-    private static final String URL_PLACEFINDER =
+    private static final String URL_PLACES =
             "https://query.yahooapis.com/v1/public/yql?format=json&q=" +
-            Uri.encode("select woeid, city, neighborhood, county from geo.placefinder where " +
-                    "gflags=\"R\" and text =");
+            Uri.encode("select * from geo.places where text =");
 
     private static final String[] LOCALITY_NAMES = new String[] {
         "locality1", "locality2", "admin3", "admin2", "admin1"
     };
-    private static final String[] PLACE_NAMES = new String[] {
-        "city", "neigborhood", "county"
-    };
+
     private static boolean metric;
     private static String todayShort;
     private static boolean addForecastDay;
+    private static final boolean USE_GEOCODER = true;
 
     public YahooWeatherProvider(Context context) {
        super(context);
@@ -242,40 +240,37 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
     }
 
     public WeatherInfo getLocationWeather(Location location, boolean metric) {
-        // workaround broken yahoo geolocation API
-        String city = locateCity(location);
-        if (city != null) {
-            List<WeatherInfo.WeatherLocation> locations = getLocations(city);
-            if (locations != null && locations.size() > 0) {
-                WeatherInfo.WeatherLocation loction = locations.get(0);
-                log(TAG, "Resolved location " + location + " to " + city + " id " + loction.id);
-                return getCustomWeather(loction.id, metric);
+        if (USE_GEOCODER) {
+            // workaround broken yahoo geolocation API
+            String city = locateCity(location);
+            if (city != null) {
+                List<WeatherInfo.WeatherLocation> locations = getLocations(city);
+                if (locations != null && locations.size() > 0) {
+                    WeatherInfo.WeatherLocation loction = locations.get(0);
+                    log(TAG, "Resolved location " + location + " to " + city + " id " + loction.id);
+                    return getCustomWeather(loction.id, metric);
+                }
             }
         }
         String language = getLanguage();
-        String params = String.format(Locale.US, "\"%f %f\" and locale=\"%s\"",
+        String params = String.format(Locale.US, "\"(%f,%f)\" and lang=\"%s\"",
                 location.getLatitude(), location.getLongitude(), language);
-        String url = URL_PLACEFINDER + Uri.encode(params);
+        String url = URL_PLACES + Uri.encode(params);
         JSONObject results = fetchResults(url);
         if (results == null) {
             return null;
         }
 
         try {
-            JSONObject result = results.getJSONObject("Result");
-            String woeid = result.getString("woeid");
-
             String queryCity = null;
-            for (String name : PLACE_NAMES) {
-                if (!result.isNull(name)) {
-                    queryCity = result.getString(name);
-                    log(TAG, String.format(Locale.US, "Placefinder for location %f %f " +
-                                "matched %s using %s", location.getLatitude(),
-                                location.getLongitude(), queryCity, name));
-                    break;
-                }
+            JSONObject place = results.getJSONObject("place");
+            WeatherInfo.WeatherLocation result = parsePlace(place);
+            String woeid = null;
+            String city = null;
+            if (result != null) {
+                woeid = result.id;
+                queryCity = result.city;
             }
-
             // The city name in the placefinder result is HTML encoded :-(
             if (queryCity != null) {
                 queryCity = Html.fromHtml(queryCity).toString();
@@ -310,7 +305,11 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
 
         for (String name : LOCALITY_NAMES) {
             if (!place.isNull(name)) {
-                result.city = place.getJSONObject(name).getString("content");
+                JSONObject localeObject = place.getJSONObject(name);
+                result.city = localeObject.getString("content");
+                if (localeObject.optString("woeid") != null) {
+                    result.id = localeObject.getString("woeid");
+                }
                 break;
             }
         }
