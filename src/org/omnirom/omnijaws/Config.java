@@ -34,21 +34,23 @@ public class Config {
     public static final String PREF_KEY_UPDATE_INTERVAL = "update_interval";
 
     public static AbstractWeatherProvider getProvider(Context context) {
-        SharedPreferences prefs = PreferenceManager
+        /*SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
         if (prefs.getString(PREF_KEY_PROVIDER, "0").equals("0")) {
             return new OpenWeatherMapProvider(context);
         }
-        return new YahooWeatherProvider(context);
+        return new YahooWeatherProvider(context);*/
+        return new OpenWeatherMapProvider(context);
     }
 
     public static String getProviderId(Context context) {
-        SharedPreferences prefs = PreferenceManager
+        /*SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
         String provider = prefs.getString(PREF_KEY_PROVIDER, "0");
-        return provider.equals("0") ? "OpenWeatherMap" : "Yahoo";
+        return provider.equals("0") ? "OpenWeatherMap" : "Yahoo";*/
+        return "OpenWeatherMap";
     }
 
     public static boolean isMetric(Context context) {

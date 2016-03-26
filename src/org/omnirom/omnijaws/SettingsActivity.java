@@ -41,7 +41,7 @@ import android.view.MenuItem;
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, WeatherLocationTask.Callback  {
 
     private SharedPreferences mPrefs;
-    private ListPreference mProvider;
+    //private ListPreference mProvider;
     private CheckBoxPreference mCustomLocation;
     //private CheckBoxPreference mAutoUpdates;
     private ListPreference mUnits;
@@ -66,16 +66,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         mCustomLocation = (CheckBoxPreference) findPreference(Config.PREF_KEY_CUSTOM_LOCATION);
         //mAutoUpdates = (CheckBoxPreference) findPreference(Config.PREF_KEY_AUTO_UPDATE);
 
-        mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
+        /*mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
         mProvider.setOnPreferenceChangeListener(this);
         int idx = mProvider.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_PROVIDER,
                 mProvider.getEntryValues()[0].toString()));
         mProvider.setValueIndex(idx);
-        mProvider.setSummary(mProvider.getEntries()[idx]);
+        mProvider.setSummary(mProvider.getEntries()[idx]);*/
 
         mUnits = (ListPreference) findPreference(Config.PREF_KEY_UNITS);
         mUnits.setOnPreferenceChangeListener(this);
-        idx = mUnits.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UNITS,
+        int idx = mUnits.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UNITS,
                 mUnits.getEntryValues()[0].toString()));
         mUnits.setValueIndex(idx);
         mUnits.setSummary(mUnits.getEntries()[idx]);
@@ -146,7 +146,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mProvider) {
+        /*if (preference == mProvider) {
             String value = (String) newValue;
             int idx = mProvider.findIndexOfValue(value);
             mProvider.setSummary(mProvider.getEntries()[idx]);
@@ -158,7 +158,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 WeatherService.startUpdate(this, true);
             }
             return true;
-        } else if (preference == mUnits) {
+        } else*/ if (preference == mUnits) {
             String value = (String) newValue;
             int idx = mUnits.findIndexOfValue(value);
             mUnits.setSummary(mUnits.getEntries()[idx]);
