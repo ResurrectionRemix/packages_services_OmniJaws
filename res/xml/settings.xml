@@ -35,12 +35,12 @@
 		android:title="@string/update_interval_title"
 		android:dependency="enable" />
 
-	<!--<ListPreference
+	<ListPreference
 		android:entries="@array/provider_entries"
 		android:entryValues="@array/provider_values"
 		android:key="provider"
 		android:title="@string/provider_title"
-		android:dependency="enable" />-->
+		android:dependency="enable" />
 
 	<ListPreference
 		android:entries="@array/units_entries"
