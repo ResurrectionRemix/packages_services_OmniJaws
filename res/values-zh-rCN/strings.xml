@@ -29,10 +29,15 @@
   <string name="weather_retrieve_location_dialog_message">网络定位未启用.\n\n请设置自定义位置或启用网络定位</string>
   <string name="weather_retrieve_location_dialog_enable_button">启用</string>
   <string name="settings_title">设置</string>
+  <string name="auto_update_title">自动更新</string>
+  <string name="unit_metric">公制 - (\u00b0F)</string>
   <string name="unit_imperial">英制 - (\u00b0F)</string>
   <string name="update">更新</string>
   <string name="enable_title">启用</string>
   <string name="update_interval_title">更新间隔</string>
+  <string name="interval_1_hour">1 小时</string>
+  <string name="interval_2_hour">2 小时</string>
   <string name="interval_4_hour">4 小时</string>
+  <string name="interval_6_hour">6 小时</string>
   <string name="interval_12_hour">12 小时</string>
 </resources>
