@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -38,7 +39,14 @@ import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, WeatherLocationTask.Callback  {
+
+    private static final String WEATHER_SERVICE_PACKAGE = "org.omnirom.omnijaws";
+    private static final String CHRONUS_ICON_PACK_INTENT = "com.dvtonder.chronus.ICON_PACK";
+    private static final String DEFAULT_WEATHER_ICON_PACKAGE = "org.omnirom.omnijaws";
 
     private SharedPreferences mPrefs;
     private ListPreference mProvider;
@@ -50,9 +58,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private boolean mTriggerPermissionCheck;
     private ListPreference mUpdateInterval;
     private CustomLocationPreference mLocation;
+    private ListPreference mWeatherIconPack;
 
     private static final String PREF_KEY_CUSTOM_LOCATION_CITY = "weather_custom_location_city";
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
+    private static final String WEATHER_ICON_PACK = "weather_icon_pack";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +103,25 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             mTriggerUpdate = false;
             checkLocationEnabled();
         }
+        mWeatherIconPack = (ListPreference) findPreference(WEATHER_ICON_PACK);
+
+        String settingHeaderPackage = Config.getIconPack(this);
+        List<String> entries = new ArrayList<String>();
+        List<String> values = new ArrayList<String>();
+        getAvailableWeatherIconPacks(entries, values);
+        mWeatherIconPack.setEntries(entries.toArray(new String[entries.size()]));
+        mWeatherIconPack.setEntryValues(values.toArray(new String[values.size()]));
+
+        int valueIndex = mWeatherIconPack.findIndexOfValue(settingHeaderPackage);
+        if (valueIndex == -1) {
+            // no longer found
+            settingHeaderPackage = DEFAULT_WEATHER_ICON_PACKAGE;
+            Config.setIconPack(this, settingHeaderPackage);
+            valueIndex = mWeatherIconPack.findIndexOfValue(settingHeaderPackage);
+        }
+        mWeatherIconPack.setValueIndex(valueIndex >= 0 ? valueIndex : 0);
+        mWeatherIconPack.setSummary(mWeatherIconPack.getEntry());
+        mWeatherIconPack.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -171,6 +200,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             mUpdateInterval.setSummary(mUpdateInterval.getEntries()[idx]);
             mUpdateInterval.setValueIndex(idx);
             WeatherService.scheduleUpdate(this);
+            return true;
+        } else if (preference == mWeatherIconPack) {
+            String value = (String) newValue;
+            Config.setIconPack(this, value);
+            int valueIndex = mWeatherIconPack.findIndexOfValue(value);
+            mWeatherIconPack.setSummary(mWeatherIconPack.getEntries()[valueIndex]);
             return true;
         }
         return false;
@@ -262,5 +297,39 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         mLocation.setText(result.city);
         mLocation.setSummary(result.city);
         WeatherService.startUpdate(this, true);
+    }
+
+    private void getAvailableWeatherIconPacks(List<String> entries, List<String> values) {
+        Intent i = new Intent();
+        PackageManager packageManager = getPackageManager();
+        i.setAction("org.omnirom.WeatherIconPack");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            if (packageName.equals(DEFAULT_WEATHER_ICON_PACKAGE)) {
+                values.add(0, r.activityInfo.name);
+            } else {
+                values.add(r.activityInfo.name);
+            }
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = r.activityInfo.packageName;
+            }
+            if (packageName.equals(DEFAULT_WEATHER_ICON_PACKAGE)) {
+                entries.add(0, label);
+            } else {
+                entries.add(label);
+            }
+        }
+        i = new Intent(Intent.ACTION_MAIN);
+        i.addCategory(CHRONUS_ICON_PACK_INTENT);
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            values.add(packageName + ".weather");
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = r.activityInfo.packageName;
+            }
+            entries.add(label);
+        }
     }
 }

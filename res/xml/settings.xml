@@ -61,4 +61,8 @@
 		android:key="weather_custom_location_city"
 		android:title="@string/weather_custom_location_title" />
 
+	<ListPreference
+		android:key="weather_icon_pack"
+		android:title="@string/weather_icon_pack_title" />
+
 </PreferenceScreen>
