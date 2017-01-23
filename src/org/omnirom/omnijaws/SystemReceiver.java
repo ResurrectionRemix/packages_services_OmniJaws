@@ -30,15 +30,7 @@ public class SystemReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         final String action = intent.getAction();
-        if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
-            if (Config.isEnabled(context) && Config.isAutoUpdate(context)) {
-                boolean hasConnection = !intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
-                if (hasConnection) {
-                    if (DEBUG) Log.d(TAG, "connectivity change");
-                    WeatherService.startUpdate(context, false);
-                }
-            }
-        } else if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
+        if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
             if (Config.isEnabled(context) && Config.isAutoUpdate(context)) {
                 if (DEBUG) Log.d(TAG, "boot completed");
                 Config.clearLastUpdateTime(context);
