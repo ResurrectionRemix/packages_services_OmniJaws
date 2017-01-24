@@ -18,6 +18,7 @@
 package org.omnirom.omnijaws.client;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,6 +90,11 @@ public class OmniJawsClient {
         public String toString() {
             return city + ":" + new Date(timeStamp) + ": " + windSpeed + ":" + windDirection + ":" +conditionCode + ":" + temp + ":" + humidity + ":" + condition + ":" + tempUnits + ":" + windUnits + ": " + forecasts;
         }
+
+        public String getLastUpdateTime() {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            return sdf.format(new Date(timeStamp));
+        }
     }
 
     public static class DayForecast {
@@ -104,7 +110,6 @@ public class OmniJawsClient {
     }
 
     private Context mContext;
-    private Handler mHandler = new Handler();
     private WeatherInfo mCachedInfo;
     private boolean mEnabled;
     private Resources mRes;

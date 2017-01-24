@@ -27,7 +27,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -37,7 +39,10 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
+
+import org.omnirom.omnijaws.client.OmniJawsClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +56,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private SharedPreferences mPrefs;
     private ListPreference mProvider;
     private CheckBoxPreference mCustomLocation;
-    //private CheckBoxPreference mAutoUpdates;
     private ListPreference mUnits;
     private SwitchPreference mEnable;
     private boolean mTriggerUpdate;
@@ -59,10 +63,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     private ListPreference mUpdateInterval;
     private CustomLocationPreference mLocation;
     private ListPreference mWeatherIconPack;
+    private Preference mUpdateStatus;
+    private Handler mHandler = new Handler();
 
     private static final String PREF_KEY_CUSTOM_LOCATION_CITY = "weather_custom_location_city";
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
     private static final String WEATHER_ICON_PACK = "weather_icon_pack";
+    private static final String PREF_KEY_UPDATE_STATUS = "update_status";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +81,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
         mEnable = (SwitchPreference) findPreference(Config.PREF_KEY_ENABLE);
         mCustomLocation = (CheckBoxPreference) findPreference(Config.PREF_KEY_CUSTOM_LOCATION);
-        //mAutoUpdates = (CheckBoxPreference) findPreference(Config.PREF_KEY_AUTO_UPDATE);
 
         mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
         mProvider.setOnPreferenceChangeListener(this);
@@ -122,6 +128,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         mWeatherIconPack.setValueIndex(valueIndex >= 0 ? valueIndex : 0);
         mWeatherIconPack.setSummary(mWeatherIconPack.getEntry());
         mWeatherIconPack.setOnPreferenceChangeListener(this);
+
+        mUpdateStatus = findPreference(PREF_KEY_UPDATE_STATUS);
+        queryLastUpdateTime();
     }
 
     @Override
@@ -150,13 +159,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 }
             }
             return true;
-        /*} else if (preference == mAutoUpdates) {
-            if (mAutoUpdates.isChecked()) {
-                WeatherService.startUpdate(this, true);
-            } else {
-                WeatherService.cancelUpdate(this);
-            }
-            return true;*/
         } else if (preference == mEnable) {
             if (mEnable.isChecked()) {
                 if (!mCustomLocation.isChecked()) {
@@ -168,6 +170,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             } else {
                 disableService();
             }
+            queryLastUpdateTime();
+            return true;
+        } else if (preference == mUpdateStatus) {
+            WeatherService.startUpdate(this, true);
+            queryLastUpdateTime();
             return true;
         }
         return false;
@@ -200,6 +207,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             mUpdateInterval.setSummary(mUpdateInterval.getEntries()[idx]);
             mUpdateInterval.setValueIndex(idx);
             WeatherService.scheduleUpdate(this);
+            queryLastUpdateTime();
             return true;
         } else if (preference == mWeatherIconPack) {
             String value = (String) newValue;
@@ -331,5 +339,46 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             }
             entries.add(label);
         }
+    }
+
+    private void queryLastUpdateTime() {
+        final AsyncTask<Void, Void, Void> t = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onProgressUpdate(Void... values) {
+            }
+            @Override
+            protected Void doInBackground(Void... params) {
+                final String updateTime = getLastUpdateTime();
+                SettingsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mUpdateStatus.setSummary(updateTime);
+                    }
+                });
+                return null;
+            }
+        };
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                t.execute();
+            }
+        }, 2000);
+    }
+
+    private String getLastUpdateTime() {
+        OmniJawsClient mWeatherClient = new OmniJawsClient(this);
+        if (mWeatherClient.isOmniJawsEnabled()) {
+            OmniJawsClient.WeatherInfo mWeatherData = null;
+            try {
+                mWeatherClient.queryWeather();
+                mWeatherData = mWeatherClient.getWeatherInfo();
+                if (mWeatherData != null) {
+                    return mWeatherData.getLastUpdateTime();
+                }
+            } catch(Exception e) {
+            }
+        }
+        return getResources().getString(R.string.service_disabled);
     }
 }

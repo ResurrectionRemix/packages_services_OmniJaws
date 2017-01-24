@@ -211,7 +211,6 @@ public class WeatherService extends Service {
         mAlarm = alarmPending(context);
         am.setInexactRepeating(AlarmManager.RTC, due, interval, mAlarm);
         startUpdate(context, true);
-
     }
 
     public static void cancelUpdate(Context context) {

@@ -13,7 +13,7 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
 import org.omnirom.omnijaws.SettingsActivity;
-
+import org.omnirom.omnijaws.R;
 
 public class WeatherTileService extends TileService {
     @Override
@@ -71,21 +71,26 @@ public class WeatherTileService extends TileService {
         OmniJawsClient mWeatherClient = new OmniJawsClient(this);
         OmniJawsClient.WeatherInfo mWeatherData = null;
         Drawable weatherImage = mWeatherClient.getErrorWeatherConditionImage();
-        String label = null;
+        String label = getResources().getString(R.string.service_error);
         try {
-            mWeatherClient.queryWeather();
-            mWeatherData = mWeatherClient.getWeatherInfo();
-            if (mWeatherData != null) {
-                weatherImage = mWeatherClient.getWeatherConditionImage(mWeatherData.conditionCode);
-                label = mWeatherData.temp + mWeatherData.tempUnits + " " + mWeatherData.city;
+            if (!mWeatherClient.isOmniJawsEnabled()) {
+                label = getResources().getString(R.string.service_disabled);
             } else {
-                label = "Error";
+                mWeatherClient.queryWeather();
+                mWeatherData = mWeatherClient.getWeatherInfo();
+                if (mWeatherData != null) {
+                    weatherImage = mWeatherClient.getWeatherConditionImage(mWeatherData.conditionCode);
+                    label = mWeatherData.temp + mWeatherData.tempUnits + " " + mWeatherData.city;
+                } else {
+                    label = getResources().getString(R.string.service_error);
+                }
             }
-            Tile tile = this.getQsTile();
-            tile.setLabel(label);
-            tile.setIcon(Icon.createWithBitmap(resize(getResources(), weatherImage, 48).getBitmap()));
-            tile.updateTile();
         } catch(Exception e) {
         }
+        Tile tile = this.getQsTile();
+        tile.setLabel(label);
+        tile.setIcon(Icon.createWithBitmap(resize(getResources(), weatherImage, 48).getBitmap()));
+        tile.updateTile();
+
     }
 }

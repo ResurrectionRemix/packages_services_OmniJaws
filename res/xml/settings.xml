@@ -22,18 +22,18 @@
 		android:key="enable"
 		android:title="@string/enable_title" />
 
-	<!--<CheckBoxPreference
-		android:defaultValue="false"
-		android:key="auto_update"
-		android:title="@string/auto_update_title"
-	android:dependency="enable" />-->
-
 	<ListPreference
 		android:entries="@array/update_interval_entries"
 		android:entryValues="@array/update_interval_values"
 		android:key="update_interval"
 		android:title="@string/update_interval_title"
 		android:dependency="enable" />
+
+	<Preference
+		android:key="update_status"
+		android:title="@string/last_update_time"
+		android:dependency="enable"
+		android:persistent="false" />
 
 	<ListPreference
 		android:entries="@array/provider_entries"
@@ -63,6 +63,7 @@
 
 	<ListPreference
 		android:key="weather_icon_pack"
-		android:title="@string/weather_icon_pack_title" />
+		android:title="@string/weather_icon_pack_title"
+		android:dependency="enable" />
 
 </PreferenceScreen>
