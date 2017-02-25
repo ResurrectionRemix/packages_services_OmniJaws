@@ -28,11 +28,11 @@ public class Config {
     public static final String PREF_KEY_LOCATION_NAME = "location_name";
     public static final String PREF_KEY_CUSTOM_LOCATION = "custom_location";
     public static final String PREF_KEY_WEATHER_DATA = "weather_data";
-    public static final String PREF_KEY_AUTO_UPDATE = "auto_update";
     public static final String PREF_KEY_LAST_UPDATE = "last_update";
     public static final String PREF_KEY_ENABLE = "enable";
     public static final String PREF_KEY_UPDATE_INTERVAL = "update_interval";
     public static final String PREF_KEY_ICON_PACK = "icon_pack";
+    public static final String PREF_KEY_LAST_ALARM = "last_alarm";
 
     public static AbstractWeatherProvider getProvider(Context context) {
         SharedPreferences prefs = PreferenceManager
@@ -121,14 +121,6 @@ public class Config {
         prefs.edit().remove(PREF_KEY_WEATHER_DATA).commit();
         prefs.edit().remove(PREF_KEY_LAST_UPDATE).commit();
     }
-
-    public static boolean isAutoUpdate(Context context) {
-        return true;
-        /*SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(context);
-
-        return prefs.getBoolean(PREF_KEY_AUTO_UPDATE, true);*/
-    }
     
     public static long getLastUpdateTime(Context context) {
         SharedPreferences prefs = PreferenceManager
@@ -142,6 +134,7 @@ public class Config {
                 .getDefaultSharedPreferences(context);
 
         prefs.edit().putLong(PREF_KEY_LAST_UPDATE, 0).commit();
+        prefs.edit().putLong(PREF_KEY_LAST_ALARM, 0).commit();
     }
 
     public static boolean isEnabled(Context context) {
@@ -178,5 +171,19 @@ public class Config {
                 .getDefaultSharedPreferences(context);
 
         prefs.edit().putString(PREF_KEY_ICON_PACK, value).commit();
+    }
+
+    public static long getLastAlarmTime(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.getLong(PREF_KEY_LAST_ALARM, 0);
+    }
+
+    public static void setLastAlarmTime(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        prefs.edit().putLong(PREF_KEY_LAST_ALARM, System.currentTimeMillis()).commit();
     }
 }
