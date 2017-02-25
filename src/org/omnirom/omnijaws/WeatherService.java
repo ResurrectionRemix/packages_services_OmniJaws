@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015 The OmniROM Project
+ *  Copyright (C) 2017 The OmniROM Project
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,8 +45,11 @@ public class WeatherService extends Service {
     private static final boolean DEBUG = false;
     private static final String ACTION_UPDATE = "org.omnirom.omnijaws.ACTION_UPDATE";
     private static final String ACTION_ALARM = "org.omnirom.omnijaws.ACTION_ALARM";
+    private static final String ACTION_ENABLE = "org.omnirom.omnijaws.ACTION_ENABLE";
+    private static final String ACTION_BROADCAST = "org.omnirom.omnijaws.WEATHER_UPDATE";
 
     private static final String EXTRA_FORCE = "force";
+    private static final String EXTRA_ENABLE = "enable";
 
     static final String ACTION_CANCEL_LOCATION_UPDATE =
             "org.omnirom.omnijaws.CANCEL_LOCATION_UPDATE";
@@ -110,10 +113,22 @@ public class WeatherService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         boolean force = intent.getBooleanExtra(EXTRA_FORCE, false);
+        boolean enable = intent.getBooleanExtra(EXTRA_ENABLE, false);
 
         if (mRunning) {
             Log.w(TAG, "Service running ... do nothing");
             return START_REDELIVER_INTENT;
+        }
+
+        if (ACTION_ENABLE.equals(intent.getAction())) {
+            if (DEBUG) Log.d(TAG, "Set enablement " + enable);
+            Config.setEnabled(this, enable);
+            if (!enable) {
+                cancelUpdate(this);
+            } else {
+                // force an immediate update
+                force = true;
+            }
         }
 
         if (!Config.isEnabled(this)) {
@@ -136,18 +151,23 @@ public class WeatherService extends Service {
         }
 
         if (!force) {
-            final long lastUpdate = Config.getLastUpdateTime(this);
-            if (lastUpdate != 0) {
+            final long lastAlarm = Config.getLastAlarmTime(this);
+            if (lastAlarm != 0) {
                 final long now = System.currentTimeMillis();
                 final long updateInterval = ALARM_INTERVAL_BASE * Config.getUpdateInterval(this);
-                if (lastUpdate + updateInterval > now) {
-                    if (DEBUG)  Log.d(TAG, "Service started, but update not due ... stopping");
+                if (lastAlarm + updateInterval > now) {
+                    if (DEBUG)  Log.d(TAG, "Service started, but next alarm is due at " + new Date(lastAlarm + updateInterval) + " ... stopping");
                     stopSelf();
                     return START_NOT_STICKY;
                 }
             }
         }
-        if (DEBUG) Log.d(TAG, "updateWeather");
+        // force updates will not change the alarm schedule
+        if (ACTION_ALARM.equals(intent.getAction())) {
+            // normal regular alarm update
+            Config.setLastAlarmTime(this);
+        }
+        if (DEBUG) Log.d(TAG, "updateWeather force =" + force);
         updateWeather();
 
         return START_REDELIVER_INTENT;
@@ -205,6 +225,7 @@ public class WeatherService extends Service {
         final long interval = ALARM_INTERVAL_BASE * Config.getUpdateInterval(context);
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         final long due = System.currentTimeMillis() + interval;
+        Config.setLastAlarmTime(context);
 
         if (DEBUG) Log.d(TAG, "Scheduling next update at " + new Date(due));
 
@@ -251,13 +272,16 @@ public class WeatherService extends Service {
                         WeatherContentProvider.updateCachedWeatherInfo(WeatherService.this);
                     }
                 } finally {
-                    mWakeLock.release();
-                    mRunning = false;
                     if (w == null) {
                         // error
                         Config.clearWeatherData(WeatherService.this);
                         WeatherContentProvider.updateCachedWeatherInfo(WeatherService.this);
                     }
+                    // send broadcast that something has changed
+                    Intent updateIntent = new Intent(ACTION_BROADCAST);
+                    sendBroadcast(updateIntent);
+                    mWakeLock.release();
+                    mRunning = false;
                 }
             }
          });
