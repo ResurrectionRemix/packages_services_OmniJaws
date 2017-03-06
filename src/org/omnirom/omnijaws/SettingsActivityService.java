@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import org.omnirom.omnijaws.client.OmniJawsClient;
@@ -48,7 +50,6 @@ import java.util.List;
 
 public class SettingsActivityService extends PreferenceActivity implements OnPreferenceChangeListener, WeatherLocationTask.Callback  {
 
-    private static final String WEATHER_SERVICE_PACKAGE = "org.omnirom.omnijaws";
     private static final String CHRONUS_ICON_PACK_INTENT = "com.dvtonder.chronus.ICON_PACK";
     private static final String DEFAULT_WEATHER_ICON_PACKAGE = "org.omnirom.omnijaws";
 
@@ -258,15 +259,30 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            finish();
-            return true;
-        default:
-            break;
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.playstore:
+                launchPlaystore();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    private void launchPlaystore() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://search?q=Chronus+icons&c=apps"));
+        startActivity(intent);
     }
 
     private void checkLocationPermissions() {
@@ -391,7 +407,7 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
                 if (mWeatherData != null) {
                     return mWeatherData.getLastUpdateTime();
                 }
-            } catch(Exception e) {
+            } catch(Exception ignored) {
             }
         }
         return getResources().getString(R.string.service_disabled);
