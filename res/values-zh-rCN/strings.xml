@@ -40,4 +40,9 @@
   <string name="interval_4_hour">4 小时</string>
   <string name="interval_6_hour">6 小时</string>
   <string name="interval_12_hour">12 小时</string>
+  <string name="weather_tile_title">天气</string>
+  <string name="weather_icon_pack_title">天气图标包</string>
+  <string name="service_disabled">禁用</string>
+  <string name="service_error">错误</string>
+  <string name="last_update_time">上次更新时间</string>
 </resources>
