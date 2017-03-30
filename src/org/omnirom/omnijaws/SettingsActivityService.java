@@ -142,9 +142,6 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
         }
         mUpdateStatus = findPreference(PREF_KEY_UPDATE_STATUS);
         queryLastUpdateTime();
-        if (mWeatherIconPack !=null) {
-            prefScreen.removePreference(mWeatherIconPack);
-        }
     }
 
     @Override
