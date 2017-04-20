@@ -326,4 +326,8 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     private String getAPIKey() {
         return mContext.getResources().getString(R.string.owm_api_key, API_KEY);
     }
+
+    public boolean shouldRetry() {
+        return false;
+    }
 }
