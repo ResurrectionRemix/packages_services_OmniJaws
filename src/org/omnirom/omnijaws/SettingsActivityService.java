@@ -189,7 +189,7 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
             queryLastUpdateTime();
             return true;
         } else if (preference == mUpdateStatus) {
-            WeatherService.startUpdate(this, true);
+            WeatherService.startUpdate(this);
             queryLastUpdateTime();
             return true;
         }
@@ -207,7 +207,7 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
                 // city ids are provider specific - so we need to recheck
                 new WeatherLocationTask(this, Config.getLocationName(this), this).execute();
             } else {
-                WeatherService.startUpdate(this, true);
+                WeatherService.startUpdate(this);
             }
             return true;
         } else if (preference == mUnits) {
@@ -215,7 +215,7 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
             int idx = mUnits.findIndexOfValue(value);
             mUnits.setSummary(mUnits.getEntries()[idx]);
             mUnits.setValueIndex(idx);
-            WeatherService.startUpdate(this, true);
+            WeatherService.startUpdate(this);
             return true;
         } else if (preference == mUpdateInterval) {
             String value = (String) newValue;
@@ -335,7 +335,7 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
         Config.setLocationName(this, result.city);
         mLocation.setText(result.city);
         mLocation.setSummary(result.city);
-        WeatherService.startUpdate(this, true);
+        WeatherService.startUpdate(this);
     }
 
     private void getAvailableWeatherIconPacks(List<String> entries, List<String> values) {

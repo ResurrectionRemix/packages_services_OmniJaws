@@ -46,7 +46,6 @@ public class WeatherService extends Service {
     private static final String ACTION_ENABLE = "org.omnirom.omnijaws.ACTION_ENABLE";
     private static final String ACTION_BROADCAST = "org.omnirom.omnijaws.WEATHER_UPDATE";
 
-    private static final String EXTRA_FORCE = "force";
     private static final String EXTRA_ENABLE = "enable";
 
     static final String ACTION_CANCEL_LOCATION_UPDATE =
@@ -91,16 +90,13 @@ public class WeatherService extends Service {
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
     }
 
-    public static void startUpdate(Context context, boolean force) {
-        start(context, ACTION_UPDATE, force);
+    public static void startUpdate(Context context) {
+        start(context, ACTION_UPDATE);
     }
 
-    private static void start(Context context, String action, boolean force) {
+    private static void start(Context context, String action) {
         Intent i = new Intent(context, WeatherService.class);
         i.setAction(action);
-        if (force) {
-            i.putExtra(EXTRA_FORCE, force);
-        }
         context.startService(i);
     }
 
@@ -112,7 +108,6 @@ public class WeatherService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        boolean force = intent.getBooleanExtra(EXTRA_FORCE, false);
         boolean enable = intent.getBooleanExtra(EXTRA_ENABLE, false);
 
         if (mRunning) {
@@ -125,9 +120,6 @@ public class WeatherService extends Service {
             Config.setEnabled(this, enable);
             if (!enable) {
                 cancelUpdate(this);
-            } else {
-                // force an immediate update
-                force = true;
             }
         }
 
@@ -150,24 +142,10 @@ public class WeatherService extends Service {
             return START_NOT_STICKY;
         }
 
-        if (!force) {
-            final long lastAlarm = Config.getLastAlarmTime(this);
-            if (lastAlarm != 0) {
-                final long now = System.currentTimeMillis();
-                final long updateInterval = ALARM_INTERVAL_BASE * Config.getUpdateInterval(this);
-                if (lastAlarm + updateInterval > now) {
-                    if (DEBUG)  Log.d(TAG, "Service started, but next alarm is due at " + new Date(lastAlarm + updateInterval) + " ... stopping");
-                    stopSelf();
-                    return START_NOT_STICKY;
-                }
-            }
-        }
-        // force updates will not change the alarm schedule
         if (ACTION_ALARM.equals(intent.getAction())) {
-            // normal regular alarm update
             Config.setLastAlarmTime(this);
         }
-        if (DEBUG) Log.d(TAG, "updateWeather force =" + force);
+        if (DEBUG) Log.d(TAG, "updateWeather");
         updateWeather();
 
         return START_REDELIVER_INTENT;
@@ -231,7 +209,7 @@ public class WeatherService extends Service {
 
         mAlarm = alarmPending(context);
         am.setInexactRepeating(AlarmManager.RTC, due, interval, mAlarm);
-        startUpdate(context, true);
+        startUpdate(context);
     }
 
     public static void cancelUpdate(Context context) {

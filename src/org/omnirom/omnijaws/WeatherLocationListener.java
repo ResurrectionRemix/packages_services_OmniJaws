@@ -106,7 +106,7 @@ class WeatherLocationListener implements LocationListener {
         // Now, we have a location to use. Schedule a weather update right now.
         Log.d(TAG, "The location has changed, schedule an update ");
         synchronized (WeatherLocationListener.class) {
-            WeatherService.startUpdate(mContext, true);
+            WeatherService.startUpdate(mContext);
             cancelTimeoutAlarm();
             sInstance = null;
         }
@@ -118,7 +118,7 @@ class WeatherLocationListener implements LocationListener {
         Log.d(TAG, "The location service has become available, schedule an update ");
         if (status == LocationProvider.AVAILABLE) {
             synchronized (WeatherLocationListener.class) {
-                WeatherService.startUpdate(mContext, true);
+                WeatherService.startUpdate(mContext);
                 cancelTimeoutAlarm();
                 sInstance = null;
             }
