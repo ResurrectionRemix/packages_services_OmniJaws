@@ -56,6 +56,8 @@ public class WeatherService extends Service {
     public static final long LOCATION_REQUEST_TIMEOUT = 5L * 60L * 1000L; // request for at most 5 minutes
     private static final long OUTDATED_LOCATION_THRESHOLD_MILLIS = 10L * 60L * 1000L; // 10 minutes
     private static final long ALARM_INTERVAL_BASE = AlarmManager.INTERVAL_HOUR;
+    private static final int RETRY_DELAY_MS = 3000;
+    private static final int RETRY_MAX_NUM = 3;
 
     private HandlerThread mHandlerThread;
     private Handler mHandler;
@@ -251,23 +253,49 @@ public class WeatherService extends Service {
                     mRunning = true;
                     mWakeLock.acquire();
                     AbstractWeatherProvider provider = Config.getProvider(WeatherService.this);
-                    if (!Config.isCustomLocation(WeatherService.this)) {
-                        if (checkPermissions()) {
-                            Location location = getCurrentLocation();
-                            if (location != null) {
-                                w = provider.getLocationWeather(location, Config.isMetric(WeatherService.this));
+                    int i = 0;
+                    // retry max 3 times
+                    while(i < RETRY_MAX_NUM) {
+                        if (!Config.isCustomLocation(WeatherService.this)) {
+                            if (checkPermissions()) {
+                                Location location = getCurrentLocation();
+                                if (location != null) {
+                                    w = provider.getLocationWeather(location, Config.isMetric(WeatherService.this));
+                                } else {
+                                    Log.w(TAG, "no location");
+                                    // we are outa here
+                                    break;
+                                }
+                            } else {
+                                Log.w(TAG, "no location permissions");
+                                // we are outa here
+                                break;
                             }
+                        } else if (Config.getLocationId(WeatherService.this) != null){
+                            w = provider.getCustomWeather(Config.getLocationId(WeatherService.this), Config.isMetric(WeatherService.this));
                         } else {
-                            Log.w(TAG, "no location permissions");
+                            Log.w(TAG, "no valid custom location");
+                            // we are outa here
+                            break;
                         }
-                    } else if (Config.getLocationId(WeatherService.this) != null){
-                        w = provider.getCustomWeather(Config.getLocationId(WeatherService.this), Config.isMetric(WeatherService.this));
-                    } else {
-                        Log.w(TAG, "no valid custom location");
-                    }
-                    if (w != null) {
-                        Config.setWeatherData(WeatherService.this, w);
-                        WeatherContentProvider.updateCachedWeatherInfo(WeatherService.this);
+                        if (w != null) {
+                            Config.setWeatherData(WeatherService.this, w);
+                            WeatherContentProvider.updateCachedWeatherInfo(WeatherService.this);
+                            // we are outa here
+                            break;
+                        } else {
+                            if (!provider.shouldRetry()) {
+                                // some other error
+                                break;
+                            } else {
+                                Log.w(TAG, "retry count =" + i);
+                                try {
+                                    Thread.sleep(RETRY_DELAY_MS);
+                                } catch (InterruptedException e) {
+                                }
+                            }
+                        }
+                        i++;
                     }
                 } finally {
                     if (w == null) {

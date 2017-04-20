@@ -70,6 +70,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
     private static String todayShort;
     private static boolean addForecastDay;
     private static final boolean USE_GEOCODER = true;
+    private static boolean mIncomplete;
 
     public YahooWeatherProvider(Context context) {
        super(context);
@@ -124,6 +125,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
         addForecastDay = false;
 
         log(TAG, "URL = " + url + " returning a response of " + response);
+        mIncomplete = false;
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
@@ -150,6 +152,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
                 log(TAG, "Weather updated: " + w);
                 return w;
             } else {
+                mIncomplete = true;
                 Log.w(TAG, "Received incomplete weather XML (id=" + id + ")");
             }
         } catch (ParserConfigurationException e) {
@@ -161,6 +164,10 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
         }
 
         return null;
+    }
+
+    public boolean shouldRetry() {
+        return mIncomplete;
     }
 
     private static class WeatherHandler extends DefaultHandler {

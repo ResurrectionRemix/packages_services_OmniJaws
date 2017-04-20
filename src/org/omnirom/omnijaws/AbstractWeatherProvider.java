@@ -58,12 +58,14 @@ public abstract class AbstractWeatherProvider {
         }
         return null;
     }
-    
+
     public abstract WeatherInfo getCustomWeather(String id, boolean metric);
 
     public abstract WeatherInfo getLocationWeather(Location location, boolean metric);
 
     public abstract List<WeatherInfo.WeatherLocation> getLocations(String input);
+
+    public abstract boolean shouldRetry();
 
     protected void log(String tag, String msg) {
         if (DEBUG) Log.d("WeatherService:" + tag, msg);
