@@ -96,6 +96,6 @@ public class CustomLocationPreference extends EditTextPreference implements Weat
         setText(result.city);
         mDialog.dismiss();
         setSummary(result.city);
-        WeatherService.startUpdate(getContext(), true);
+        WeatherService.startUpdate(getContext());
     }
 }
