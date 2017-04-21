@@ -16,4 +16,34 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Провайдер погоды</string>
+  <string name="units_title">Единица измерения</string>
+  <string name="weather_progress_title">Проверка местоположения</string>
+  <string name="weather_select_location">Выберите местоположение</string>
+  <string name="custom_location_title">Пользовательское местоположение</string>
+  <string name="weather_custom_location_dialog_title">Введите местоположение</string>
+  <string name="weather_custom_location_title">Местоположение</string>
+  <string name="weather_custom_location_missing">Установить пользовательское местоположение</string>
+  <string name="weather_retrieve_location_dialog_title">Не удаётся определить местоположение!</string>
+  <string name="weather_retrieve_location_dialog_message">Определение местоположения по сети выключено.\n\nВведите местоположение вручную или включите определение местоположения по сети</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Включить</string>
+  <string name="settings_title">Настройки</string>
+  <string name="auto_update_title">Автоматические обновления</string>
+  <string name="unit_metric">Метрическая система (\u00b0C)</string>
+  <string name="unit_imperial">Стандартные (\u00b0F)</string>
+  <string name="update">Обновление</string>
+  <string name="enable_title">Включить</string>
+  <string name="update_interval_title">Интервал обновления</string>
+  <string name="interval_1_hour">1 час</string>
+  <string name="interval_2_hour">2 часа</string>
+  <string name="interval_4_hour">4 часа</string>
+  <string name="interval_6_hour">6 часов</string>
+  <string name="interval_12_hour">12 часов</string>
+  <string name="weather_tile_title">Погода</string>
+  <string name="weather_icon_pack_title">Стиль значков</string>
+  <string name="weather_icon_pack_playstore">Найти наборы значков</string>
+  <string name="service_disabled">Выключен</string>
+  <string name="service_error">Ошибка</string>
+  <string name="last_update_time">Время последнего обновления</string>
+</resources>

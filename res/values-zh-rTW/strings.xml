@@ -16,4 +16,34 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">天氣提供者</string>
+  <string name="units_title">單位</string>
+  <string name="weather_progress_title">正在確認位置</string>
+  <string name="weather_select_location">選擇位置</string>
+  <string name="custom_location_title">自訂位置</string>
+  <string name="weather_custom_location_dialog_title">輸入位置</string>
+  <string name="weather_custom_location_title">位置</string>
+  <string name="weather_custom_location_missing">使用自訂位置</string>
+  <string name="weather_retrieve_location_dialog_title">無法取得位置！</string>
+  <string name="weather_retrieve_location_dialog_message">網路定位已停用。\n\n請設定自訂位置或啟用網路定位</string>
+  <string name="weather_retrieve_location_dialog_enable_button">啟用</string>
+  <string name="settings_title">設定</string>
+  <string name="auto_update_title">自動更新</string>
+  <string name="unit_metric">公制 (\u00b0C)</string>
+  <string name="unit_imperial">英制 (\u00b0F)</string>
+  <string name="update">更新</string>
+  <string name="enable_title">啟用</string>
+  <string name="update_interval_title">更新頻率</string>
+  <string name="interval_1_hour">1 小時</string>
+  <string name="interval_2_hour">2 小時</string>
+  <string name="interval_4_hour">4 小時</string>
+  <string name="interval_6_hour">6 小時</string>
+  <string name="interval_12_hour">12 小時</string>
+  <string name="weather_tile_title">天氣</string>
+  <string name="weather_icon_pack_title">狀態圖示包</string>
+  <string name="weather_icon_pack_playstore">尋找圖示包</string>
+  <string name="service_disabled">已停用</string>
+  <string name="service_error">錯誤</string>
+  <string name="last_update_time">最後更新時間</string>
+</resources>

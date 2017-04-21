@@ -16,4 +16,34 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Pružatelj vremenske prognoze</string>
+  <string name="units_title">Jedinice</string>
+  <string name="weather_progress_title">Potvrđivanje lokacije</string>
+  <string name="weather_select_location">Odaberi lokaciju</string>
+  <string name="custom_location_title">Prilagođena lokacija</string>
+  <string name="weather_custom_location_dialog_title">Unesite lokaciju</string>
+  <string name="weather_custom_location_title">Lokacija</string>
+  <string name="weather_custom_location_missing">Postavi prilagođenu lokaciju</string>
+  <string name="weather_retrieve_location_dialog_title">Nije moguće pronaći lokaciju!</string>
+  <string name="weather_retrieve_location_dialog_message">Mrežno geolociranje nije omogućeno.\n\nPostavite prilagođenu lokaciju ili omogućite mrežnu lokaciju</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Omogući</string>
+  <string name="settings_title">Postavke</string>
+  <string name="auto_update_title">Automatska ažuriranja</string>
+  <string name="unit_metric">Metričke (\u00b0C)</string>
+  <string name="unit_imperial">Imperijalne (\u00b0F)</string>
+  <string name="update">Ažuriraj</string>
+  <string name="enable_title">Omogući</string>
+  <string name="update_interval_title">Interval ažuriranja</string>
+  <string name="interval_1_hour">1 sat</string>
+  <string name="interval_2_hour">2 sata</string>
+  <string name="interval_4_hour">4 sata</string>
+  <string name="interval_6_hour">6 sati</string>
+  <string name="interval_12_hour">12 sati</string>
+  <string name="weather_tile_title">Vremenska prognoza</string>
+  <string name="weather_icon_pack_title">Paket ikona za prognozu</string>
+  <string name="weather_icon_pack_playstore">Pronađi pakete ikona</string>
+  <string name="service_disabled">Onemogućeno</string>
+  <string name="service_error">Greška</string>
+  <string name="last_update_time">Posljednje ažuriranje</string>
+</resources>

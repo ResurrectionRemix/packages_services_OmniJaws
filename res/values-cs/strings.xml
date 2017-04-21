@@ -16,4 +16,34 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Poskytovatel počasí</string>
+  <string name="units_title">Jednotka</string>
+  <string name="weather_progress_title">Ověřování polohy</string>
+  <string name="weather_select_location">Zvolte polohu</string>
+  <string name="custom_location_title">Vlastní poloha</string>
+  <string name="weather_custom_location_dialog_title">Zadat polohu</string>
+  <string name="weather_custom_location_title">Poloha</string>
+  <string name="weather_custom_location_missing">Nastavit vlastní polohu</string>
+  <string name="weather_retrieve_location_dialog_title">Nelze určit polohu!</string>
+  <string name="weather_retrieve_location_dialog_message">Zjištění polohy sítí je vypnuto.\n\nJe nutné nastavit vlastní polohu, nebo zapnout zjišťování sítí</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Povolit</string>
+  <string name="settings_title">Nastavení</string>
+  <string name="auto_update_title">Automatické aktualizace</string>
+  <string name="unit_metric">Metrické jednotky (\u00b0C)</string>
+  <string name="unit_imperial">Anglosaské jednotky (\u00b0F)</string>
+  <string name="update">Aktualizace</string>
+  <string name="enable_title">Povolit</string>
+  <string name="update_interval_title">Interval aktualizace</string>
+  <string name="interval_1_hour">1 hodina</string>
+  <string name="interval_2_hour">2 hodiny</string>
+  <string name="interval_4_hour">4 hodiny</string>
+  <string name="interval_6_hour">6 hodin</string>
+  <string name="interval_12_hour">12 hodin</string>
+  <string name="weather_tile_title">Počasí</string>
+  <string name="weather_icon_pack_title">Balíček ikon stavu počasí</string>
+  <string name="weather_icon_pack_playstore">Najít balíček ikon</string>
+  <string name="service_disabled">Vypnuto</string>
+  <string name="service_error">Chyba</string>
+  <string name="last_update_time">Čas poslední aktualizace</string>
+</resources>
