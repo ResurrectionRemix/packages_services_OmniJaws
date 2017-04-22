@@ -33,6 +33,7 @@ public class Config {
     public static final String PREF_KEY_UPDATE_INTERVAL = "update_interval";
     public static final String PREF_KEY_ICON_PACK = "icon_pack";
     public static final String PREF_KEY_LAST_ALARM = "last_alarm";
+    public static final String PREF_KEY_UPDATE_ERROR = "update_error";
 
     public static AbstractWeatherProvider getProvider(Context context) {
         SharedPreferences prefs = PreferenceManager
@@ -185,5 +186,19 @@ public class Config {
                 .getDefaultSharedPreferences(context);
 
         prefs.edit().putLong(PREF_KEY_LAST_ALARM, System.currentTimeMillis()).commit();
+    }
+
+    public static boolean isUpdateError(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return prefs.getBoolean(PREF_KEY_UPDATE_ERROR, false);
+    }
+
+    public static void setUpdateError(Context context, boolean value) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        prefs.edit().putBoolean(PREF_KEY_UPDATE_ERROR, value).commit();
     }
 }

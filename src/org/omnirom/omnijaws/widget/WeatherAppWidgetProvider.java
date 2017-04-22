@@ -53,7 +53,7 @@ import java.util.Date;
 
 public class WeatherAppWidgetProvider extends AppWidgetProvider {
     private static final String TAG = "WeatherAppWidgetProvider";
-    public static final boolean LOGGING = false;
+    private static final boolean LOGGING = false;
     private static final String REFRESH_BROADCAST = "org.omnirom.omnijaws.widget.WEATHER_REFRESH";
     private static final String WEATHER_UPDATE = "org.omnirom.omnijaws.WEATHER_UPDATE";
     private static final String WEATHER_ERROR = "org.omnirom.omnijaws.WEATHER_ERROR";
@@ -103,7 +103,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (LOGGING) {
-            Log.i(TAG, "WeatherUpdateService:onReceive: " + action);
+            Log.i(TAG, "onReceive: " + action);
         }
         if (action.equals(WEATHER_UPDATE)) {
             updateAllWeather(context);
@@ -172,7 +172,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
 
     public static void showErrorState(Context context, int errorReason) {
         if (LOGGING) {
-            Log.i(TAG, "showErrorState");
+            Log.i(TAG, "showErrorState " + errorReason);
         }
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         if (appWidgetManager != null) {
@@ -214,23 +214,25 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
 
         boolean backgroundShadow = prefs.getBoolean(WeatherAppWidgetConfigure.KEY_BACKGROUND_SHADOW + "_" + appWidgetId, false);
         widget.setViewVisibility(R.id.background_shadow, backgroundShadow ? View.VISIBLE : View.GONE);
+        widget.setViewVisibility(R.id.progress_container, View.GONE);
+        widget.setViewVisibility(R.id.condition_line, View.VISIBLE);
 
         OmniJawsClient.WeatherInfo weatherData = weatherClient.getWeatherInfo();
         if (weatherData == null) {
-            Log.i(TAG, "updateWeather weatherData == null");
+            Log.e(TAG, "updateWeather weatherData == null");
             widget.setViewVisibility(R.id.current_weather_data, View.GONE);
-            widget.setViewVisibility(R.id.condition_line, View.GONE);
             widget.setTextViewText(R.id.no_weather_notice, context.getResources().getString(R.string.omnijaws_service_unkown));
             widget.setViewVisibility(R.id.no_weather_notice, View.VISIBLE);
-            widget.setViewVisibility(R.id.progress_container, View.GONE);
             appWidgetManager.updateAppWidget(appWidgetId, widget);
             return;
         }
-        Log.i(TAG, "updateWeather " + weatherData.toString());
+        if (LOGGING) {
+            Log.i(TAG, "updateWeather " + weatherData.toString());
+        }
         widget.setViewVisibility(R.id.no_weather_notice, View.GONE);
-        widget.setViewVisibility(R.id.condition_line, View.VISIBLE);
         widget.setViewVisibility(R.id.current_weather_data, View.VISIBLE);
-        widget.setViewVisibility(R.id.progress_container, View.GONE);
+        widget.setViewVisibility(R.id.current_weather_city, View.VISIBLE);
+        widget.setViewVisibility(R.id.current_weather_timestamp, View.VISIBLE);
 
         Bundle newOptions = appWidgetManager.getAppWidgetOptions(appWidgetId);
         int minHeight = context.getResources().getDimensionPixelSize(R.dimen.weather_widget_height);
@@ -330,8 +332,6 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setViewVisibility(R.id.condition_line, View.GONE);
         widget.setViewVisibility(R.id.progress_container, View.VISIBLE);
         widget.setViewVisibility(R.id.current_weather_data, View.GONE);
-        widget.setTextViewText(R.id.current_weather_city, "");
-        widget.setTextViewText(R.id.current_weather_timestamp, "");
         widget.setTextViewText(R.id.no_weather_notice, context.getResources().getString(R.string.omnijaws_service_progress));
         widget.setViewVisibility(R.id.no_weather_notice, View.VISIBLE);
         widget.setImageViewBitmap(R.id.refresh, shadow(context.getResources(),
@@ -355,11 +355,9 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean backgroundShadow = prefs.getBoolean(WeatherAppWidgetConfigure.KEY_BACKGROUND_SHADOW + "_" + appWidgetId, false);
         widget.setViewVisibility(R.id.background_shadow, backgroundShadow ? View.VISIBLE : View.GONE);
-        widget.setViewVisibility(R.id.condition_line, View.GONE);
         widget.setViewVisibility(R.id.progress_container, View.GONE);
+        widget.setViewVisibility(R.id.condition_line, View.VISIBLE);
         widget.setViewVisibility(R.id.current_weather_data, View.GONE);
-        widget.setTextViewText(R.id.current_weather_city, "");
-        widget.setTextViewText(R.id.current_weather_timestamp, "");
         widget.setTextViewText(R.id.no_weather_notice, errorReason == EXTRA_ERROR_DISABLED ?
                 context.getResources().getString(R.string.omnijaws_service_disabled) :
                 context.getResources().getString(R.string.omnijaws_service_error));
