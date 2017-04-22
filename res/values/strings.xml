@@ -50,6 +50,10 @@
     <string name="service_error">Error</string>
     <string name="last_update_time">Last update time</string>
     <string name="omnijaws_service_unkown">No weather data</string>
+    <string name="omnijaws_service_error">Error loading weather data</string>
+    <string name="omnijaws_service_init">Waiting for weather data...</string>
+    <string name="omnijaws_service_progress">Updating...</string>
+    <string name="omnijaws_service_disabled">Service disabled</string>
     <string name="weather_widget">Weather</string>
     <string name="omnijaws_current_text">Now</string>
     <string name="show_background_title">Background shadow</string>
