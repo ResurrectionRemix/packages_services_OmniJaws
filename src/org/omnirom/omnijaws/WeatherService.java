@@ -45,8 +45,14 @@ public class WeatherService extends Service {
     private static final String ACTION_ALARM = "org.omnirom.omnijaws.ACTION_ALARM";
     private static final String ACTION_ENABLE = "org.omnirom.omnijaws.ACTION_ENABLE";
     private static final String ACTION_BROADCAST = "org.omnirom.omnijaws.WEATHER_UPDATE";
+    private static final String ACTION_ERROR = "org.omnirom.omnijaws.WEATHER_ERROR";
 
     private static final String EXTRA_ENABLE = "enable";
+    private static final String EXTRA_ERROR = "error";
+
+    private static final int EXTRA_ERROR_NETWORK = 0;
+    private static final int EXTRA_ERROR_LOCATION = 1;
+    private static final int EXTRA_ERROR_DISABLED = 2;
 
     static final String ACTION_CANCEL_LOCATION_UPDATE =
             "org.omnirom.omnijaws.CANCEL_LOCATION_UPDATE";
@@ -125,6 +131,9 @@ public class WeatherService extends Service {
 
         if (!Config.isEnabled(this)) {
             Log.w(TAG, "Service started, but not enabled ... stopping");
+            Intent errorIntent = new Intent(ACTION_ERROR);
+            errorIntent.putExtra(EXTRA_ERROR, EXTRA_ERROR_DISABLED);
+            sendBroadcast(errorIntent);
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -132,12 +141,18 @@ public class WeatherService extends Service {
         if (ACTION_CANCEL_LOCATION_UPDATE.equals(intent.getAction())) {
             Log.w(TAG, "Service started, but location timeout ... stopping");
             WeatherLocationListener.cancel(this);
+            Intent errorIntent = new Intent(ACTION_ERROR);
+            errorIntent.putExtra(EXTRA_ERROR, EXTRA_ERROR_LOCATION);
+            sendBroadcast(errorIntent);
             stopSelf();
             return START_NOT_STICKY;
         }
 
         if (!isNetworkAvailable()) {
             if (DEBUG) Log.d(TAG, "Service started, but no network ... stopping");
+            Intent errorIntent = new Intent(ACTION_ERROR);
+            errorIntent.putExtra(EXTRA_ERROR, EXTRA_ERROR_NETWORK);
+            sendBroadcast(errorIntent);
             stopSelf();
             return START_NOT_STICKY;
         }
