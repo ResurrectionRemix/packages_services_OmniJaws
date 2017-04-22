@@ -16,4 +16,32 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Weeraanbieder</string>
+  <string name="units_title">Eenheid</string>
+  <string name="weather_progress_title">Locatie controleren</string>
+  <string name="weather_select_location">Selecteer locatie</string>
+  <string name="custom_location_title">Aangepaste locatie</string>
+  <string name="weather_custom_location_dialog_title">Voer locatie in</string>
+  <string name="weather_custom_location_title">Locatie</string>
+  <string name="weather_custom_location_missing">Gebruik aangepaste locatie</string>
+  <string name="weather_retrieve_location_dialog_title">Kan locatie niet bepalen!</string>
+  <string name="weather_retrieve_location_dialog_message">Netwerklocatiebepaling is uitgeschakeld.\n\nGebruik een aangepaste locatie of schakel netwerklocatiebepaling in</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Activeer</string>
+  <string name="settings_title">Instellingen</string>
+  <string name="auto_update_title">Automatische updates</string>
+  <string name="unit_metric">Metrisch (\u00b0C)</string>
+  <string name="unit_imperial">Imperiaal (\u00b0F)</string>
+  <string name="update">Bijwerken</string>
+  <string name="enable_title">Activeer</string>
+  <string name="update_interval_title">Vernieuwingsinterval</string>
+  <string name="interval_1_hour">1 uur</string>
+  <string name="interval_2_hour">2 uur</string>
+  <string name="interval_4_hour">4 uur</string>
+  <string name="interval_6_hour">6 uur</string>
+  <string name="interval_12_hour">12 uur</string>
+  <string name="weather_tile_title">Weer</string>
+  <string name="service_disabled">Uitgeschakeld</string>
+  <string name="service_error">Fout</string>
+  <string name="last_update_time">Laatst bijgewerkt</string>
+</resources>

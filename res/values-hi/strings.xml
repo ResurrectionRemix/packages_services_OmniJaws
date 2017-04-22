@@ -16,4 +16,11 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">मौसम जानकारी प्रदाता</string>
+  <string name="units_title">यूनिट</string>
+  <string name="weather_select_location">स्थान का चयन करें</string>
+  <string name="custom_location_title">कस्टम स्थान</string>
+  <string name="weather_custom_location_dialog_title">अपना स्थान दर्ज करें</string>
+  <string name="weather_custom_location_title">स्थान</string>
+</resources>
