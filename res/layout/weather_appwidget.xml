@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/widget_padding">
 
         <LinearLayout
             android:id="@+id/current_weather_line"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:singleLine="true"
-                android:text="@string/omnijaws_service_unkown"
+                android:text="@string/omnijaws_service_init"
                 android:textAppearance="@style/Weather" />
 
             <TextView
@@ -90,8 +90,7 @@
                 android:layout_width="@dimen/weather_refresh_icon_size"
                 android:layout_height="@dimen/weather_refresh_icon_size"
                 android:layout_gravity="center_vertical"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_menu_refresh" />
+                android:scaleType="centerInside" />
         </LinearLayout>
 
         <LinearLayout

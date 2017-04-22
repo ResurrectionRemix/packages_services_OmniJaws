@@ -87,9 +87,6 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
         final PreferenceScreen prefScreen = getPreferenceScreen();
         mEnable = (SwitchPreference) findPreference(Config.PREF_KEY_ENABLE);
 
-        if (!mShowIconPack) {
-            prefScreen.removePreference(mEnable);
-        }
         mCustomLocation = (CheckBoxPreference) findPreference(Config.PREF_KEY_CUSTOM_LOCATION);
 
         mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
