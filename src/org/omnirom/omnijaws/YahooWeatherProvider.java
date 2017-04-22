@@ -69,7 +69,7 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
     private static boolean metric;
     private static String todayShort;
     private static boolean addForecastDay;
-    private static final boolean USE_GEOCODER = true;
+    private static final boolean USE_GEOCODER = false;
     private static boolean mIncomplete;
 
     public YahooWeatherProvider(Context context) {

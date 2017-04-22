@@ -23,8 +23,10 @@ import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -61,8 +63,8 @@ public class WeatherService extends Service {
     public static final long LOCATION_REQUEST_TIMEOUT = 5L * 60L * 1000L; // request for at most 5 minutes
     private static final long OUTDATED_LOCATION_THRESHOLD_MILLIS = 10L * 60L * 1000L; // 10 minutes
     private static final long ALARM_INTERVAL_BASE = AlarmManager.INTERVAL_HOUR;
-    private static final int RETRY_DELAY_MS = 3000;
-    private static final int RETRY_MAX_NUM = 3;
+    private static final int RETRY_DELAY_MS = 5000;
+    private static final int RETRY_MAX_NUM = 5;
 
     private HandlerThread mHandlerThread;
     private Handler mHandler;
@@ -77,7 +79,20 @@ public class WeatherService extends Service {
         sLocationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
         sLocationCriteria.setCostAllowed(false);
     }
-    
+
+    private BroadcastReceiver mScreenStateListener = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (DEBUG) Log.d(TAG, "screenStateListener:onReceive");
+            if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
+                if (Config.isEnabled(context) && Config.isUpdateError(context)) {
+                    Log.i(TAG, "screenStateListener trigger update after update error");
+                    WeatherService.startUpdate(context);
+                }
+            }
+        }
+    };
+
     public WeatherService() {
     }
 
@@ -89,11 +104,13 @@ public class WeatherService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (DEBUG) Log.d(TAG, "onCreate");
         mHandlerThread = new HandlerThread("WeatherService Thread");
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper());
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        registerScreenStateListener();
     }
 
     public static void startUpdate(Context context) {
@@ -106,6 +123,11 @@ public class WeatherService extends Service {
         context.startService(i);
     }
 
+    public static void stop(Context context) {
+        Intent i = new Intent(context, WeatherService.class);
+        context.stopService(i);
+    }
+
     private static PendingIntent alarmPending(Context context) {
         Intent intent = new Intent(context, WeatherService.class);
         intent.setAction(ACTION_ALARM);
@@ -114,14 +136,20 @@ public class WeatherService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        boolean enable = intent.getBooleanExtra(EXTRA_ENABLE, false);
+        Config.setUpdateError(this, false);
+        if (intent == null) {
+            Log.w(TAG, "intent == null");
+            stopSelf();
+            return START_NOT_STICKY;
+        }
 
         if (mRunning) {
             Log.w(TAG, "Service running ... do nothing");
-            return START_REDELIVER_INTENT;
+            return START_STICKY;
         }
 
         if (ACTION_ENABLE.equals(intent.getAction())) {
+            boolean enable = intent.getBooleanExtra(EXTRA_ENABLE, false);
             if (DEBUG) Log.d(TAG, "Set enablement " + enable);
             Config.setEnabled(this, enable);
             if (!enable) {
@@ -144,8 +172,8 @@ public class WeatherService extends Service {
             Intent errorIntent = new Intent(ACTION_ERROR);
             errorIntent.putExtra(EXTRA_ERROR, EXTRA_ERROR_LOCATION);
             sendBroadcast(errorIntent);
-            stopSelf();
-            return START_NOT_STICKY;
+            Config.setUpdateError(this, true);
+            return START_STICKY;
         }
 
         if (!isNetworkAvailable()) {
@@ -153,8 +181,8 @@ public class WeatherService extends Service {
             Intent errorIntent = new Intent(ACTION_ERROR);
             errorIntent.putExtra(EXTRA_ERROR, EXTRA_ERROR_NETWORK);
             sendBroadcast(errorIntent);
-            stopSelf();
-            return START_NOT_STICKY;
+            Config.setUpdateError(this, true);
+            return START_STICKY;
         }
 
         if (ACTION_ALARM.equals(intent.getAction())) {
@@ -163,12 +191,14 @@ public class WeatherService extends Service {
         if (DEBUG) Log.d(TAG, "updateWeather");
         updateWeather();
 
-        return START_REDELIVER_INTENT;
+        return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (DEBUG) Log.d(TAG, "onDestroy");
+        unregisterScreenStateListener();
     }
 
     private boolean isNetworkAvailable() {
@@ -295,6 +325,7 @@ public class WeatherService extends Service {
                         // error
                         Config.clearWeatherData(WeatherService.this);
                         WeatherContentProvider.updateCachedWeatherInfo(WeatherService.this);
+                        Config.setUpdateError(WeatherService.this, true);
                     }
                     // send broadcast that something has changed
                     Intent updateIntent = new Intent(ACTION_BROADCAST);
@@ -308,5 +339,20 @@ public class WeatherService extends Service {
 
     private boolean checkPermissions() {
         return checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void registerScreenStateListener() {
+        if (DEBUG) Log.d(TAG, "registerScreenStateListener");
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        this.registerReceiver(mScreenStateListener, filter);
+    }
+
+    private void unregisterScreenStateListener() {
+        if (DEBUG) Log.d(TAG, "unregisterScreenStateListener");
+        try {
+            this.unregisterReceiver(mScreenStateListener);
+        } catch (Exception e) {
+        }
     }
 }

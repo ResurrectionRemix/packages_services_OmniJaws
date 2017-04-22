@@ -332,6 +332,7 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
     private void disableService() {
         // stop any pending
         WeatherService.cancelUpdate(this);
+        WeatherService.stop(this);
     }
 
     @Override
