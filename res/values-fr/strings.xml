@@ -22,7 +22,7 @@
   <string name="weather_progress_title">Vérification de la localisation</string>
   <string name="weather_select_location">Définir le lieu</string>
   <string name="custom_location_title">Localisation personnalisé</string>
-  <string name="weather_custom_location_dialog_title">Entrer le nom d\'une ville, d\'un lieu...</string>
+  <string name="weather_custom_location_dialog_title">Saisir le nom d\'une ville, d\'un lieu...</string>
   <string name="weather_custom_location_title">Localisation</string>
   <string name="weather_custom_location_missing">Définir un lieu manuellement</string>
   <string name="weather_retrieve_location_dialog_title">Récupération de la localisation impossible !</string>

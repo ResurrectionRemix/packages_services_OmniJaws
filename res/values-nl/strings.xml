@@ -41,6 +41,8 @@
   <string name="interval_6_hour">6 uur</string>
   <string name="interval_12_hour">12 uur</string>
   <string name="weather_tile_title">Weer</string>
+  <string name="weather_icon_pack_title">Pictogrampakket</string>
+  <string name="weather_icon_pack_playstore">Download pictogrampakket</string>
   <string name="service_disabled">Uitgeschakeld</string>
   <string name="service_error">Fout</string>
   <string name="last_update_time">Laatst bijgewerkt</string>

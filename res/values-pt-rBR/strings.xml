@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="provider_title">Provedor de tempo</string>
-  <string name="units_title">Unidades</string>
+  <string name="units_title">Unidade</string>
   <string name="weather_progress_title">Verificando localização</string>
   <string name="weather_select_location">Selecionar local</string>
   <string name="custom_location_title">Localização personalizada</string>
@@ -33,7 +33,7 @@
   <string name="unit_metric">Unidade métrica (\u00b0C)</string>
   <string name="unit_imperial">Imperial (\u00b0F)</string>
   <string name="update">Atualizar</string>
-  <string name="enable_title">Ativar</string>
+  <string name="enable_title">Habilitar</string>
   <string name="update_interval_title">Intervalo de atualização</string>
   <string name="interval_1_hour">1 hora</string>
   <string name="interval_2_hour">2 horas</string>
