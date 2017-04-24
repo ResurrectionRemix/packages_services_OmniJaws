@@ -21,12 +21,12 @@
   <string name="units_title">Unité</string>
   <string name="weather_progress_title">Vérification de la localisation</string>
   <string name="weather_select_location">Définir le lieu</string>
-  <string name="custom_location_title">Localisation personnalisé</string>
+  <string name="custom_location_title">Localisation manuelle</string>
   <string name="weather_custom_location_dialog_title">Saisir le nom d\'une ville, d\'un lieu...</string>
   <string name="weather_custom_location_title">Localisation</string>
   <string name="weather_custom_location_missing">Définir un lieu manuellement</string>
-  <string name="weather_retrieve_location_dialog_title">Récupération de la localisation impossible !</string>
-  <string name="weather_retrieve_location_dialog_message">La géolocalisation par réseau est désactivée.\n\nDéfinir une position manuellement ou activer la géolocalisation par réseau</string>
+  <string name="weather_retrieve_location_dialog_title">Localisation impossible !</string>
+  <string name="weather_retrieve_location_dialog_message">La géolocalisation est désactivée.\n\nDéfinir une position manuellement ou activer la géolocalisation</string>
   <string name="weather_retrieve_location_dialog_enable_button">Activer</string>
   <string name="settings_title">Paramètres</string>
   <string name="auto_update_title">Actualisation automatique</string>
