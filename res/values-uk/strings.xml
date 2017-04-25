@@ -16,4 +16,18 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Провайдер погоди</string>
+  <string name="units_title">Одиниця виміру</string>
+  <string name="weather_progress_title">Перевірка розташування</string>
+  <string name="weather_select_location">Виберіть розташування</string>
+  <string name="custom_location_title">Налаштування місцезнаходження</string>
+  <string name="weather_custom_location_dialog_title">Введіть розташування</string>
+  <string name="weather_custom_location_title">Місцезнаходження</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Увімкнути</string>
+  <string name="auto_update_title">Автоматичні оновлення</string>
+  <string name="enable_title">Увімкнути</string>
+  <string name="update_interval_title">Інтервал оновлення</string>
+  <string name="interval_1_hour">1 година</string>
+  <string name="service_disabled">Вимкнено</string>
+</resources>

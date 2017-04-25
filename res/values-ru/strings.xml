@@ -40,4 +40,10 @@
   <string name="interval_4_hour">4 часа</string>
   <string name="interval_6_hour">6 часов</string>
   <string name="interval_12_hour">12 часов</string>
+  <string name="weather_tile_title">Погода</string>
+  <string name="weather_icon_pack_title">Набор значков \"Погода\"</string>
+  <string name="weather_icon_pack_playstore">Поиск наборов значков</string>
+  <string name="service_disabled">Выключено</string>
+  <string name="service_error">Ошибка</string>
+  <string name="last_update_time">Время последнего обновления</string>
 </resources>
