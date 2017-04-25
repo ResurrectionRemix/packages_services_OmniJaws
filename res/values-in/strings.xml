@@ -17,5 +17,9 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Weather provider</string>
+  <string name="units_title">Unit</string>
+  <string name="custom_location_title">Custom location</string>
+  <string name="weather_custom_location_dialog_title">Enter location</string>
   <string name="update">Update</string>
 </resources>
