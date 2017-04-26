@@ -19,7 +19,21 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="provider_title">Weather provider</string>
   <string name="units_title">Unit</string>
+  <string name="weather_select_location">Pilih lokasi</string>
   <string name="custom_location_title">Custom location</string>
   <string name="weather_custom_location_dialog_title">Enter location</string>
+  <string name="weather_custom_location_title">Lokasi</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Dihidupkan</string>
+  <string name="settings_title">Setelan</string>
   <string name="update">Update</string>
+  <string name="enable_title">Dihidupkan</string>
+  <string name="interval_1_hour">1 jam</string>
+  <string name="interval_2_hour">2 jam</string>
+  <string name="interval_4_hour">4 jam</string>
+  <string name="interval_6_hour">6 jam</string>
+  <string name="interval_12_hour">12 jam</string>
+  <string name="weather_tile_title">Cuaca</string>
+  <string name="weather_icon_pack_title">Paket ikon kondisi</string>
+  <string name="service_disabled">Dimatikan</string>
+  <string name="service_error">Kesalahan</string>
 </resources>
