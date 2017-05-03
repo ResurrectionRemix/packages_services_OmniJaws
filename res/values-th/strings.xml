@@ -16,4 +16,34 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">ผู้ให้บริการสภาพอากาศ</string>
+  <string name="units_title">หน่วย</string>
+  <string name="weather_progress_title">ตรวจสอบตำแหน่งที่ตั้ง</string>
+  <string name="weather_select_location">เลือกตำแหน่งที่ตั้ง</string>
+  <string name="custom_location_title">ตำแหน่งที่กำหนดเอง</string>
+  <string name="weather_custom_location_dialog_title">ป้อนตำแหน่งที่ตั้ง</string>
+  <string name="weather_custom_location_title">ตำแหน่ง</string>
+  <string name="weather_custom_location_missing">กำหนดตำแหน่งที่กำหนดเอง</string>
+  <string name="weather_retrieve_location_dialog_title">ไม่สามารถรับตำแหน่งได้!</string>
+  <string name="weather_retrieve_location_dialog_message">การหาตำแหน่งโดยใช้เครือข่ายถูกปิด\n\nตั้งตำแหน่งกำหนดเองหรือเปิดใช้ตำแหน่งเครือข่าย</string>
+  <string name="weather_retrieve_location_dialog_enable_button">เปิดใช้งาน</string>
+  <string name="settings_title">การตั้งค่า</string>
+  <string name="auto_update_title">ปรับปรุงอัตโนมัติ</string>
+  <string name="unit_metric">วัด (\u00b0C)</string>
+  <string name="unit_imperial">อิมพีเรียล (\u00b0F)</string>
+  <string name="update">อัปเดต</string>
+  <string name="enable_title">เปิดใช้งาน</string>
+  <string name="update_interval_title">ระยะเวลาอัพเดต</string>
+  <string name="interval_1_hour">1 ชั่วโมง</string>
+  <string name="interval_2_hour">2 ชั่วโมง</string>
+  <string name="interval_4_hour">4 ชั่วโมง</string>
+  <string name="interval_6_hour">6 ชั่วโมง</string>
+  <string name="interval_12_hour">12 ชั่วโมง</string>
+  <string name="weather_tile_title">สภาพอากาศ</string>
+  <string name="weather_icon_pack_title">สภาพชุดไอคอน</string>
+  <string name="weather_icon_pack_playstore">ค้นหาไอคอนแพ็ค</string>
+  <string name="service_disabled">ปิดการใช้งาน</string>
+  <string name="service_error">ผิดพลาด</string>
+  <string name="last_update_time">ปรับปรุงครั้งล่าสุด</string>
+</resources>
