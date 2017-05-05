@@ -46,4 +46,13 @@
   <string name="service_disabled">Onemogućeno</string>
   <string name="service_error">Greška</string>
   <string name="last_update_time">Posljednje ažuriranje</string>
+  <string name="omnijaws_service_unkown">Nema podataka o vremenu</string>
+  <string name="omnijaws_service_error">Greška pri učitavanju podataka o vremenu</string>
+  <string name="omnijaws_service_init">Čekanje podataka o vremenu...</string>
+  <string name="omnijaws_service_progress">Ažuriranje...</string>
+  <string name="omnijaws_service_disabled">Usluga je onemogućena</string>
+  <string name="weather_widget">Vremenska prognoza</string>
+  <string name="omnijaws_current_text">Sada</string>
+  <string name="show_background_title">Pozadinska sjena</string>
+  <string name="weather_config_title">Postavke usluge</string>
 </resources>

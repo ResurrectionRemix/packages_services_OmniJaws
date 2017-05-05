@@ -46,4 +46,13 @@
   <string name="service_disabled">Вимкнено</string>
   <string name="service_error">Помилка</string>
   <string name="last_update_time">Час останнього оновлення</string>
+  <string name="omnijaws_service_unkown">Немає даних про погоду</string>
+  <string name="omnijaws_service_error">Помилка завантаження даних про погоду</string>
+  <string name="omnijaws_service_init">Очікування даних про погоду...</string>
+  <string name="omnijaws_service_progress">Оновлення...</string>
+  <string name="omnijaws_service_disabled">Службу вимкнено</string>
+  <string name="weather_widget">Погода</string>
+  <string name="omnijaws_current_text">Зараз</string>
+  <string name="show_background_title">Тінь фону</string>
+  <string name="weather_config_title">Налаштування служби</string>
 </resources>

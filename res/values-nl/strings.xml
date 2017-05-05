@@ -46,4 +46,13 @@
   <string name="service_disabled">Uitgeschakeld</string>
   <string name="service_error">Fout</string>
   <string name="last_update_time">Laatst bijgewerkt</string>
+  <string name="omnijaws_service_unkown">Geen weergegevens</string>
+  <string name="omnijaws_service_error">Probleem met het laden van weergegevens</string>
+  <string name="omnijaws_service_init">Wachten op weergegevens...</string>
+  <string name="omnijaws_service_progress">Bijwerken...</string>
+  <string name="omnijaws_service_disabled">Service uitgeschakeld</string>
+  <string name="weather_widget">Weer</string>
+  <string name="omnijaws_current_text">Nu</string>
+  <string name="show_background_title">Achtergrond schaduw</string>
+  <string name="weather_config_title">Service instellingen</string>
 </resources>

@@ -46,4 +46,13 @@
   <string name="service_disabled">Đã tắt</string>
   <string name="service_error">Lỗi</string>
   <string name="last_update_time">Lần cập nhật cuối</string>
+  <string name="omnijaws_service_unkown">Không có dữ liệu thời tiết</string>
+  <string name="omnijaws_service_error">Lỗi tải dữ liệu thời tiết</string>
+  <string name="omnijaws_service_init">Chờ đợi cho dữ liệu thời tiết...</string>
+  <string name="omnijaws_service_progress">Đang Cập Nhật...</string>
+  <string name="omnijaws_service_disabled">Dịch vụ bị vô hiệu hóa</string>
+  <string name="weather_widget">Thời tiết</string>
+  <string name="omnijaws_current_text">Hiện tại</string>
+  <string name="show_background_title">Nền bóng</string>
+  <string name="weather_config_title">Cài đặt dịch vụ</string>
 </resources>
