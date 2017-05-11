@@ -53,5 +53,6 @@
   <string name="omnijaws_service_disabled">Layanan dimatikan</string>
   <string name="weather_widget">Cuaca</string>
   <string name="omnijaws_current_text">Sekarang</string>
+  <string name="show_background_title">Latar belakang bayangan</string>
   <string name="weather_config_title">Pengaturan layanan</string>
 </resources>
