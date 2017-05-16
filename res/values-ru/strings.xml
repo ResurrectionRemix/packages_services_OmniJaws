@@ -46,4 +46,13 @@
   <string name="service_disabled">Выключено</string>
   <string name="service_error">Ошибка</string>
   <string name="last_update_time">Время последнего обновления</string>
+  <string name="omnijaws_service_unkown">Нет данных погоды</string>
+  <string name="omnijaws_service_error">Ошибка загрузки данных о погоде</string>
+  <string name="omnijaws_service_init">Ожидание данных о погоде...</string>
+  <string name="omnijaws_service_progress">Обновление...</string>
+  <string name="omnijaws_service_disabled">Служба отключена</string>
+  <string name="weather_widget">Погода</string>
+  <string name="omnijaws_current_text">Только что</string>
+  <string name="show_background_title">Стиль фона</string>
+  <string name="weather_config_title">Параметры службы</string>
 </resources>
