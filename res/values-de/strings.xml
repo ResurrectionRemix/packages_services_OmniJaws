@@ -21,7 +21,7 @@
   <string name="units_title">Einheit</string>
   <string name="weather_progress_title">Standort überprüfen</string>
   <string name="weather_select_location">Standort auswählen</string>
-  <string name="custom_location_title">Benutzerdefinierter Ort</string>
+  <string name="custom_location_title">Benutzerdefinierter Standort</string>
   <string name="weather_custom_location_dialog_title">Ort eingeben</string>
   <string name="weather_custom_location_title">Standort</string>
   <string name="weather_custom_location_missing">Benutzerdefinierten Standort festlegen</string>
