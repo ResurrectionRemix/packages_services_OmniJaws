@@ -7,6 +7,13 @@ Thanks to http://openweathermap.org/ for providing an unrestricted API key
 OpenWeatherMap API
 http://openweathermap.org/current
 
+IMPORTANT: please request your own API key from OpenWeatherMap at
+https://openweathermap.org/appid#get
+and enter it here
+https://github.com/omnirom/android_packages_services_OmniJaws/blob/android-7.1/res/values/config.xml
+Check also here how this is used
+https://github.com/omnirom/android_packages_services_OmniJaws/blob/android-7.1/src/org/omnirom/omnijaws/OpenWeatherMapProvider.java
+
 Yahoo weather API
 https://developer.yahoo.com/weather/
 
