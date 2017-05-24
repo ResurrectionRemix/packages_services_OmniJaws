@@ -47,7 +47,7 @@
   <string name="service_error">错误</string>
   <string name="last_update_time">最后更新时间</string>
   <string name="omnijaws_service_unkown">没有天气数据</string>
-  <string name="omnijaws_service_error">加载的天气数据时出错</string>
+  <string name="omnijaws_service_error">加载天气数据时出错</string>
   <string name="omnijaws_service_init">正在等待天气数据...</string>
   <string name="omnijaws_service_progress">正在更新...</string>
   <string name="omnijaws_service_disabled">服务已被禁用</string>
