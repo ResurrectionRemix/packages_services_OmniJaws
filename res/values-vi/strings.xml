@@ -21,7 +21,7 @@
   <string name="units_title">Đơn vị</string>
   <string name="weather_progress_title">Đang xác nhận vị trí</string>
   <string name="weather_select_location">Chọn vị trí</string>
-  <string name="custom_location_title">Vị trí tùy chỉnh</string>
+  <string name="custom_location_title">Tùy chỉnh vị trí</string>
   <string name="weather_custom_location_dialog_title">Nhập vị trí</string>
   <string name="weather_custom_location_title">Vị trí</string>
   <string name="weather_custom_location_missing">Cài đặt vị trí tùy chỉnh</string>
@@ -48,8 +48,8 @@
   <string name="last_update_time">Lần cập nhật cuối</string>
   <string name="omnijaws_service_unkown">Không có dữ liệu thời tiết</string>
   <string name="omnijaws_service_error">Lỗi tải dữ liệu thời tiết</string>
-  <string name="omnijaws_service_init">Chờ đợi cho dữ liệu thời tiết...</string>
-  <string name="omnijaws_service_progress">Đang Cập Nhật...</string>
+  <string name="omnijaws_service_init">Đang chờ dữ liệu thời tiết...</string>
+  <string name="omnijaws_service_progress">Đang cập nhật...</string>
   <string name="omnijaws_service_disabled">Dịch vụ bị vô hiệu hóa</string>
   <string name="weather_widget">Thời tiết</string>
   <string name="omnijaws_current_text">Hiện tại</string>
