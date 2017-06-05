@@ -16,4 +16,12 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="units_title">יחידות</string>
+  <string name="weather_progress_title">אימות מיקום</string>
+  <string name="weather_select_location">בחר מיקום</string>
+  <string name="custom_location_title">מיקום מותאים אישית</string>
+  <string name="weather_custom_location_dialog_title">הזן מיקום</string>
+  <string name="weather_custom_location_title">מיקום</string>
+  <string name="weather_custom_location_missing">קביעת מיקום מותאם אישית</string>
+</resources>
