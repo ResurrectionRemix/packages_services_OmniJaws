@@ -17,6 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">ספק מזג אוויר</string>
   <string name="units_title">יחידות</string>
   <string name="weather_progress_title">אימות מיקום</string>
   <string name="weather_select_location">בחר מיקום</string>
@@ -24,4 +25,24 @@
   <string name="weather_custom_location_dialog_title">הזן מיקום</string>
   <string name="weather_custom_location_title">מיקום</string>
   <string name="weather_custom_location_missing">קביעת מיקום מותאם אישית</string>
+  <string name="weather_retrieve_location_dialog_title">אין אפשרות לקבל מיקום.</string>
+  <string name="weather_retrieve_location_dialog_message">מיקום רשת מושבת.\n\nבחר מיקום מותאם אישית או הפעל את מיקום רשת</string>
+  <string name="weather_retrieve_location_dialog_enable_button">הפעל</string>
+  <string name="settings_title">הגדרות</string>
+  <string name="auto_update_title">עדכונים אוטומטיים</string>
+  <string name="unit_metric">מטרים (\u00b0C)</string>
+  <string name="unit_imperial">אימפריאל (\u00b0F)</string>
+  <string name="update">עדכון</string>
+  <string name="enable_title">הפעל</string>
+  <string name="update_interval_title">תדירות עדכון</string>
+  <string name="interval_1_hour">שעה אחת</string>
+  <string name="interval_2_hour">שעתיים</string>
+  <string name="interval_4_hour">4 שעות</string>
+  <string name="interval_6_hour">6 שעות</string>
+  <string name="interval_12_hour">12 שעות</string>
+  <string name="weather_tile_title">מזג אוויר</string>
+  <string name="weather_icon_pack_playstore">מצא ערכת אייקונים</string>
+  <string name="service_disabled">מנוטרל</string>
+  <string name="service_error">שגיאה</string>
+  <string name="last_update_time">זמן עדכון אחרון</string>
 </resources>
