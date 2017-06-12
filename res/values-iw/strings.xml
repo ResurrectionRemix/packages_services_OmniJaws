@@ -45,4 +45,13 @@
   <string name="service_disabled">מנוטרל</string>
   <string name="service_error">שגיאה</string>
   <string name="last_update_time">זמן עדכון אחרון</string>
+  <string name="omnijaws_service_unkown">אין נתוני מזג האוויר</string>
+  <string name="omnijaws_service_error">שגיאה בטעינת נתוני מזג האויר</string>
+  <string name="omnijaws_service_init">ממתין לנתוני מזג האוויר...</string>
+  <string name="omnijaws_service_progress">מעדכן...</string>
+  <string name="omnijaws_service_disabled">השירות הושבת</string>
+  <string name="weather_widget">מזג האוויר</string>
+  <string name="omnijaws_current_text">עכשיו</string>
+  <string name="show_background_title">צל רקע</string>
+  <string name="weather_config_title">הגדרות שירות</string>
 </resources>
