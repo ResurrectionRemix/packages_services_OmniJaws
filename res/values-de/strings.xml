@@ -49,7 +49,7 @@
   <string name="omnijaws_service_unkown">Keine Wetterdaten</string>
   <string name="omnijaws_service_error">Fehler beim Laden der Wetterdaten</string>
   <string name="omnijaws_service_init">Warten auf Wetterdaten...</string>
-  <string name="omnijaws_service_progress">Aktualisiere…</string>
+  <string name="omnijaws_service_progress">Aktualisieren…</string>
   <string name="omnijaws_service_disabled">Dienst deaktiviert</string>
   <string name="weather_widget">Wetter</string>
   <string name="omnijaws_current_text">Jetzt</string>
