@@ -46,4 +46,13 @@
   <string name="service_disabled">無効</string>
   <string name="service_error">エラー</string>
   <string name="last_update_time">最終更新時刻</string>
+  <string name="omnijaws_service_unkown">気象情報がありません</string>
+  <string name="omnijaws_service_error">気象データ読み込みエラー</string>
+  <string name="omnijaws_service_init">気象データを取得しています...</string>
+  <string name="omnijaws_service_progress">更新中...</string>
+  <string name="omnijaws_service_disabled">サービスは無効です</string>
+  <string name="weather_widget">天気</string>
+  <string name="omnijaws_current_text">今</string>
+  <string name="show_background_title">背景色</string>
+  <string name="weather_config_title">サービスの設定</string>
 </resources>
