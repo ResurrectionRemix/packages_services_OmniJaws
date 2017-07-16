@@ -23,4 +23,13 @@
   <string name="custom_location_title">कस्टम स्थान</string>
   <string name="weather_custom_location_dialog_title">अपना स्थान दर्ज करें</string>
   <string name="weather_custom_location_title">स्थान</string>
+  <string name="weather_retrieve_location_dialog_enable_button">सक्षम करें</string>
+  <string name="enable_title">सक्षम करें</string>
+  <string name="interval_1_hour">1 घंटा</string>
+  <string name="interval_2_hour">2 घंटे</string>
+  <string name="interval_4_hour">4 घंटे</string>
+  <string name="interval_6_hour">6 घंटे</string>
+  <string name="interval_12_hour">12 घंटे</string>
+  <string name="weather_widget">मौसम</string>
+  <string name="omnijaws_current_text">अभी</string>
 </resources>

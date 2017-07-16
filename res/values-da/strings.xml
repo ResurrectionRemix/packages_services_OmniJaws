@@ -17,7 +17,42 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="provider_title">Vejr udbyder</string>
+  <string name="provider_title">Vejrdata udbyder</string>
   <string name="units_title">Enhed</string>
   <string name="weather_progress_title">Bekræfter lokation</string>
+  <string name="weather_select_location">Vælg sted</string>
+  <string name="custom_location_title">Brugerdefineret placering</string>
+  <string name="weather_custom_location_dialog_title">Indtast lokation</string>
+  <string name="weather_custom_location_title">Sted</string>
+  <string name="weather_custom_location_missing">Set alternativ lokation</string>
+  <string name="weather_retrieve_location_dialog_title">Kan ikke hente lokation!</string>
+  <string name="weather_retrieve_location_dialog_message">Netværk geolokation er slået fra.\n\nIndtast en alternativ lokation, eller aktivér netværks geolokation</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Aktivér</string>
+  <string name="settings_title">Indstillinger</string>
+  <string name="auto_update_title">Automatiske oppdateringer</string>
+  <string name="unit_metric">Metrisk (\u00b0C)</string>
+  <string name="unit_imperial">Imperial (\u00b0F)</string>
+  <string name="update">Opdater</string>
+  <string name="enable_title">Aktivér</string>
+  <string name="update_interval_title">Opdateringsinterval</string>
+  <string name="interval_1_hour">1 time</string>
+  <string name="interval_2_hour">2 timer</string>
+  <string name="interval_4_hour">4 timer</string>
+  <string name="interval_6_hour">6 timer</string>
+  <string name="interval_12_hour">12 timer</string>
+  <string name="weather_tile_title">Vejr</string>
+  <string name="weather_icon_pack_title">Tilstand ikonpakke</string>
+  <string name="weather_icon_pack_playstore">Finn ikonpakker</string>
+  <string name="service_disabled">Deaktiveret</string>
+  <string name="service_error">Fejl</string>
+  <string name="last_update_time">Sidste opdateringstidspunkt</string>
+  <string name="omnijaws_service_unkown">Ingen vejrdata</string>
+  <string name="omnijaws_service_error">Fejl ved indlæsningen af vejrdata</string>
+  <string name="omnijaws_service_init">Venter på vejrdata...</string>
+  <string name="omnijaws_service_progress">Opdaterer...</string>
+  <string name="omnijaws_service_disabled">Tjeneste deaktiveret</string>
+  <string name="weather_widget">Vejr</string>
+  <string name="omnijaws_current_text">Nu</string>
+  <string name="show_background_title">Baggrunds skygge</string>
+  <string name="weather_config_title">Serviceinnstillinger</string>
 </resources>
