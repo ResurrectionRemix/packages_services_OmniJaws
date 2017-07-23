@@ -30,7 +30,7 @@
   <string name="weather_retrieve_location_dialog_enable_button">Aktivieren</string>
   <string name="settings_title">Einstellungen</string>
   <string name="auto_update_title">Automatische Updates</string>
-  <string name="unit_metric">Metrik (\u00b0C)</string>
+  <string name="unit_metric">Metrisch (\u00b0C)</string>
   <string name="unit_imperial">Imperial (\u00b0F)</string>
   <string name="update">Update</string>
   <string name="enable_title">Aktivieren</string>
@@ -41,18 +41,18 @@
   <string name="interval_6_hour">6 Stunden</string>
   <string name="interval_12_hour">12 Stunden</string>
   <string name="weather_tile_title">Wetter</string>
-  <string name="weather_icon_pack_title">Bedingungs Symbol Packet</string>
-  <string name="weather_icon_pack_playstore">Symbolpacket suchen</string>
+  <string name="weather_icon_pack_title">Bedingungs Symbolpaket</string>
+  <string name="weather_icon_pack_playstore">Symbolpaket suchen</string>
   <string name="service_disabled">Deaktiviert</string>
   <string name="service_error">Fehler</string>
   <string name="last_update_time">Zeitpunkt der letzten Aktualisierung</string>
   <string name="omnijaws_service_unkown">Keine Wetterdaten</string>
   <string name="omnijaws_service_error">Fehler beim Laden der Wetterdaten</string>
-  <string name="omnijaws_service_init">Warten auf Wetterdaten...</string>
+  <string name="omnijaws_service_init">Auf Wetterdaten warten...</string>
   <string name="omnijaws_service_progress">Aktualisierung läuft...</string>
   <string name="omnijaws_service_disabled">Dienst deaktiviert</string>
   <string name="weather_widget">Wetter</string>
   <string name="omnijaws_current_text">Jetzt</string>
-  <string name="show_background_title">Hintergrund Schatten</string>
+  <string name="show_background_title">Hintergrundschatten</string>
   <string name="weather_config_title">Service-Einstellungen</string>
 </resources>
