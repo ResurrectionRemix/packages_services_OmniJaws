@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="provider_title">Proveedor de clima</string>
-  <string name="units_title">Unidades</string>
+  <string name="units_title">Unidad de medida</string>
   <string name="weather_progress_title">Verificando ubicación</string>
   <string name="weather_select_location">Seleccione ubicación</string>
   <string name="custom_location_title">Ubicación personalizada</string>
@@ -46,9 +46,9 @@
   <string name="service_disabled">Deshabilitado</string>
   <string name="service_error">Error</string>
   <string name="last_update_time">Última hora de la actualización</string>
-  <string name="omnijaws_service_unkown">No hay datos del tiempo</string>
+  <string name="omnijaws_service_unkown">No hay datos del clima</string>
   <string name="omnijaws_service_error">Error al cargar datos del clima</string>
-  <string name="omnijaws_service_init">Esperando datos...</string>
+  <string name="omnijaws_service_init">Esperando información del clima...</string>
   <string name="omnijaws_service_progress">Actualizando...</string>
   <string name="omnijaws_service_disabled">Servicio deshabilitado</string>
   <string name="weather_widget">Clima</string>
