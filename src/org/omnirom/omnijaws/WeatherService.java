@@ -37,6 +37,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -214,11 +215,15 @@ public class WeatherService extends Service {
         NetworkInfo info = cm.getActiveNetworkInfo();
         return info != null && info.isConnected();
     }
-    
+
+    private boolean doCheckLocationEnabled() {
+        return Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE, -1) != Settings.Secure.LOCATION_MODE_OFF;
+    }
+
     private Location getCurrentLocation() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            Log.w(TAG, "network locations disabled");
+        if (!doCheckLocationEnabled()) {
+            Log.w(TAG, "locations disabled");
             return null;
         }
         Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);

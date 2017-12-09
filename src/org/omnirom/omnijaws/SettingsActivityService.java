@@ -295,9 +295,12 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
         }
     }
 
+    private boolean doCheckLocationEnabled() {
+        return Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE, -1) != Settings.Secure.LOCATION_MODE_OFF;
+    }
+
     private void checkLocationEnabled() {
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+        if (!doCheckLocationEnabled()) {
             showDialog();
         } else {
             checkLocationPermissions();
