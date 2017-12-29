@@ -16,4 +16,12 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="weather_custom_location_title">Asukoht</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Luba</string>
+  <string name="interval_2_hour">2 tundi</string>
+  <string name="interval_4_hour">4 tundi</string>
+  <string name="interval_6_hour">6 tundi</string>
+  <string name="interval_12_hour">12 tundi</string>
+  <string name="service_disabled">Keelatud</string>
+</resources>

@@ -45,6 +45,7 @@
   <string name="weather_icon_pack_playstore">Temukan paket ikon</string>
   <string name="service_disabled">Dimatikan</string>
   <string name="service_error">Kesalahan</string>
+  <string name="last_update_time">Waktu pembaruan terakhir</string>
   <string name="omnijaws_service_unkown">Tidak ada data cuaca</string>
   <string name="omnijaws_service_error">Kesalahan memuat data cuaca</string>
   <string name="omnijaws_service_init">Menunggu data cuaca...</string>
@@ -52,5 +53,6 @@
   <string name="omnijaws_service_disabled">Layanan dimatikan</string>
   <string name="weather_widget">Cuaca</string>
   <string name="omnijaws_current_text">Sekarang</string>
+  <string name="show_background_title">Bayangan latar belakang</string>
   <string name="weather_config_title">Setelan layanan</string>
 </resources>
