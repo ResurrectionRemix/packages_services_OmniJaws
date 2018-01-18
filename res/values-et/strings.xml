@@ -19,6 +19,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="provider_title">Ilmapakkuja</string>
   <string name="units_title">Ühik</string>
+  <string name="weather_progress_title">Kontrollin asukohta</string>
   <string name="weather_select_location">Vali asukoht</string>
   <string name="custom_location_title">Kohandatud asukoht</string>
   <string name="weather_custom_location_dialog_title">Sisesta asukoht</string>
@@ -36,11 +37,13 @@
   <string name="interval_6_hour">6 tundi</string>
   <string name="interval_12_hour">12 tundi</string>
   <string name="weather_tile_title">Ilm</string>
+  <string name="weather_icon_pack_playstore">Leia ikoonipakke</string>
   <string name="service_disabled">Keelatud</string>
   <string name="service_error">Viga</string>
   <string name="last_update_time">Viimase uuenduse aeg</string>
-  <string name="omnijaws_service_unkown">Ilmaandmed puuduvad</string>
+  <string name="omnijaws_service_unkown">Ilmateade puudub</string>
   <string name="omnijaws_service_error">Ilmateate laadimisel esines viga</string>
+  <string name="omnijaws_service_init">Ootan ilmaandmeid...</string>
   <string name="omnijaws_service_progress">Uuendamine...</string>
   <string name="omnijaws_service_disabled">Teenus keelatud</string>
   <string name="weather_widget">Ilm</string>
