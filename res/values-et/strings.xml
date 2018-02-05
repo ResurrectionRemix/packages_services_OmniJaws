@@ -25,6 +25,8 @@
   <string name="weather_custom_location_dialog_title">Sisesta asukoht</string>
   <string name="weather_custom_location_title">Asukoht</string>
   <string name="weather_custom_location_missing">Määra kohandatud asukoht</string>
+  <string name="weather_retrieve_location_dialog_title">Asukohta ei saa hankida!</string>
+  <string name="weather_retrieve_location_dialog_message">Võrgupõhine geoasukoht on keelatud.\n\nMäära kohandatud asukoht või luba võrgupõhine asukoht</string>
   <string name="weather_retrieve_location_dialog_enable_button">Luba</string>
   <string name="settings_title">Seaded</string>
   <string name="auto_update_title">Automaatsed uuendused</string>
