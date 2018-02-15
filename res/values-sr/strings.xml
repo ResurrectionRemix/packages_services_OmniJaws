@@ -16,4 +16,43 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="provider_title">Пружалац услуга временских прилика</string>
+  <string name="units_title">Јединица</string>
+  <string name="weather_progress_title">Утврђивање локације</string>
+  <string name="weather_select_location">Изабери локацију</string>
+  <string name="custom_location_title">Прилагођена локација</string>
+  <string name="weather_custom_location_dialog_title">Унесите локацију</string>
+  <string name="weather_custom_location_title">Локација</string>
+  <string name="weather_custom_location_missing">Постави прилагођену локацију</string>
+  <string name="weather_retrieve_location_dialog_title">Не могу да добавим локацију!</string>
+  <string name="weather_retrieve_location_dialog_message">Мрежна геолокација је онемогућена.\n\n Постави прилагођену локацију или омогући мрежну локацију</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Укључи</string>
+  <string name="settings_title">Поставке</string>
+  <string name="auto_update_title">Аутоматcко оcвежавање</string>
+  <string name="unit_metric">Метричке (\u00b0C)</string>
+  <string name="unit_imperial">Империјалне (\u00b0F)</string>
+  <string name="update">Освежи</string>
+  <string name="enable_title">Укључи</string>
+  <string name="update_interval_title">Интервал освежавања</string>
+  <string name="interval_1_hour">1 сат</string>
+  <string name="interval_2_hour">2 сата</string>
+  <string name="interval_4_hour">4 сата</string>
+  <string name="interval_6_hour">6 сати</string>
+  <string name="interval_12_hour">12 сати</string>
+  <string name="weather_tile_title">Време</string>
+  <string name="weather_icon_pack_title">Пакет икона за прогнозу</string>
+  <string name="weather_icon_pack_playstore">Пронађи пакете икона</string>
+  <string name="service_disabled">Искључено</string>
+  <string name="service_error">Грешка</string>
+  <string name="last_update_time">Последње освежавање</string>
+  <string name="omnijaws_service_unkown">Нема података о времену</string>
+  <string name="omnijaws_service_error">Грешка при учитавању података о времену</string>
+  <string name="omnijaws_service_init">Чекање података о времену...</string>
+  <string name="omnijaws_service_progress">Ажурирање...</string>
+  <string name="omnijaws_service_disabled">Услуга је онемогућена</string>
+  <string name="weather_widget">Временска прогноза</string>
+  <string name="omnijaws_current_text">Сада</string>
+  <string name="show_background_title">Сенка позадине</string>
+  <string name="weather_config_title">Поставке услуге</string>
+</resources>
