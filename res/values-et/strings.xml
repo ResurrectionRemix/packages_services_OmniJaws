@@ -31,7 +31,7 @@
   <string name="settings_title">Seaded</string>
   <string name="auto_update_title">Automaatsed uuendused</string>
   <string name="unit_metric">Meetermõõdustik (\u00b0C)</string>
-  <string name="unit_imperial">Impeeriumimõõdustik (\u00b0F)</string>
+  <string name="unit_imperial">Imperiaalmõõdustik (\u00b0F)</string>
   <string name="update">Uuenda</string>
   <string name="enable_title">Luba</string>
   <string name="update_interval_title">Uuendamise intervall</string>

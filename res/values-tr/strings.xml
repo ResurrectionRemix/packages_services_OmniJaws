@@ -21,12 +21,12 @@
   <string name="units_title">Birim</string>
   <string name="weather_progress_title">Konum doğrulanıyor</string>
   <string name="weather_select_location">Konum seçin</string>
-  <string name="custom_location_title">Hususî konum</string>
+  <string name="custom_location_title">Husûsî konum</string>
   <string name="weather_custom_location_dialog_title">Konum girin</string>
   <string name="weather_custom_location_title">Konum</string>
-  <string name="weather_custom_location_missing">Hususî konum ayarlayın</string>
+  <string name="weather_custom_location_missing">Husûsî konum ayarlayın</string>
   <string name="weather_retrieve_location_dialog_title">Konum alınamıyor!</string>
-  <string name="weather_retrieve_location_dialog_message">Ağ üzerinden konum belirleme devre dışı.\n\nHususî bir konum ayarlayın veyâ ağ konumunu etkinleştirin</string>
+  <string name="weather_retrieve_location_dialog_message">Ağ üzerinden konum ta\'yîn etme devre dışı.\n\nHusûsî bir konum ayarlayın veyâ ağ konumunu etkinleştirin</string>
   <string name="weather_retrieve_location_dialog_enable_button">Etkinleştir</string>
   <string name="settings_title">Ayarlar</string>
   <string name="auto_update_title">Kendiliğinden güncellemeler</string>
