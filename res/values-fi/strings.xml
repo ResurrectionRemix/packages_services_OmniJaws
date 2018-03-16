@@ -22,10 +22,10 @@
   <string name="weather_progress_title">Tarkastetaan sijaintia</string>
   <string name="weather_select_location">Valitse sijainti</string>
   <string name="custom_location_title">Itse valittu sijainti</string>
-  <string name="weather_custom_location_dialog_title">Syötä sijainti</string>
+  <string name="weather_custom_location_dialog_title">Syötä sijainti (automaattinen kopiointi)</string>
   <string name="weather_custom_location_title">Sijainti</string>
   <string name="weather_custom_location_missing">Aseta itse valittu sijainti</string>
-  <string name="weather_retrieve_location_dialog_title">Paikantaminen epäonnistui!</string>
+  <string name="weather_retrieve_location_dialog_title">Ei voi noutaa sijaintia!</string>
   <string name="weather_retrieve_location_dialog_message">Verkon kautta paikantaminen poistettu käytöstä. \n\nAseta itse valittu sijainti tai ota verkon kautta paikantaminen käyttöön</string>
   <string name="weather_retrieve_location_dialog_enable_button">Ota käyttöön</string>
   <string name="settings_title">Asetukset</string>

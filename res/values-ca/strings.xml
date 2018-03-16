@@ -26,9 +26,12 @@
   <string name="weather_custom_location_title">Ubicació</string>
   <string name="weather_custom_location_missing">Establiu una ubicació personalitzada</string>
   <string name="weather_retrieve_location_dialog_title">No s\'ha pogut obtenir la ubicació!</string>
+  <string name="weather_retrieve_location_dialog_message">La geolocalización de red está deshabilitada.\n\nAjuste una ubicación personalizada o habilite la ubicación de red</string>
   <string name="weather_retrieve_location_dialog_enable_button">Activar</string>
   <string name="settings_title">Preferències</string>
   <string name="auto_update_title">Actualitzacions automàtiques</string>
+  <string name="unit_metric">Unitats mètriques</string>
+  <string name="unit_imperial">Unitats imperials</string>
   <string name="update">Actualitzar</string>
   <string name="enable_title">Activar</string>
   <string name="update_interval_title">Interval d\'actualització</string>
@@ -38,6 +41,8 @@
   <string name="interval_6_hour">6 hores</string>
   <string name="interval_12_hour">12 hores</string>
   <string name="weather_tile_title">Temps</string>
+  <string name="weather_icon_pack_title">Pack d\'icones d\'estat</string>
+  <string name="weather_icon_pack_playstore">Cercar paquets d\'icones</string>
   <string name="service_disabled">Deshabilitat</string>
   <string name="service_error">Error</string>
   <string name="last_update_time">Darrera actualització</string>
