@@ -19,10 +19,13 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="provider_title">Sään tarjoaja</string>
   <string name="units_title">Yksikkö</string>
+  <string name="weather_progress_title">Varmistetaan sijaintia</string>
   <string name="weather_select_location">Valitse sijainti</string>
   <string name="custom_location_title">Mukautettu sijainti</string>
   <string name="weather_custom_location_dialog_title">Anna sijainti</string>
   <string name="weather_custom_location_title">Sijainti</string>
+  <string name="weather_custom_location_missing">Aseta mukautettu sijainti</string>
+  <string name="weather_retrieve_location_dialog_title">Sijaintia ei voida hakea!</string>
   <string name="settings_title">Asetukset</string>
   <string name="auto_update_title">Automaattiset päivitykset</string>
   <string name="unit_metric">Metrijärjestelmä (\u00b0C)</string>
