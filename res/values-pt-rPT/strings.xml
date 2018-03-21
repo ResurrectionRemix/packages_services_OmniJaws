@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="provider_title">Provedor de meteorologia</string>
+  <string name="provider_title">Fornecedor de meteorologia</string>
   <string name="units_title">Unidades</string>
   <string name="weather_progress_title">A verificar localização</string>
   <string name="weather_select_location">Selecionar localização</string>
@@ -46,9 +46,9 @@
   <string name="service_disabled">Desativado</string>
   <string name="service_error">Erro</string>
   <string name="last_update_time">Última atualização</string>
-  <string name="omnijaws_service_unkown">Sem dados meteorológicos</string>
-  <string name="omnijaws_service_error">Erro ao carregar dados meteorológicos</string>
-  <string name="omnijaws_service_init">À espera dos dados meteorológicos...</string>
+  <string name="omnijaws_service_unkown">Sem informações meteorológicas</string>
+  <string name="omnijaws_service_error">Erro ao carregar informações meteorológicas</string>
+  <string name="omnijaws_service_init">À espera de informações meteorológicas...</string>
   <string name="omnijaws_service_progress">A atualizar...</string>
   <string name="omnijaws_service_disabled">Serviço desativado</string>
   <string name="weather_widget">Meteorologia</string>
