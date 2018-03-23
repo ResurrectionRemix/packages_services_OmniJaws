@@ -134,20 +134,37 @@ public class YahooWeatherProvider extends AbstractWeatherProvider  {
             WeatherHandler handler = new WeatherHandler();
             parser.parse(new InputSource(reader), handler);
 
+            ArrayList<DayForecast> forecasts = handler.forecasts;
+
+            // clients assume there are 5  entries - so fill with dummy if needed
+            if (forecasts.size() < 5) {
+                for (int i = forecasts.size(); i < 5; i++) {
+                    Log.w(TAG, "Missing forecast for day " + i + " creating dummy");
+                    DayForecast item = new DayForecast(
+                        /* low */ 0,
+                        /* high */ 0,
+                        /* condition */ "",
+                        /* conditionCode */ -1,
+                        "NaN",
+                        metric);
+                    forecasts.add(item);
+                }
+            }
+
             if (handler.isComplete()) {
                 // There are cases where the current condition is unknown, but the forecast
                 // is not - using the (inaccurate) forecast is probably better than showing
                 // the question mark
                 if (handler.conditionCode == 3200) {
-                    handler.condition = handler.forecasts.get(0).condition;
-                    handler.conditionCode = handler.forecasts.get(0).conditionCode;
+                    handler.condition = forecasts.get(0).condition;
+                    handler.conditionCode = forecasts.get(0).conditionCode;
                 }
 
                 WeatherInfo w = new WeatherInfo(mContext, id,
                         handler.city,
                         handler.condition, handler.conditionCode, handler.temperature,
                         handler.humidity, handler.windSpeed,
-                        handler.windDirection, metric, handler.forecasts,
+                        handler.windDirection, metric, forecasts,
                         System.currentTimeMillis());
                 log(TAG, "Weather updated: " + w);
                 return w;
