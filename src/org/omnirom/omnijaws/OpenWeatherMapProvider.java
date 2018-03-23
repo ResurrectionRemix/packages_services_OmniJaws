@@ -182,6 +182,20 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
             }
             result.add(item);
         }
+        // clients assume there are 5  entries - so fill with dummy if needed
+        if (result.size() < 5) {
+            for (int i = result.size(); i < 5; i++) {
+                Log.w(TAG, "Missing forecast for day " + i + " creating dummy");
+                DayForecast item = new DayForecast(
+                        /* low */ 0,
+                        /* high */ 0,
+                        /* condition */ "",
+                        /* conditionCode */ -1,
+                        "NaN",
+                        metric);
+                result.add(item);
+            }
+        }
         return result;
     }
 
