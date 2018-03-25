@@ -16,4 +16,54 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Weather - Weather codes -->
+  <string name="weather_0">Tornadas</string>
+  <string name="weather_1">Tropinė audra</string>
+  <string name="weather_2">Uraganas</string>
+  <string name="weather_3">Smarki perkūnija</string>
+  <string name="weather_4">Perkūnija</string>
+  <string name="weather_5">Lietus ir sniegas</string>
+  <string name="weather_6">Lietus ir šlapdriba</string>
+  <string name="weather_7">Sniegas ir šlapdriba</string>
+  <string name="weather_8">Šalta dulksna</string>
+  <string name="weather_9">Dulksna</string>
+  <string name="weather_10">Šaltas lietus</string>
+  <string name="weather_11">Liūtys</string>
+  <string name="weather_12">Liūtys</string>
+  <string name="weather_13">Sniego šuorai</string>
+  <string name="weather_14">Nedidelės pūgos</string>
+  <string name="weather_15">Pūga</string>
+  <string name="weather_16">Sniegas</string>
+  <string name="weather_17">Kruša</string>
+  <string name="weather_18">Šlapdriba</string>
+  <string name="weather_19">Dulkėta</string>
+  <string name="weather_20">Ūkanota</string>
+  <string name="weather_21">Migla</string>
+  <string name="weather_22">Dūmuota</string>
+  <string name="weather_23">Stiprus vėjas</string>
+  <string name="weather_24">Vėjuota</string>
+  <string name="weather_25">Šalta</string>
+  <string name="weather_26">Debesuota</string>
+  <string name="weather_27">Daugiausiai debesuota</string>
+  <string name="weather_28">Daugiausiai debesuota</string>
+  <string name="weather_29">Debesuota su pragiedruliais</string>
+  <string name="weather_30">Debesuota su pragiedruliais</string>
+  <string name="weather_31">Giedra</string>
+  <string name="weather_32">Saulėta</string>
+  <string name="weather_33">Gražu</string>
+  <string name="weather_34">Gražu</string>
+  <string name="weather_35">Sniegas ir kruša</string>
+  <string name="weather_36">Karšta</string>
+  <string name="weather_37">Izoliuota perkūnija</string>
+  <string name="weather_38">Išsiskirsčiusi perkūnija</string>
+  <string name="weather_39">Išsiskirsčiusi perkūnija</string>
+  <string name="weather_40">Išsiskirsčiusios liūtys</string>
+  <string name="weather_41">Smarkus sniegas</string>
+  <string name="weather_42">Išsiskirsčiusios sniego pūgos</string>
+  <string name="weather_43">Smarkus sniegas</string>
+  <string name="weather_44">Debesuota su pragiedruliais</string>
+  <string name="weather_45">Liūtys su perkūnija</string>
+  <string name="weather_46">Sniego pūgos</string>
+  <string name="weather_47">Izoliuotos liūtys su perkūnija</string>
+</resources>

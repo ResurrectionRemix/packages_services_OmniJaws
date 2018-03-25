@@ -16,4 +16,54 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Weather - Weather codes -->
+  <string name="weather_0">Торнадо</string>
+  <string name="weather_1">Тропическа буря</string>
+  <string name="weather_2">Ураган</string>
+  <string name="weather_3">Силни гръмотевични бури</string>
+  <string name="weather_4">Гръмотевични бури</string>
+  <string name="weather_5">Смесени дъжд и сняг</string>
+  <string name="weather_6">Смесени дъжд и суграшица</string>
+  <string name="weather_7">Смесени сняг и суграшица</string>
+  <string name="weather_8">Замръзнал ситен дъжд</string>
+  <string name="weather_9">Ситен дъжд</string>
+  <string name="weather_10">Замръзващ дъжд</string>
+  <string name="weather_11">Преваляване</string>
+  <string name="weather_12">Преваляване</string>
+  <string name="weather_13">Снежни превалявания</string>
+  <string name="weather_14">Леки превалявания от сняг</string>
+  <string name="weather_15">Снежна виелица</string>
+  <string name="weather_16">Сняг</string>
+  <string name="weather_17">Градушка</string>
+  <string name="weather_18">Суграшица</string>
+  <string name="weather_19">Прах</string>
+  <string name="weather_20">Мъгливо</string>
+  <string name="weather_21">Мараня</string>
+  <string name="weather_22">Задимено</string>
+  <string name="weather_23">Бурен</string>
+  <string name="weather_24">Ветровито</string>
+  <string name="weather_25">Студено</string>
+  <string name="weather_26">Облачно</string>
+  <string name="weather_27">Предимно облачно</string>
+  <string name="weather_28">Предимно облачно</string>
+  <string name="weather_29">Частична облачност</string>
+  <string name="weather_30">Частична облачност</string>
+  <string name="weather_31">Ясно</string>
+  <string name="weather_32">Слънчево</string>
+  <string name="weather_33">Ясно</string>
+  <string name="weather_34">Ясно</string>
+  <string name="weather_35">Смесени дъжд и градушка</string>
+  <string name="weather_36">Горещо</string>
+  <string name="weather_37">Изолирани гръмотевични бури</string>
+  <string name="weather_38">Възможни са гръмотевични бури</string>
+  <string name="weather_39">Възможни са гръмотевични бури</string>
+  <string name="weather_40">Възможни са валежи</string>
+  <string name="weather_41">Силен снеговалеж</string>
+  <string name="weather_42">Възможни са превалявания от сняг</string>
+  <string name="weather_43">Силен снеговалеж</string>
+  <string name="weather_44">Частична облачност</string>
+  <string name="weather_45">Преваляване с гръмотевици</string>
+  <string name="weather_46">Снеговалеж</string>
+  <string name="weather_47">Изолирани превалявания с гръмотевици</string>
+</resources>

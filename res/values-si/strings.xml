@@ -16,4 +16,54 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Weather - Weather codes -->
+  <string name="weather_0">ටෝනාඩෝව</string>
+  <string name="weather_1">නිවර්තන කුණාටුව</string>
+  <string name="weather_2">චණ්ඩමාරුතය</string>
+  <string name="weather_3">රළු අකුණු කුණාටු</string>
+  <string name="weather_4">අකුණු කුණාටු</string>
+  <string name="weather_5">හිම මිශ්‍රිත වැස්ස</string>
+  <string name="weather_6">ශීත මිශ්‍රිත වැස්ස</string>
+  <string name="weather_7">හිම මිශ්‍රිත ශීතකර වැස්ස</string>
+  <string name="weather_8">ඉතා ශීතල හිරිකඩ</string>
+  <string name="weather_9">හිරිකඩ</string>
+  <string name="weather_10">ඉතා ශීතල වැස්ස</string>
+  <string name="weather_11">නොකඩවා වැසි</string>
+  <string name="weather_12">නොකඩවා වැසි</string>
+  <string name="weather_13">හදිසි ලිහිල් හිම වැසි</string>
+  <string name="weather_14">නොකඩවා ලිහිල් හිම වැසි</string>
+  <string name="weather_15">හමන හිම</string>
+  <string name="weather_16">හිම</string>
+  <string name="weather_17">හිම කැට වැස්ස</string>
+  <string name="weather_18">ශීතකර වැස්ස</string>
+  <string name="weather_19">දූවිල්ල</string>
+  <string name="weather_20">මීදුමෙන් වැසුණු</string>
+  <string name="weather_21">තුනී මීදුම</string>
+  <string name="weather_22">නොපැහැදිලි</string>
+  <string name="weather_23">කුණාටු සහිත</string>
+  <string name="weather_24">සුළං සහිත</string>
+  <string name="weather_25">සීතල</string>
+  <string name="weather_26">වලාකුළින් වැසුණු</string>
+  <string name="weather_27">වැඩිවශයෙන් වලාකුළින් වැසුණු</string>
+  <string name="weather_28">වැඩිවශයෙන් වලාකුළින් වැසුණු</string>
+  <string name="weather_29">අඩවශයෙන් වලාකුළින් වැසුණු</string>
+  <string name="weather_30">අඩවශයෙන් වලාකුළින් වැසුණු</string>
+  <string name="weather_31">පැහැදිලි</string>
+  <string name="weather_32">ප්‍රබෝධමත්</string>
+  <string name="weather_33">වැසි නැති</string>
+  <string name="weather_34">වැසි නැති</string>
+  <string name="weather_35">හිම කැට මිශ්‍රිත වැස්ස</string>
+  <string name="weather_36">උණුසුම්</string>
+  <string name="weather_37">ඒකලිත අකුණු කුණාටු</string>
+  <string name="weather_38">විසිරුන අකුණු කුණාටු</string>
+  <string name="weather_39">විසිරුන අකුණු කුණාටු</string>
+  <string name="weather_40">නොකඩවා විසිරුන වැසි</string>
+  <string name="weather_41">අධික හිම</string>
+  <string name="weather_42">නොකඩවා විසිරුන හිම වැසි</string>
+  <string name="weather_43">අධික හිම</string>
+  <string name="weather_44">අඩවශයෙන් වලාකුළින් වැසුණු</string>
+  <string name="weather_45">ගිගුරුම් සහිත වැසි</string>
+  <string name="weather_46">නොකඩවා හිම වැසි</string>
+  <string name="weather_47">ඒකලිත ගිගුරුම් සහිත වැසි</string>
+</resources>
