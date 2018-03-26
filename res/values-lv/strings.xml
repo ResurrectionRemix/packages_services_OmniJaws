@@ -16,4 +16,54 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Weather - Weather codes -->
+  <string name="weather_0">Virpuļviesulis</string>
+  <string name="weather_1">Tropu vētra</string>
+  <string name="weather_2">Viesuļvētra</string>
+  <string name="weather_3">Pamatīgs pērkona negaiss</string>
+  <string name="weather_4">Pērkona negaiss</string>
+  <string name="weather_5">Lietus un slapjš sniegs</string>
+  <string name="weather_6">Lietus un slapjdraņķis</string>
+  <string name="weather_7">Sniegs un slapjdraņķis</string>
+  <string name="weather_8">Sasalstoša atkala</string>
+  <string name="weather_9">Atkala</string>
+  <string name="weather_10">Sasalstošs lietus</string>
+  <string name="weather_11">Lietusgāzes</string>
+  <string name="weather_12">Lietusgāzes</string>
+  <string name="weather_13">Sniega vētra</string>
+  <string name="weather_14">Viegls sniegs</string>
+  <string name="weather_15">Putenis</string>
+  <string name="weather_16">Sniegs</string>
+  <string name="weather_17">Krusa</string>
+  <string name="weather_18">Krusa</string>
+  <string name="weather_19">Putekļu vētra</string>
+  <string name="weather_20">Miglains</string>
+  <string name="weather_21">Smogs</string>
+  <string name="weather_22">Dūmakains</string>
+  <string name="weather_23">Brāzmains</string>
+  <string name="weather_24">Vējains</string>
+  <string name="weather_25">Auksts</string>
+  <string name="weather_26">Mākoņains</string>
+  <string name="weather_27">Lielākoties mākoņains</string>
+  <string name="weather_28">Lielākoties mākoņains</string>
+  <string name="weather_29">Daļēji mākoņains</string>
+  <string name="weather_30">Daļēji mākoņains</string>
+  <string name="weather_31">Skaidrs</string>
+  <string name="weather_32">Saulains</string>
+  <string name="weather_33">Jauks</string>
+  <string name="weather_34">Jauks</string>
+  <string name="weather_35">Lietus un krusa</string>
+  <string name="weather_36">Karsts</string>
+  <string name="weather_37">Atsevišķi negaisi</string>
+  <string name="weather_38">Vietām negaiss</string>
+  <string name="weather_39">Vietām negaiss</string>
+  <string name="weather_40">Vietām lietusgāzes</string>
+  <string name="weather_41">Stiprs sniegs</string>
+  <string name="weather_42">Vietām stiprs sniegs</string>
+  <string name="weather_43">Stiprs sniegs</string>
+  <string name="weather_44">Daļēji mākoņains</string>
+  <string name="weather_45">Lietusgāzes un negaiss</string>
+  <string name="weather_46">Sniegputeņi</string>
+  <string name="weather_47">Atseviški negaisi</string>
+</resources>
