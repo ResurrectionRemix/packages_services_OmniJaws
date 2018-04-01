@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="provider_title">Proveedor del tiempo</string>
+  <string name="provider_title">Proveedor de clima</string>
   <string name="units_title">Unidad</string>
   <string name="weather_progress_title">Comprobando ubicación</string>
   <string name="weather_select_location">Selecciona ubicación</string>
