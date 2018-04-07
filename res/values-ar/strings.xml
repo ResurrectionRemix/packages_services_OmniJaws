@@ -48,7 +48,7 @@
   <string name="last_update_time">وقت آخر تحديث</string>
   <string name="omnijaws_service_unkown">لا بيانات طقس</string>
   <string name="omnijaws_service_error">خطأ بتحميل بيانات الطقس</string>
-  <string name="omnijaws_service_init">في إنتظار بيانات الطقس...</string>
+  <string name="omnijaws_service_init">Waiting for weather data...</string>
   <string name="omnijaws_service_progress">جارِ التحديث...</string>
   <string name="omnijaws_service_disabled">الخدمة معطّلة</string>
   <string name="weather_widget">الطقس</string>

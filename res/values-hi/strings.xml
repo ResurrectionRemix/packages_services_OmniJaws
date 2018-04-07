@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="provider_title">मौसम जानकारी पर्दाता</string>
+  <string name="provider_title">मौसम जानकारी प्रदाता</string>
   <string name="units_title">इकाई</string>
   <string name="weather_progress_title">स्थान का सत्यापन किया जा रहा</string>
   <string name="weather_select_location">स्थान का चयन करें</string>
@@ -29,21 +29,21 @@
   <string name="weather_retrieve_location_dialog_message">स्थान बताने वाली व्यवस्था बन्द है। अपना कोई पसन्द का स्थान डाले या स्थान बताने वाली सेवा चालु करें</string>
   <string name="weather_retrieve_location_dialog_enable_button">सक्षम करें</string>
   <string name="settings_title">व्यवस्थाएें</string>
-  <string name="auto_update_title">अपनें आप नया कऱें</string>
-  <string name="unit_metric">मैट्रिक </string>
-  <string name="unit_imperial">अंगरेज़ी </string>
-  <string name="update">नवीनतम बनायें</string>
+  <string name="auto_update_title">स्वत: अपडेटस</string>
+  <string name="unit_metric">मैट्रिक (\u00b0C)</string>
+  <string name="unit_imperial">अंगरेज़ी (\u00b0F)</string>
+  <string name="update">अपडेट करें</string>
   <string name="enable_title">सक्षम करें</string>
-  <string name="update_interval_title">नवीनतम बनाने का अन्तराल</string>
-  <string name="interval_1_hour">१ घंटा</string>
-  <string name="interval_2_hour">२ घंटे</string>
+  <string name="update_interval_title">अद्यतन अंतराल</string>
+  <string name="interval_1_hour">1 घंटा</string>
+  <string name="interval_2_hour">2 घंटे</string>
   <string name="interval_4_hour">4 घंटे</string>
   <string name="interval_6_hour">6 घंटे</string>
   <string name="interval_12_hour">12 घंटे</string>
   <string name="weather_tile_title">मौसम</string>
-  <string name="weather_icon_pack_title">स्थिति चिह्न की गड्डी</string>
-  <string name="weather_icon_pack_playstore">चिह्न चित्र की गड्डी ढूंढें</string>
-  <string name="service_disabled">अक्षम कर दिया गया</string>
+  <string name="weather_icon_pack_title">शर्त चिह्न पैक</string>
+  <string name="weather_icon_pack_playstore">चिह्न पैक खोजे</string>
+  <string name="service_disabled">अक्षम</string>
   <string name="service_error">गलती</string>
   <string name="last_update_time">अंतिम नवीनी करण का समय</string>
   <string name="omnijaws_service_unkown">मौसम के बारे में जानकारी उपलब्ध नहीं है</string>
