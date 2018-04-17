@@ -39,6 +39,7 @@
   <string name="interval_12_hour">12 tuntia</string>
   <string name="weather_tile_title">Sää</string>
   <string name="service_error">Virhe</string>
+  <string name="last_update_time">Viimeisin päivitys</string>
   <string name="omnijaws_service_unkown">Ei säätietoja</string>
   <string name="omnijaws_service_error">Virhe ladattaessa säätietoja</string>
   <string name="omnijaws_service_init">Odotetaan säätietoja...</string>
