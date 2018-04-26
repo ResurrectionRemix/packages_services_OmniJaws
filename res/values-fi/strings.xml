@@ -26,11 +26,13 @@
   <string name="weather_custom_location_title">Sijainti</string>
   <string name="weather_custom_location_missing">Aseta mukautettu sijainti</string>
   <string name="weather_retrieve_location_dialog_title">Sijaintia ei voida hakea!</string>
+  <string name="weather_retrieve_location_dialog_enable_button">Ota käyttöön</string>
   <string name="settings_title">Asetukset</string>
   <string name="auto_update_title">Automaattiset päivitykset</string>
   <string name="unit_metric">Metrijärjestelmä (\u00b0C)</string>
   <string name="unit_imperial">Imperiaalinen (\u00b0F)</string>
   <string name="update">Päivitä</string>
+  <string name="enable_title">Ota käyttöön</string>
   <string name="update_interval_title">Päivitysväli</string>
   <string name="interval_1_hour">1 tunti</string>
   <string name="interval_2_hour">2 tuntia</string>
@@ -38,6 +40,9 @@
   <string name="interval_6_hour">6 tuntia</string>
   <string name="interval_12_hour">12 tuntia</string>
   <string name="weather_tile_title">Sää</string>
+  <string name="weather_icon_pack_title">Sääkuvakepaketti</string>
+  <string name="weather_icon_pack_playstore">Löydä kuvakepaketteja</string>
+  <string name="service_disabled">Pois käytöstä</string>
   <string name="service_error">Virhe</string>
   <string name="last_update_time">Viimeisin päivitys</string>
   <string name="omnijaws_service_unkown">Ei säätietoja</string>
@@ -47,5 +52,6 @@
   <string name="omnijaws_service_disabled">Palvelu ei käytössä</string>
   <string name="weather_widget">Sää</string>
   <string name="omnijaws_current_text">Nyt</string>
+  <string name="show_background_title">Taustan varjo</string>
   <string name="weather_config_title">Palvelun asetukset</string>
 </resources>
