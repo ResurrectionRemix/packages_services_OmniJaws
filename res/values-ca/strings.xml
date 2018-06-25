@@ -40,4 +40,19 @@
   <string name="interval_4_hour">4 hores</string>
   <string name="interval_6_hour">6 hores</string>
   <string name="interval_12_hour">12 hores</string>
+  <string name="weather_tile_title">El temps</string>
+  <string name="weather_icon_pack_title">Paquet d\'icones per al temps</string>
+  <string name="weather_icon_pack_playstore">Cerca paquets d\'icones</string>
+  <string name="service_disabled">Inhabilitat</string>
+  <string name="service_error">Error</string>
+  <string name="last_update_time">Hora de la darrera actualització</string>
+  <string name="omnijaws_service_unkown">No hi ha dades meteorològiques</string>
+  <string name="omnijaws_service_error">Error en carregar les dades meteorològiques</string>
+  <string name="omnijaws_service_init">S\'està esperant les dades del temps...</string>
+  <string name="omnijaws_service_progress">S\'està actualitzant...</string>
+  <string name="omnijaws_service_disabled">Servei inhabilitat</string>
+  <string name="weather_widget">El temps</string>
+  <string name="omnijaws_current_text">Ara</string>
+  <string name="show_background_title">Ombra del fons</string>
+  <string name="weather_config_title">Configuració del servei</string>
 </resources>
