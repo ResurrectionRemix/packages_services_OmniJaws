@@ -41,6 +41,7 @@ public class WeatherAppWidgetConfigure extends PreferenceActivity {
 
     public static final String KEY_ICON_PACK = "weather_icon_pack";
     public static final String KEY_BACKGROUND_SHADOW = "show_background";
+    public static final String KEY_WITH_FORECAST = "with_forecast";
 
     private static final String DEFAULT_WEATHER_ICON_PACKAGE = "org.omnirom.omnijaws";
     private static final String DEFAULT_WEATHER_ICON_PREFIX = "outline";
@@ -100,6 +101,7 @@ public class WeatherAppWidgetConfigure extends PreferenceActivity {
         });
 
         initPreference(KEY_BACKGROUND_SHADOW, prefs.getBoolean(KEY_BACKGROUND_SHADOW + "_" + mAppWidgetId, false));
+        initPreference(KEY_WITH_FORECAST, prefs.getBoolean(KEY_WITH_FORECAST + "_" + mAppWidgetId, true));
     }
 
     private void initPreference(String key, boolean value) {
@@ -123,6 +125,7 @@ public class WeatherAppWidgetConfigure extends PreferenceActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().remove(KEY_ICON_PACK + "_" + id).commit();
         prefs.edit().remove(KEY_BACKGROUND_SHADOW + "_" + id).commit();
+        prefs.edit().remove(KEY_WITH_FORECAST + "_" + id).commit();
     }
 
     public static void remapPrefs(Context context, int oldId, int newId) {
@@ -135,6 +138,10 @@ public class WeatherAppWidgetConfigure extends PreferenceActivity {
         boolean oldBoolean = prefs.getBoolean(KEY_BACKGROUND_SHADOW + "_" + oldId, false);
         prefs.edit().putBoolean(KEY_BACKGROUND_SHADOW + "_" + newId, oldBoolean).commit();
         prefs.edit().remove(KEY_BACKGROUND_SHADOW + "_" + oldId).commit();
+
+        oldBoolean = prefs.getBoolean(KEY_WITH_FORECAST + "_" + oldId, true);
+        prefs.edit().putBoolean(KEY_WITH_FORECAST + "_" + newId, oldBoolean).commit();
+        prefs.edit().remove(KEY_WITH_FORECAST + "_" + oldId).commit();
     }
 
     @Override

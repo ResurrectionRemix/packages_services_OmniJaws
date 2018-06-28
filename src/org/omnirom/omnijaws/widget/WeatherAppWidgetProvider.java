@@ -214,6 +214,8 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setOnClickPendingIntent(R.id.weather_data,
                 PendingIntent.getActivity(context, 0, configureIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
+        boolean withForcast = prefs.getBoolean(WeatherAppWidgetConfigure.KEY_WITH_FORECAST + "_" + appWidgetId, true);
+
         boolean backgroundShadow = prefs.getBoolean(WeatherAppWidgetConfigure.KEY_BACKGROUND_SHADOW + "_" + appWidgetId, false);
         widget.setViewVisibility(R.id.background_shadow, backgroundShadow ? View.VISIBLE : View.GONE);
         initWidget(widget);
@@ -245,8 +247,8 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
             currentHeight = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, minHeight);
             currentWidth = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, minWidth);
         }
-        boolean showDays = currentHeight > minHeight ? true : false;
-        boolean showLocalDetails = currentHeight > minHeight ? true : false;
+        boolean showDays = (currentHeight > minHeight && withForcast) ? true : false;
+        boolean showLocalDetails = (currentHeight > minHeight && withForcast) ? true : false;
 
         Long timeStamp = weatherData.timeStamp;
         String format = DateFormat.is24HourFormat(context) ? "HH:mm" : "hh:mm a";
@@ -263,6 +265,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setImageViewBitmap(R.id.forecast_image_0, bd.getBitmap());
         widget.setTextViewText(R.id.forecast_text_0, dayShort);
         widget.setViewVisibility(R.id.forecast_text_0, showDays ? View.VISIBLE : View.GONE);
+        widget.setViewVisibility(R.id.forecast_0, withForcast ? View.VISIBLE : View.GONE);
 
         cal.add(Calendar.DATE, 1);
         dayShort = sdf.format(new Date(cal.getTimeInMillis()));
@@ -273,6 +276,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setImageViewBitmap(R.id.forecast_image_1, bd.getBitmap());
         widget.setTextViewText(R.id.forecast_text_1, dayShort);
         widget.setViewVisibility(R.id.forecast_text_1, showDays ? View.VISIBLE : View.GONE);
+        widget.setViewVisibility(R.id.forecast_1, withForcast ? View.VISIBLE : View.GONE);
 
         cal.add(Calendar.DATE, 1);
         dayShort = sdf.format(new Date(cal.getTimeInMillis()));
@@ -283,6 +287,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setImageViewBitmap(R.id.forecast_image_2, bd.getBitmap());
         widget.setTextViewText(R.id.forecast_text_2, dayShort);
         widget.setViewVisibility(R.id.forecast_text_2, showDays ? View.VISIBLE : View.GONE);
+        widget.setViewVisibility(R.id.forecast_2, withForcast ? View.VISIBLE : View.GONE);
 
         cal.add(Calendar.DATE, 1);
         dayShort = sdf.format(new Date(cal.getTimeInMillis()));
@@ -293,6 +298,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setImageViewBitmap(R.id.forecast_image_3, bd.getBitmap());
         widget.setTextViewText(R.id.forecast_text_3, dayShort);
         widget.setViewVisibility(R.id.forecast_text_3, showDays ? View.VISIBLE : View.GONE);
+        widget.setViewVisibility(R.id.forecast_3, withForcast ? View.VISIBLE : View.GONE);
 
         cal.add(Calendar.DATE, 1);
         dayShort = sdf.format(new Date(cal.getTimeInMillis()));
@@ -303,6 +309,7 @@ public class WeatherAppWidgetProvider extends AppWidgetProvider {
         widget.setImageViewBitmap(R.id.forecast_image_4, bd.getBitmap());
         widget.setTextViewText(R.id.forecast_text_4, dayShort);
         widget.setViewVisibility(R.id.forecast_text_4, showDays ? View.VISIBLE : View.GONE);
+        widget.setViewVisibility(R.id.forecast_4, withForcast ? View.VISIBLE : View.GONE);
 
         d = weatherClient.getWeatherConditionImage(weatherData.conditionCode);
         bd = overlay(context.getResources(), d, weatherData.temp, null, weatherData.tempUnits);

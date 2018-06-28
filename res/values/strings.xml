@@ -51,7 +51,7 @@
     <string name="last_update_time">Last update time</string>
     <string name="omnijaws_service_unkown">No weather data</string>
     <string name="omnijaws_service_error">Error loading weather data</string>
-    <string name="omnijaws_service_init">Waiting for weather data...</string>
+    <string name="omnijaws_service_init">Waiting...</string>
     <string name="omnijaws_service_progress">Updating...</string>
     <string name="omnijaws_service_disabled">Service disabled</string>
     <string name="weather_widget">Weather</string>
@@ -60,4 +60,5 @@
     <string name="weather_config_title">Service settings</string>
     <string name="weather_config_summary"></string>
     <string name="omnijaws_service_error_marker" translatable="false">*</string>
+    <string name="with_forecast_title">With 4-day forecast and details</string>
 </resources>
