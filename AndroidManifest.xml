@@ -90,7 +90,7 @@
 
         <activity
             android:name=".widget.WeatherAppWidgetConfigure"
-            android:theme="@android:style/Theme.Material.Settings">
+            android:theme="@android:style/Theme.DeviceDefault.Settings">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
