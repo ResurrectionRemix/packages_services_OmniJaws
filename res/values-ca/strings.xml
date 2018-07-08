@@ -48,7 +48,7 @@
   <string name="last_update_time">Hora de la darrera actualització</string>
   <string name="omnijaws_service_unkown">No hi ha dades meteorològiques</string>
   <string name="omnijaws_service_error">Error en carregar les dades meteorològiques</string>
-  <string name="omnijaws_service_init">S\'està esperant les dades del temps...</string>
+  <string name="omnijaws_service_init">S\'està esperant les dades del meteorològiques...</string>
   <string name="omnijaws_service_progress">S\'està actualitzant...</string>
   <string name="omnijaws_service_disabled">Servei inhabilitat</string>
   <string name="weather_widget">El temps</string>
