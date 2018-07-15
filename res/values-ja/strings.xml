@@ -30,8 +30,8 @@
   <string name="weather_retrieve_location_dialog_enable_button">有効</string>
   <string name="settings_title">設定</string>
   <string name="auto_update_title">自動更新</string>
-  <string name="unit_metric">摂氏 (\u00b0C)</string>
-  <string name="unit_imperial">華氏 (\u00b0F)</string>
+  <string name="unit_metric">摂氏（\u00b0C）</string>
+  <string name="unit_imperial">華氏（\u00b0F）</string>
   <string name="update">更新</string>
   <string name="enable_title">有効</string>
   <string name="update_interval_title">更新間隔</string>
