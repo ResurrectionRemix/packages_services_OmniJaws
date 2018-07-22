@@ -21,14 +21,14 @@
   <string name="units_title">Unit</string>
   <string name="weather_progress_title">Memverifikasi lokasi</string>
   <string name="weather_select_location">Pilih lokasi</string>
-  <string name="custom_location_title">Lokasi kustom</string>
+  <string name="custom_location_title">Lokasi khusus</string>
   <string name="weather_custom_location_dialog_title">Masukkan lokasi</string>
   <string name="weather_custom_location_title">Lokasi</string>
   <string name="weather_custom_location_missing">Atur lokasi</string>
   <string name="weather_retrieve_location_dialog_title">Tidak dapat mengambil lokasi!</string>
   <string name="weather_retrieve_location_dialog_message">Jaringan geolocation tidak aktif.\n\natur lokasi atau aktifkan lokasi jaringan</string>
   <string name="weather_retrieve_location_dialog_enable_button">Aktifkan</string>
-  <string name="settings_title">Pengaturan</string>
+  <string name="settings_title">Setelan</string>
   <string name="auto_update_title">Pembaruan otomatis</string>
   <string name="unit_metric">Metrik (\u00b0C)</string>
   <string name="unit_imperial">Imperial (\u00b0F)</string>
