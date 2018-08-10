@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import org.omnirom.omnijaws.WeatherInfo.DayForecast;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
@@ -344,7 +345,11 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     }
 
     private String getAPIKey() {
-        return mContext.getResources().getString(R.string.owm_api_key, null);
+        try {
+            return mContext.getResources().getString(R.string.owm_api_key);
+        } catch (Resources.NotFoundException e) {
+            return null;
+        }
     }
 
     public boolean shouldRetry() {
