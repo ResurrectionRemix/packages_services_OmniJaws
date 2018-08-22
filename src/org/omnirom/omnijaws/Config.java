@@ -41,7 +41,7 @@ public class Config {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        if (prefs.getString(PREF_KEY_PROVIDER, "0").equals("0")) {
+        if (prefs.getString(PREF_KEY_PROVIDER, "1").equals("0")) {
             return new OpenWeatherMapProvider(context);
         }
         return new YahooWeatherProvider(context);
@@ -51,7 +51,7 @@ public class Config {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        String provider = prefs.getString(PREF_KEY_PROVIDER, "0");
+        String provider = prefs.getString(PREF_KEY_PROVIDER, "1");
         return provider.equals("0") ? "OpenWeatherMap" : "Yahoo";
     }
 
