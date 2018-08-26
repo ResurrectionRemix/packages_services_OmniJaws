@@ -91,22 +91,28 @@ public class SettingsActivityService extends PreferenceActivity implements OnPre
 
         mProvider = (ListPreference) findPreference(Config.PREF_KEY_PROVIDER);
         mProvider.setOnPreferenceChangeListener(this);
-        int idx = mProvider.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_PROVIDER,
-                mProvider.getEntryValues()[0].toString()));
+        int idx = mProvider.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_PROVIDER, "0"));
+        if (idx == -1) {
+            idx = 0;
+        }
         mProvider.setValueIndex(idx);
         mProvider.setSummary(mProvider.getEntries()[idx]);
 
         mUnits = (ListPreference) findPreference(Config.PREF_KEY_UNITS);
         mUnits.setOnPreferenceChangeListener(this);
-        idx = mUnits.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UNITS,
-                mUnits.getEntryValues()[0].toString()));
+        idx = mUnits.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UNITS, "0"));
+        if (idx == -1) {
+            idx = 0;
+        }
         mUnits.setValueIndex(idx);
         mUnits.setSummary(mUnits.getEntries()[idx]);
 
         mUpdateInterval = (ListPreference) findPreference(Config.PREF_KEY_UPDATE_INTERVAL);
         mUpdateInterval.setOnPreferenceChangeListener(this);
-        idx = mUpdateInterval.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UPDATE_INTERVAL,
-                mUpdateInterval.getEntryValues()[0].toString()));
+        idx = mUpdateInterval.findIndexOfValue(mPrefs.getString(Config.PREF_KEY_UPDATE_INTERVAL, "2"));
+        if (idx == -1) {
+            idx = 0;
+        }
         mUpdateInterval.setValueIndex(idx);
         mUpdateInterval.setSummary(mUpdateInterval.getEntries()[idx]);
 

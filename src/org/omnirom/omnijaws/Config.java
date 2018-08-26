@@ -41,7 +41,7 @@ public class Config {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        if (prefs.getString(PREF_KEY_PROVIDER, "1").equals("0")) {
+        if (prefs.getString(PREF_KEY_PROVIDER, "0").equals("1")) {
             return new OpenWeatherMapProvider(context);
         }
         return new YahooWeatherProvider(context);
@@ -51,8 +51,8 @@ public class Config {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        String provider = prefs.getString(PREF_KEY_PROVIDER, "1");
-        return provider.equals("0") ? "OpenWeatherMap" : "Yahoo";
+        String provider = prefs.getString(PREF_KEY_PROVIDER, "0");
+        return provider.equals("1") ? "OpenWeatherMap" : "Yahoo";
     }
 
     public static boolean isMetric(Context context) {
@@ -158,7 +158,7 @@ public class Config {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
-        String valueString = prefs.getString(PREF_KEY_UPDATE_INTERVAL, "1");
+        String valueString = prefs.getString(PREF_KEY_UPDATE_INTERVAL, "2");
         return Integer.valueOf(valueString);
     }
 
