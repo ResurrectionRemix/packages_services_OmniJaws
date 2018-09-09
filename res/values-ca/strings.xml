@@ -48,11 +48,12 @@
   <string name="last_update_time">Darrera actualització</string>
   <string name="omnijaws_service_unkown">Sense informació del temps</string>
   <string name="omnijaws_service_error">Error carregant l\'informació del temps</string>
-  <string name="omnijaws_service_init">Esperant dades meteorològiques...</string>
+  <string name="omnijaws_service_init">S\'està esperant...</string>
   <string name="omnijaws_service_progress">Actualitzant...</string>
   <string name="omnijaws_service_disabled">Servei deshabilitat</string>
   <string name="weather_widget">Temps</string>
   <string name="omnijaws_current_text">Ara</string>
   <string name="show_background_title">Ombra de fons</string>
   <string name="weather_config_title">Configuració del servei</string>
+  <string name="with_forecast_title">Amb previsió de 4 dies i detalls</string>
 </resources>

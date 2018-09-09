@@ -48,7 +48,6 @@
   <string name="last_update_time">最後更新時間</string>
   <string name="omnijaws_service_unkown">沒有天氣資料</string>
   <string name="omnijaws_service_error">載入天氣資料時出錯</string>
-  <string name="omnijaws_service_init">正在等待天氣資料...</string>
   <string name="omnijaws_service_progress">更新中…</string>
   <string name="omnijaws_service_disabled">已停用服務</string>
   <string name="weather_widget">天氣</string>

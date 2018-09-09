@@ -48,11 +48,12 @@
   <string name="last_update_time">Son güncelleme zamanı</string>
   <string name="omnijaws_service_unkown">Hava durumu verileri yok</string>
   <string name="omnijaws_service_error">Hava durumu verileri yüklenirken hata oluştu</string>
-  <string name="omnijaws_service_init">Hava durumu verileri bekleniyor...</string>
+  <string name="omnijaws_service_init">Bekleyin...</string>
   <string name="omnijaws_service_progress">Güncelleniyor...</string>
   <string name="omnijaws_service_disabled">Servis devre dışı</string>
   <string name="weather_widget">Hava durumu</string>
   <string name="omnijaws_current_text">Şimdi</string>
   <string name="show_background_title">Arkaplan gölgesi</string>
   <string name="weather_config_title">Servis ayarları</string>
+  <string name="with_forecast_title">4 günlük hava durumu ve detayları</string>
 </resources>

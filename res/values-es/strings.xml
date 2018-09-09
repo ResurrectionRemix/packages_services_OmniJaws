@@ -48,7 +48,6 @@
   <string name="last_update_time">Última hora de la actualización</string>
   <string name="omnijaws_service_unkown">No hay datos del clima</string>
   <string name="omnijaws_service_error">Error al cargar datos del clima</string>
-  <string name="omnijaws_service_init">Esperando datos del tiempo...</string>
   <string name="omnijaws_service_progress">Actualizando...</string>
   <string name="omnijaws_service_disabled">Servicio deshabilitado</string>
   <string name="weather_widget">Clima</string>

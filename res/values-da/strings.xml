@@ -48,7 +48,6 @@
   <string name="last_update_time">Sidste opdateringstidspunkt</string>
   <string name="omnijaws_service_unkown">Ingen vejrdata</string>
   <string name="omnijaws_service_error">Fejl ved indlæsningen af vejrdata</string>
-  <string name="omnijaws_service_init">Venter på vejrdata...</string>
   <string name="omnijaws_service_progress">Opdaterer...</string>
   <string name="omnijaws_service_disabled">Tjeneste deaktiveret</string>
   <string name="weather_widget">Vejr</string>

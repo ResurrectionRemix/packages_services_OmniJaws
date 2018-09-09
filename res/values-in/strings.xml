@@ -48,7 +48,7 @@
   <string name="last_update_time">Terakhir kali diperbarui</string>
   <string name="omnijaws_service_unkown">Tidak ada data cuaca</string>
   <string name="omnijaws_service_error">Kesalahan memuat data cuaca</string>
-  <string name="omnijaws_service_init">Menunggu data cuaca...</string>
+  <string name="omnijaws_service_init">Menunggu...</string>
   <string name="omnijaws_service_progress">Memperbarui...</string>
   <string name="omnijaws_service_disabled">Layanan dimatikan</string>
   <string name="weather_widget">Cuaca</string>

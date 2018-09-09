@@ -48,11 +48,12 @@
   <string name="last_update_time">最后更新时间</string>
   <string name="omnijaws_service_unkown">没有天气数据</string>
   <string name="omnijaws_service_error">加载天气数据时出错</string>
-  <string name="omnijaws_service_init">正在等待天气数据...</string>
+  <string name="omnijaws_service_init">等待...</string>
   <string name="omnijaws_service_progress">正在更新...</string>
   <string name="omnijaws_service_disabled">服务已被禁用</string>
   <string name="weather_widget">天气</string>
   <string name="omnijaws_current_text">现在</string>
   <string name="show_background_title">背景阴影</string>
   <string name="weather_config_title">服务设置</string>
+  <string name="with_forecast_title">有 4 天的预测和详细信息</string>
 </resources>

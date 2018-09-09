@@ -47,7 +47,6 @@
   <string name="last_update_time">זמן עדכון אחרון</string>
   <string name="omnijaws_service_unkown">אין נתוני מזג האוויר</string>
   <string name="omnijaws_service_error">שגיאה בטעינת נתוני מזג האויר</string>
-  <string name="omnijaws_service_init">ממתין לנתוני מזג האוויר...</string>
   <string name="omnijaws_service_progress">מעדכן...</string>
   <string name="omnijaws_service_disabled">השירות הושבת</string>
   <string name="weather_widget">מזג האוויר</string>

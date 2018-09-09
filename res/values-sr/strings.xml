@@ -48,7 +48,6 @@
   <string name="last_update_time">Последње освежавање</string>
   <string name="omnijaws_service_unkown">Нема података о времену</string>
   <string name="omnijaws_service_error">Грешка при учитавању података о времену</string>
-  <string name="omnijaws_service_init">Чекање података о времену...</string>
   <string name="omnijaws_service_progress">Ажурирање...</string>
   <string name="omnijaws_service_disabled">Услуга је онемогућена</string>
   <string name="weather_widget">Временска прогноза</string>

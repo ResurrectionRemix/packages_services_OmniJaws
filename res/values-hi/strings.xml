@@ -48,7 +48,6 @@
   <string name="last_update_time">अंतिम नवीनी करण का समय</string>
   <string name="omnijaws_service_unkown">मौसम के बारे में जानकारी उपलब्ध नहीं है</string>
   <string name="omnijaws_service_error">मौसम की जानकारी अभी उप्लब्ध नही हें</string>
-  <string name="omnijaws_service_init">मौसम की जानकारी के लिए प्रतीक्षा कर रहा है...</string>
   <string name="omnijaws_service_progress">नवीनी करण हो रहा है.. ।</string>
   <string name="omnijaws_service_disabled">सेवा अक्षम</string>
   <string name="weather_widget">मौसम</string>

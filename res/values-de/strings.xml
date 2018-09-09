@@ -48,11 +48,12 @@
   <string name="last_update_time">Zeitpunkt der letzten Aktualisierung</string>
   <string name="omnijaws_service_unkown">Keine Wetterdaten</string>
   <string name="omnijaws_service_error">Fehler beim Laden der Wetterdaten</string>
-  <string name="omnijaws_service_init">Auf Wetterdaten warten...</string>
+  <string name="omnijaws_service_init">Warten...</string>
   <string name="omnijaws_service_progress">Aktualisierung läuft...</string>
   <string name="omnijaws_service_disabled">Dienst deaktiviert</string>
   <string name="weather_widget">Wetter</string>
   <string name="omnijaws_current_text">Jetzt</string>
   <string name="show_background_title">Hintergrundschatten</string>
   <string name="weather_config_title">Service-Einstellungen</string>
+  <string name="with_forecast_title">Mit 4-Tage-Prognose und Details</string>
 </resources>

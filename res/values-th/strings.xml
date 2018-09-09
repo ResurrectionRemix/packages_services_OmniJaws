@@ -48,7 +48,6 @@
   <string name="last_update_time">ปรับปรุงครั้งล่าสุด</string>
   <string name="omnijaws_service_unkown">ไม่มีข้อมูลสภาพอากาศ</string>
   <string name="omnijaws_service_error">ผิดพลาดในการโหลดข้อมูลสภาพอากาศ</string>
-  <string name="omnijaws_service_init">กำลังรอข้อมูลสภาพอากาศ</string>
   <string name="omnijaws_service_progress">อัปเดต...</string>
   <string name="omnijaws_service_disabled">ปิดบริการ</string>
   <string name="weather_widget">สภาพอากาศ</string>

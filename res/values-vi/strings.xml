@@ -48,7 +48,6 @@
   <string name="last_update_time">Lần cập nhật cuối</string>
   <string name="omnijaws_service_unkown">Không có dữ liệu thời tiết</string>
   <string name="omnijaws_service_error">Lỗi tải dữ liệu thời tiết</string>
-  <string name="omnijaws_service_init">Đang chờ dữ liệu thời tiết...</string>
   <string name="omnijaws_service_progress">Đang cập nhật...</string>
   <string name="omnijaws_service_disabled">Dịch vụ bị vô hiệu hóa</string>
   <string name="weather_widget">Thời tiết</string>

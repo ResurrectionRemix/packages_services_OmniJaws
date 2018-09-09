@@ -48,7 +48,6 @@
   <string name="last_update_time">Viime päivitys aika</string>
   <string name="omnijaws_service_unkown">Ei säätietoja</string>
   <string name="omnijaws_service_error">Virhe ladattaessa säätietoja</string>
-  <string name="omnijaws_service_init">Odottaa säätietoja...</string>
   <string name="omnijaws_service_progress">Päivitetään...</string>
   <string name="omnijaws_service_disabled">Palvelu poistettu käytöstä</string>
   <string name="weather_widget">Sää</string>

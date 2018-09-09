@@ -48,7 +48,6 @@
   <string name="last_update_time">Čas poslednej aktualizácie</string>
   <string name="omnijaws_service_unkown">Žiadne údaje o počasí</string>
   <string name="omnijaws_service_error">Chyba pri načítavaní údajov o počasí</string>
-  <string name="omnijaws_service_init">Čaká sa na údaje o počasí...</string>
   <string name="omnijaws_service_progress">Aktualizácia...</string>
   <string name="omnijaws_service_disabled">Služba vypnutá</string>
   <string name="weather_widget">Počasie</string>

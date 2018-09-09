@@ -48,7 +48,6 @@
   <string name="last_update_time">Senaste uppdateringstid</string>
   <string name="omnijaws_service_unkown">Ingen väderinfo</string>
   <string name="omnijaws_service_error">Fel vid inläsning av väderdata.</string>
-  <string name="omnijaws_service_init">Hämtar väderdata...</string>
   <string name="omnijaws_service_progress">Uppdaterar...</string>
   <string name="omnijaws_service_disabled">Tjänsten har inaktiverats</string>
   <string name="weather_widget">Väder</string>

@@ -26,7 +26,7 @@
   <string name="weather_custom_location_title">場所</string>
   <string name="weather_custom_location_missing">その他の場所を設定する</string>
   <string name="weather_retrieve_location_dialog_title">場所を取得できません！</string>
-  <string name="weather_retrieve_location_dialog_message">ネットワークを使った現在地の取得が無効になっています。\n\nカスタムの場所を設定するか、ネットワークを利用した位置情報を有効にしてください。</string>
+  <string name="weather_retrieve_location_dialog_message">ネットワークを使った現在地の取得が無効になっています。\n\nカスタムの場所を設定するか、ネットワークを利用した位置情報を有効にして下さい。</string>
   <string name="weather_retrieve_location_dialog_enable_button">有効</string>
   <string name="settings_title">設定</string>
   <string name="auto_update_title">自動更新</string>
@@ -48,11 +48,12 @@
   <string name="last_update_time">最終更新時刻</string>
   <string name="omnijaws_service_unkown">気象情報がありません</string>
   <string name="omnijaws_service_error">気象データ読み込みエラー</string>
-  <string name="omnijaws_service_init">気象データを取得しています...</string>
+  <string name="omnijaws_service_init">待機中...</string>
   <string name="omnijaws_service_progress">更新中...</string>
   <string name="omnijaws_service_disabled">サービスは無効です</string>
   <string name="weather_widget">天気</string>
   <string name="omnijaws_current_text">今</string>
   <string name="show_background_title">背景色</string>
   <string name="weather_config_title">サービスの設定</string>
+  <string name="with_forecast_title">4日間の天気予報と詳細</string>
 </resources>

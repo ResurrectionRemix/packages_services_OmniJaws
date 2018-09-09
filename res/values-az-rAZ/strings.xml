@@ -48,7 +48,6 @@
   <string name="last_update_time">Son yeniləmə zamanı</string>
   <string name="omnijaws_service_unkown">Hava vəziyyəti məlumatı yoxdur</string>
   <string name="omnijaws_service_error">Hava durumu məlumatları yüklənərkən xəta baş verdi</string>
-  <string name="omnijaws_service_init">Hava durumu məlumatları gözlənilir...</string>
   <string name="omnijaws_service_progress">Yenilənir...</string>
   <string name="omnijaws_service_disabled">Xidmət deaktivdir</string>
   <string name="weather_widget">Hava</string>
