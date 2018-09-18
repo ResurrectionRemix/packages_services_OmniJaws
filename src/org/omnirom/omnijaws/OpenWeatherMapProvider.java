@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class OpenWeatherMapProvider extends AbstractWeatherProvider {
@@ -46,8 +47,7 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     private static final String URL_WEATHER =
             "http://api.openweathermap.org/data/2.5/weather?%s&mode=json&units=%s&lang=%s&appid=%s";
     private static final String URL_FORECAST =
-            "http://api.openweathermap.org/data/2.5/forecast/daily?" +
-            "%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS + "&appid=%s";
+            "http://api.openweathermap.org/data/2.5/forecast?%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS + "&appid=%s";
 
     private List<String> mKeys = new ArrayList<String>();
     private boolean mHasAPIKey;
@@ -174,11 +174,11 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
             DayForecast item = null;
             try {
                 JSONObject forecast = forecasts.getJSONObject(i);
-                JSONObject temperature = forecast.getJSONObject("temp");
+                JSONObject conditionData = forecast.getJSONObject("main");
                 JSONObject data = forecast.getJSONArray("weather").getJSONObject(0);
                 item = new DayForecast(
-                        /* low */ sanitizeTemperature(temperature.getDouble("min"), metric),
-                        /* high */ sanitizeTemperature(temperature.getDouble("max"), metric),
+                        /* low */ sanitizeTemperature(conditionData.getDouble("temp_min"), metric),
+                        /* high */ sanitizeTemperature(conditionData.getDouble("temp_max"), metric),
                         /* condition */ data.getString("main"),
                         /* conditionCode */ mapConditionIconToCode(
                                 data.getString("icon"), data.getInt("id")),
@@ -360,12 +360,16 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     private void loadKeys() {
         try {
             String key = mContext.getResources().getString(R.string.owm_api_key_1);
-            mKeys.add(key);
+            if (!TextUtils.isEmpty(key)) {
+                mKeys.add(key);
+            }
         } catch (Resources.NotFoundException e) {
         }
         try {
             String key = mContext.getResources().getString(R.string.owm_api_key_2);
-            mKeys.add(key);
+            if (!TextUtils.isEmpty(key)) {
+                mKeys.add(key);
+            }
         } catch (Resources.NotFoundException e) {
         }
     }
