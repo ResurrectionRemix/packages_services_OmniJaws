@@ -49,7 +49,7 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
     private static final String URL_WEATHER =
             "http://api.openweathermap.org/data/2.5/weather?%s&mode=json&units=%s&lang=%s&appid=%s";
     private static final String URL_FORECAST =
-            "http://api.openweathermap.org/data/2.5/forecast?%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS + "&appid=%s";
+            "http://api.openweathermap.org/data/2.5/forecast/daily?%s&mode=json&units=%s&lang=%s&cnt=" + FORECAST_DAYS + "&appid=%s";
 
     private List<String> mKeys = new ArrayList<String>();
     private boolean mHasAPIKey;
@@ -176,11 +176,11 @@ public class OpenWeatherMapProvider extends AbstractWeatherProvider {
             DayForecast item = null;
             try {
                 JSONObject forecast = forecasts.getJSONObject(i);
-                JSONObject conditionData = forecast.getJSONObject("main");
+                JSONObject conditionData = forecast.getJSONObject("temp");
                 JSONObject data = forecast.getJSONArray("weather").getJSONObject(0);
                 item = new DayForecast(
-                        /* low */ sanitizeTemperature(conditionData.getDouble("temp_min"), metric),
-                        /* high */ sanitizeTemperature(conditionData.getDouble("temp_max"), metric),
+                        /* low */ sanitizeTemperature(conditionData.getDouble("min"), metric),
+                        /* high */ sanitizeTemperature(conditionData.getDouble("max"), metric),
                         /* condition */ data.getString("main"),
                         /* conditionCode */ mapConditionIconToCode(
                                 data.getString("icon"), data.getInt("id")),
