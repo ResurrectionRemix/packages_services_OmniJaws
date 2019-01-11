@@ -16,4 +16,44 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="provider_title">Đơn vị cung cấp thông tin thời tiết</string>
+    <string name="units_title">Đơn vị</string>
+    <string name="weather_progress_title">Đang xác nhận vị trí</string>
+    <string name="weather_select_location">Chọn vị trí</string>
+    <string name="custom_location_title">Tùy chỉnh vị trí</string>
+    <string name="weather_custom_location_dialog_title">Nhập vị trí</string>
+    <string name="weather_custom_location_title">Vị trí</string>
+    <string name="weather_custom_location_missing">Đặt vị trí tùy chỉnh</string>
+    <string name="weather_retrieve_location_dialog_title">Không thể xác định vị trí!</string>
+    <string name="weather_retrieve_location_dialog_message">Định vị qua mạng bị tắt.\n\nĐặt vị trí tùy chỉnh hoặc kích hoạt định vị qua mạng</string>
+    <string name="weather_retrieve_location_dialog_enable_button">Bật</string>
+    <string name="settings_title">Cài đặt</string>
+    <string name="auto_update_title">Cập nhật tự động</string>
+    <string name="unit_metric">Hệ Mét (\u00b0C)</string>
+    <string name="unit_imperial">Hệ đo lường Anh (\u00b0F)</string>
+    <string name="update">Cập nhật</string>
+    <string name="enable_title">Bật</string>
+    <string name="update_interval_title">Khoảng thời gian cập nhật</string>
+    <string name="interval_1_hour">1 giờ</string>
+    <string name="interval_2_hour">2 giờ</string>
+    <string name="interval_4_hour">4 giờ</string>
+    <string name="interval_6_hour">6 giờ</string>
+    <string name="interval_12_hour">12 giờ</string>
+    <string name="weather_tile_title">Thời tiết</string>
+    <string name="weather_icon_pack_title">Gói biểu tượng thời tiết</string>
+    <string name="weather_icon_pack_playstore">Tìm gói biểu tượng</string>
+    <string name="service_disabled">Tắt</string>
+    <string name="service_error">Lỗi</string>
+    <string name="last_update_time">Lần cập nhật cuối</string>
+    <string name="omnijaws_service_unkown">Không có dữ liệu thời tiết</string>
+    <string name="omnijaws_service_error">Lỗi khi tải dữ liệu thời tiết</string>
+    <string name="omnijaws_service_init">Đang đợi...</string>
+    <string name="omnijaws_service_progress">Đang cập nhật...</string>
+    <string name="omnijaws_service_disabled">Dịch vụ bị vô hiệu hóa</string>
+    <string name="weather_widget">Thời tiết</string>
+    <string name="omnijaws_current_text">Hiện tại</string>
+    <string name="show_background_title">Bóng của nền</string>
+    <string name="weather_config_title">Cài đặt dịch vụ</string>
+    <string name="with_forecast_title">Dự báo và chi tiết trong 4 ngày</string>
+</resources>
