@@ -16,4 +16,44 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="provider_title">Постачальник погоди</string>
+    <string name="units_title">Од. вимірювання</string>
+    <string name="weather_progress_title">Перевірка розташування</string>
+    <string name="weather_select_location">Виберіть розташування</string>
+    <string name="custom_location_title">Встановити ручне місцезнаходження</string>
+    <string name="weather_custom_location_dialog_title">Введіть місцезнаходження</string>
+    <string name="weather_custom_location_title">Розташування</string>
+    <string name="weather_custom_location_missing">Встановити ручне місцезнаходження</string>
+    <string name="weather_retrieve_location_dialog_title">Не вдається визначити розташування!</string>
+    <string name="weather_retrieve_location_dialog_message">Визначення місцезнаходження по мережі вимкнено.\n\nУвімкніть визначення місцезнаходження по мережі або введіть його вручну</string>
+    <string name="weather_retrieve_location_dialog_enable_button">Увімкнути</string>
+    <string name="settings_title">Налаштування</string>
+    <string name="auto_update_title">Автоматичні оновлення</string>
+    <string name="unit_metric">Метрична (\u00b0C)</string>
+    <string name="unit_imperial">Імперська (\u00b0F)</string>
+    <string name="update">Оновити</string>
+    <string name="enable_title">Увімкнути</string>
+    <string name="update_interval_title">Частота оновлення</string>
+    <string name="interval_1_hour">1 година</string>
+    <string name="interval_2_hour">2 години</string>
+    <string name="interval_4_hour">4 години</string>
+    <string name="interval_6_hour">6 годин</string>
+    <string name="interval_12_hour">12 годин</string>
+    <string name="weather_tile_title">Погода</string>
+    <string name="weather_icon_pack_title">Стиль значків погодних умов</string>
+    <string name="weather_icon_pack_playstore">Знайти набір значків для погодних умов</string>
+    <string name="service_disabled">Вимкнено</string>
+    <string name="service_error">Помилка</string>
+    <string name="last_update_time">Востаннє оновлено</string>
+    <string name="omnijaws_service_unkown">Немає даних про погоду</string>
+    <string name="omnijaws_service_error">Помилка завантаження даних про погоду</string>
+    <string name="omnijaws_service_init">Очікуйте...</string>
+    <string name="omnijaws_service_progress">Оновлення...</string>
+    <string name="omnijaws_service_disabled">Службу вимкнено</string>
+    <string name="weather_widget">Погода</string>
+    <string name="omnijaws_current_text">Зараз</string>
+    <string name="show_background_title">Тінь фону</string>
+    <string name="weather_config_title">Налаштування служби</string>
+    <string name="with_forecast_title">З 4-денним прогнозом та деталями</string>
+</resources>
