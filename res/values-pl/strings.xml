@@ -19,6 +19,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="provider_title">Dostawca pogody</string>
     <string name="units_title">Jednostka</string>
+    <string name="weather_progress_title">Sprawdzanie lokalizacji</string>
     <string name="weather_select_location">Wybierz lokalizację</string>
     <string name="custom_location_title">Niestandardowa lokalizacja</string>
     <string name="weather_custom_location_dialog_title">Wprowadź lokalizację</string>
@@ -33,6 +34,7 @@
     <string name="unit_imperial">Imperialna (\u00b0F)</string>
     <string name="update">Aktualizuj</string>
     <string name="enable_title">Aktywuj</string>
+    <string name="update_interval_title">Częstotliwość odświeżania</string>
     <string name="interval_1_hour">1 godzina</string>
     <string name="interval_2_hour">2 godziny</string>
     <string name="interval_4_hour">4 godziny</string>
