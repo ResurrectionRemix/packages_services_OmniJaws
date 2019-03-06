@@ -51,7 +51,7 @@
     <string name="omnijaws_service_init">En attente...</string>
     <string name="omnijaws_service_progress">Actualisation...</string>
     <string name="omnijaws_service_disabled">Service désactivé</string>
-    <string name="weather_widget">Prévisions Météo</string>
+    <string name="weather_widget">Météo</string>
     <string name="omnijaws_current_text">Actuellement</string>
     <string name="show_background_title">Afficher l\'ombre d\'arrière-plan</string>
     <string name="weather_config_title">Paramètres du service</string>
