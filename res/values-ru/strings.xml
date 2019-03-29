@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="provider_title">Поставщик погоды</string>
+    <string name="provider_title">Провайдер погоды</string>
     <string name="units_title">Единица измерения</string>
     <string name="weather_progress_title">Проверка местоположения</string>
     <string name="weather_select_location">Выберите местоположение</string>
