@@ -55,4 +55,5 @@
     <string name="omnijaws_current_text">Teraz</string>
     <string name="show_background_title">Cień tła</string>
     <string name="weather_config_title">Ustawienia usługi</string>
+    <string name="with_forecast_title">Z 4-dniową prognozą i szczegółami</string>
 </resources>
