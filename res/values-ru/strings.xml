@@ -27,7 +27,7 @@
     <string name="weather_custom_location_missing">Установить пользовательское местоположение</string>
     <string name="weather_retrieve_location_dialog_title">Не удаётся определить местоположение!</string>
     <string name="weather_retrieve_location_dialog_message">Определение местоположения по сети выключено.\n\nВведите местоположение вручную или включите определение местоположения по сети</string>
-    <string name="weather_retrieve_location_dialog_enable_button">Вкл</string>
+    <string name="weather_retrieve_location_dialog_enable_button">Включить</string>
     <string name="settings_title">Настройки</string>
     <string name="auto_update_title">Автоматическое обновление</string>
     <string name="unit_metric">Метрическая (\u00b0C)</string>
@@ -52,7 +52,7 @@
     <string name="omnijaws_service_progress">Обновление...</string>
     <string name="omnijaws_service_disabled">Служба отключена</string>
     <string name="weather_widget">Погода</string>
-    <string name="omnijaws_current_text">Только что</string>
+    <string name="omnijaws_current_text">Сейчас</string>
     <string name="show_background_title">Тень фона</string>
     <string name="weather_config_title">Настройки службы</string>
     <string name="with_forecast_title">С 4-дневным прогнозом и деталями</string>

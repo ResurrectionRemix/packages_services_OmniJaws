@@ -51,4 +51,5 @@
     <string name="omnijaws_service_disabled">Tjänsten inaktiverad</string>
     <string name="weather_widget">Väder</string>
     <string name="omnijaws_current_text">Nu</string>
+    <string name="weather_config_title">Tjänstens inställningar</string>
 </resources>

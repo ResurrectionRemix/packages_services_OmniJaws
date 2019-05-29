@@ -41,7 +41,7 @@
     <string name="interval_6_hour">6時間</string>
     <string name="interval_12_hour">12時間</string>
     <string name="weather_tile_title">天気</string>
-    <string name="weather_icon_pack_title">天候アイコンパック</string>
+    <string name="weather_icon_pack_title">天気アイコンパック</string>
     <string name="weather_icon_pack_playstore">アイコンパックを探す</string>
     <string name="service_disabled">無効</string>
     <string name="service_error">エラー</string>
