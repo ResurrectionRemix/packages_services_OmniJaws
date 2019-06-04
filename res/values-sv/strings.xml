@@ -41,9 +41,11 @@
     <string name="interval_6_hour">6 timmar</string>
     <string name="interval_12_hour">12 timmar</string>
     <string name="weather_tile_title">Väder</string>
+    <string name="weather_icon_pack_title">Väderikonpaket</string>
     <string name="weather_icon_pack_playstore">Hitta ikonpaket</string>
     <string name="service_disabled">Avstängd</string>
     <string name="service_error">Fel</string>
+    <string name="last_update_time">Senaste uppdateringstid</string>
     <string name="omnijaws_service_unkown">Ingen väderdata</string>
     <string name="omnijaws_service_error">Fel vid inläsning av väderdata</string>
     <string name="omnijaws_service_init">Väntar...</string>
@@ -51,5 +53,7 @@
     <string name="omnijaws_service_disabled">Tjänsten inaktiverad</string>
     <string name="weather_widget">Väder</string>
     <string name="omnijaws_current_text">Nu</string>
+    <string name="show_background_title">Bakgrundsskugga</string>
     <string name="weather_config_title">Tjänstens inställningar</string>
+    <string name="with_forecast_title">Med 4-dagars väderprognos och detaljer</string>
 </resources>
