@@ -17,16 +17,16 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="provider_title">Penyedia Cuaca</string>
+    <string name="provider_title">Penyedia cuaca</string>
     <string name="units_title">Unit</string>
     <string name="weather_progress_title">Memverifikasi lokasi</string>
     <string name="weather_select_location">Pilih lokasi</string>
     <string name="custom_location_title">Lokasi khusus</string>
     <string name="weather_custom_location_dialog_title">Masukkan lokasi</string>
     <string name="weather_custom_location_title">Lokasi</string>
-    <string name="weather_custom_location_missing">Atur lokasi</string>
+    <string name="weather_custom_location_missing">Tentukan lokasi khusus</string>
     <string name="weather_retrieve_location_dialog_title">Tidak dapat mengambil lokasi!</string>
-    <string name="weather_retrieve_location_dialog_message">Jaringan geolocation tidak aktif.\n\natur lokasi atau aktifkan lokasi jaringan</string>
+    <string name="weather_retrieve_location_dialog_message">Geolokasi jaringan dinonaktifkan.\n\nTetapkan lokasi khusus atau aktifkan lokasi jaringan</string>
     <string name="weather_retrieve_location_dialog_enable_button">Aktifkan</string>
     <string name="settings_title">Setelan</string>
     <string name="auto_update_title">Pembaruan otomatis</string>
@@ -34,7 +34,7 @@
     <string name="unit_imperial">Imperial (\u00b0F)</string>
     <string name="update">Perbarui</string>
     <string name="enable_title">Aktifkan</string>
-    <string name="update_interval_title">Jeda pembaharuan</string>
+    <string name="update_interval_title">Jangka waktu pembaruan</string>
     <string name="interval_1_hour">1 jam</string>
     <string name="interval_2_hour">2 jam</string>
     <string name="interval_4_hour">4 jam</string>
@@ -55,4 +55,5 @@
     <string name="omnijaws_current_text">Sekarang</string>
     <string name="show_background_title">Bayangan latar belakang</string>
     <string name="weather_config_title">Setelan layanan</string>
+    <string name="with_forecast_title">Dengan perkiraan dan rincian 4-hari</string>
 </resources>
