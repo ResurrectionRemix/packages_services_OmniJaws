@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="provider_title">날씨 제공자</string>
+    <string name="units_title">단위</string>
     <string name="weather_progress_title">위치 확인 중</string>
     <string name="weather_select_location">위치 선택</string>
     <string name="custom_location_title">사용자 지정 위치</string>
