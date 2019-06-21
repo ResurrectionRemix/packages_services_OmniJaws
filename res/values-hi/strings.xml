@@ -16,4 +16,24 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="weather_select_location">स्थान का चयन करें</string>
+    <string name="custom_location_title">अपने पसंद का स्थान डालें</string>
+    <string name="weather_custom_location_dialog_title">स्थान दर्ज करें</string>
+    <string name="weather_custom_location_title">स्थान</string>
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="update">अपडेट करें</string>
+    <string name="update_interval_title">अपडेट अंतराल</string>
+    <string name="interval_1_hour">1 घंटा</string>
+    <string name="interval_2_hour">२ घंटे</string>
+    <string name="interval_4_hour">४ घंटे</string>
+    <string name="interval_6_hour">६ घंटे</string>
+    <string name="interval_12_hour">१२ घंटे</string>
+    <string name="weather_tile_title">मौसम</string>
+    <string name="last_update_time">अंतिम अपडेट का समय</string>
+    <string name="omnijaws_service_unkown">मौसम के बारे में जानकारी उपलब्ध नहीं है</string>
+    <string name="omnijaws_service_error">मौसम जानकारी प्राप्त नहीं की जा सकी</string>
+    <string name="omnijaws_service_init">प्रतीक्षा कर रहा है...</string>
+    <string name="weather_widget">मौसम</string>
+    <string name="omnijaws_current_text">अभी</string>
+</resources>

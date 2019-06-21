@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="provider_title">Đơn vị cung cấp thông tin thời tiết</string>
+    <string name="provider_title">Nhà cung cấp thông tin thời tiết</string>
     <string name="units_title">Đơn vị</string>
     <string name="weather_progress_title">Đang xác nhận vị trí</string>
     <string name="weather_select_location">Chọn vị trí</string>
