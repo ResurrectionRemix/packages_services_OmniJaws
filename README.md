@@ -1,7 +1,7 @@
 About
 -----
 OmniJaws "Just another weather service"
-is a minimized service to fetch weather data from OpenWeatherMap or Yahoo.
+is a minimized service to fetch weather data from OpenWeatherMap.
 
 OpenWeatherMap API
 http://openweathermap.org/current
@@ -11,8 +11,6 @@ https://openweathermap.org/appid#get
 and enter it here
 https://github.com/omnirom/android_packages_services_OmniJaws/blob/android-8.1/res/values/config.xml
 
-Yahoo weather API
-https://developer.yahoo.com/weather/
 
 Thanks to the original creators and contributors of the LockClock app
 https://github.com/CyanogenMod/android_packages_apps_LockClock
