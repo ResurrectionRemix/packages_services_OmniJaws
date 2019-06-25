@@ -55,4 +55,5 @@
     <string name="omnijaws_current_text">Agora</string>
     <string name="show_background_title">Sombreamento</string>
     <string name="weather_config_title">Configurações do serviço</string>
+    <string name="with_forecast_title">Previsão e detalhes dos próximos 4 dias</string>
 </resources>
