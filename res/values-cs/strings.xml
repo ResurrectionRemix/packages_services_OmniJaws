@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="provider_title">Poskytovatel počasí</string>
+    <string name="provider_title">Poskytovatel informací o počasí</string>
     <string name="units_title">Jednotka</string>
     <string name="weather_progress_title">Ověřování polohy</string>
     <string name="weather_select_location">Zvolte polohu</string>
@@ -26,7 +26,7 @@
     <string name="weather_custom_location_title">Poloha</string>
     <string name="weather_custom_location_missing">Nastavit vlastní polohu</string>
     <string name="weather_retrieve_location_dialog_title">Nelze určit polohu!</string>
-    <string name="weather_retrieve_location_dialog_message">Zjištění polohy sítí je vypnuto.\n\nJe nutné nastavit vlastní polohu, nebo zapnout zjišťování sítí</string>
+    <string name="weather_retrieve_location_dialog_message">Zjišťování polohy pomocí sítě je zakázáno.\n\nNastavte vlastní polohu, nebo povolte zjišťování polohy pomocí sítě</string>
     <string name="weather_retrieve_location_dialog_enable_button">Povolit</string>
     <string name="settings_title">Nastavení</string>
     <string name="auto_update_title">Automatické aktualizace</string>
@@ -55,5 +55,5 @@
     <string name="omnijaws_current_text">Nyní</string>
     <string name="show_background_title">Stín pozadí</string>
     <string name="weather_config_title">Nastavení služby</string>
-    <string name="with_forecast_title">Se 4 denní předpovědí a podrobnostmi</string>
+    <string name="with_forecast_title">Se 4denní předpovědí a podrobnostmi</string>
 </resources>

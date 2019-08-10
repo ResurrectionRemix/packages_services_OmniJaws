@@ -42,7 +42,7 @@
     <string name="interval_12_hour">12 Stunden</string>
     <string name="weather_tile_title">Wetter</string>
     <string name="weather_icon_pack_title">Wetter Symbol-Paket</string>
-    <string name="weather_icon_pack_playstore">Icon-Packs finden</string>
+    <string name="weather_icon_pack_playstore">Symbol-Pakete finden</string>
     <string name="service_disabled">Deaktiviert</string>
     <string name="service_error">Fehler</string>
     <string name="last_update_time">Zeitpunkt der letzten Aktualisierung</string>
