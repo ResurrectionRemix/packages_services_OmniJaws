@@ -25,9 +25,13 @@
     <string name="weather_custom_location_dialog_title">場所を入力</string>
     <string name="weather_custom_location_title">場所</string>
     <string name="weather_custom_location_missing">カスタムの場所を設定する</string>
+    <string name="weather_retrieve_location_dialog_title">場所を取得できません!</string>
+    <string name="weather_retrieve_location_dialog_message">ネットワーク位置情報が無効です。\n\nカスタムの場所を設定するかネットワーク位置情報を有効にして下さい。</string>
     <string name="weather_retrieve_location_dialog_enable_button">有効</string>
     <string name="settings_title">設定</string>
     <string name="auto_update_title">自動更新</string>
+    <string name="unit_metric">摂氏 (\u00b0C)</string>
+    <string name="unit_imperial">華氏 (\u00b0F)</string>
     <string name="update">更新</string>
     <string name="enable_title">有効</string>
     <string name="update_interval_title">更新間隔</string>
@@ -37,6 +41,7 @@
     <string name="interval_6_hour">6時間</string>
     <string name="interval_12_hour">12時間</string>
     <string name="weather_tile_title">天気</string>
+    <string name="weather_icon_pack_title">天気アイコンパック</string>
     <string name="weather_icon_pack_playstore">アイコンパックを見つける</string>
     <string name="service_disabled">無効</string>
     <string name="service_error">エラー</string>
@@ -50,4 +55,5 @@
     <string name="omnijaws_current_text">現在</string>
     <string name="show_background_title">背景の影</string>
     <string name="weather_config_title">サービスの設定</string>
+    <string name="with_forecast_title">4日間の天気予報と詳細</string>
 </resources>

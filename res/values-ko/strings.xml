@@ -55,4 +55,5 @@
     <string name="omnijaws_current_text">현재</string>
     <string name="show_background_title">배경 그림자</string>
     <string name="weather_config_title">서비스 설정</string>
+    <string name="with_forecast_title">4일 예측 및 세부 정보 포함</string>
 </resources>
