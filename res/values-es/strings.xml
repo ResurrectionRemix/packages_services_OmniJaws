@@ -56,4 +56,5 @@
     <string name="show_background_title">Sombra de fondo</string>
     <string name="weather_config_title">Ajustes del servicio</string>
     <string name="with_forecast_title">Con pronóstico de 4 días y detalles</string>
+    <string name="omnijaws_city_unkown">Desconocido</string>
 </resources>

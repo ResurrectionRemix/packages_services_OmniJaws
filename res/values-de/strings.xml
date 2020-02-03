@@ -56,4 +56,5 @@
     <string name="show_background_title">Hintergrund-Schatten</string>
     <string name="weather_config_title">Diensteinstellungen</string>
     <string name="with_forecast_title">Mit 4-Tage-Prognose und Details</string>
+    <string name="omnijaws_city_unkown">Unbekannt</string>
 </resources>

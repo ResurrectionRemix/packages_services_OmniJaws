@@ -56,4 +56,5 @@
     <string name="show_background_title">Стиль фона</string>
     <string name="weather_config_title">Параметры службы</string>
     <string name="with_forecast_title">С 4-дневным прогнозом и деталями</string>
+    <string name="omnijaws_city_unkown">Неизвестно</string>
 </resources>
