@@ -56,4 +56,5 @@
     <string name="show_background_title">Stín pozadí</string>
     <string name="weather_config_title">Nastavení služby</string>
     <string name="with_forecast_title">Se 4 denní předpovědí a podrobnostmi</string>
+    <string name="omnijaws_city_unkown">Neznámé</string>
 </resources>
